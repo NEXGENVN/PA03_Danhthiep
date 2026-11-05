@@ -1,1 +1,472 @@
-const a8_0x217c5e=a8_0x4307;function a8_0x110f(){const _0x50c2d3=['igHV4BQHDcdeKEg7Mw5N','ru5duLLqveLptG','Dg90ywXnB25LEq','lwzPBgvZlxDWyq','pYWGpYWGpYWGpW','y2LWAgvYDgv4Da','w0rHBMGGDgHP4BQ/','zMXVB3i','y8o0BMC','id0GpW','Dg9mB2nHBgvtDa','yw1LlcbbDMf0yq','W6XUAcdHUQnUAcbWAa','AgKGEmoZysbOW6XU','C3rYAw5N','C3rYAw5NAwz5','BYbOB+g6T2mGA2JdTa','4PYfiftdRg0GDgJHUQv5','lM1Ll2fWAs9Tzq','Ag/HUQnUigTOW7rUzW','icaGicbxsevsrq','4OkRlcbJW7jUia','ihvZzxiGv0HfuG','y+g6P3uGDgJHUQv0igi','z2v0q29UBMvJDa','ihrPBIbWCM9MAq','8j+sUcbqAmoToG','r+g7RwKGECoQDsbJ4BQN','uevoreLorW','Bg8UBwuVyxbPlW','Axb2na','yxjNzwqGpsa/cG','B19VCMLNAw5HBa','EmoZysbOW6XUAcdHUQm','ig5NXRdHU51PigFHU61P','4PYfifrYyw5Zywn0','icbjtK5fuIbktW','4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq','BxnNswq','C3LZDgvTx2fJyW','v2LUnJq7ihG2na','ihPHlMfJy1n0yq','y3vZDg9T','zYbOB+g6OxqGXjhHU5LU','suqGpsb1BhPHlG','4P2mieTOW7rUzYb0Aa','icaGicaGifDirq','jNPWD190ExbLpq','ANnVBG','C3nHz2uVzgvSzq','zw5JCNLWDa','DxnLCKLK','8j+uKYbhsEg6OKKGtCodia','XjhHU5LUzYb4W7nHigG','ihNdQNuGy+g6P3u','BgvUz3rO','nty5nZG3AevxBxzO','8j+tPcbh4BUSssdHUQjosca','y+g6P3uGDgJdOg5Oia','8j+sUcbqAmoTigtHU7eGAW','4P2mieTOW7rUzYb0W6W','Dsa6','4BUTigZdVtO','lca/kq','CMvZDwX0','Cg9ZDa','zMLSzxmVDJi/EG','4BUdigZHUQv5ihrOW7rU','4BUdigDP4BQJAsbTW6mG','lI4U','iog6O25OihbOW61Hia','s2L0lZuZnY4ZnG','zxjYB3jFy29Kzq','ys5dt09lsuvFwG','B2zPBgvZ','mteYota1oeHHwuXmqW','yw1Llcb0B3rHBa','Aw9UignVBw1PDa','8j+sSYdeKmoJihrY4BURihq','sxf2zfnSyZHOrG','rvjst1i','BI9QC29Ulcb0zq','tCoJigJdS2eGDgJHUQu','8j+xKE+4JYdeKgfUzYb04BUXia','zgf0ywjHC2u','CM0TDxjSzw5JBW','CMLUzW','id0GDwX6ys5vsq','tog7L2KGBog6PxKGzge','XinUzYbRW70GwMfS','uIbcwsb6ys5jBq','yxzHDgfY','su4GDxnLCL9SAq','tog7L2KGA2HPigZHUQu','4PYfieFHU61PihNdQNuG','zMLK','lcakicaGicaGia','pty4mYz6ChDFDa','B+g6OwKGy2JgSgeGXje','AEg6V246','Axb2nG','rvjfihvZzxjjra','icaGicaGicaGia','W7rUzYdeKEg7PW','tw96AwXSys81lG','zxjYB3jFBwvZCW','CgfYC2u','Bog6PxKGDgJdTg5Nia','veLoifbst0zjta','ihrOW7rUzYb0Aw4','lI4Vy29UzMLNlW','CMvWBgfJzq','l3nLBMq/ENb3xW','Bg8UBwu','imsrXinUzYbUAog6Rxa','C2z1BgX5cG','DhqTChjVzMLSzq','4P2mienODEg7L2KGuee','Bsb0Aog6PxKGDgJdTa','su5trvjuieLova','svb2na','x1nfsW','ihbYB2zPBguGDG','t00GDxnLCIbxsa','BcWGzMvLx2nOyq','ihrOAEg6V3qGDhjV','4BUBAsbgsuq6','lMfJy1n0yxr1CW','DgHP4BQ/Da','4BUvBMCGy+g7Mw5Nia','uKuGDwX6ys51CW','zxjjrca9id8Gqq','z2NHUQnPig3dOYbYzq','CMvSzwfZzq','W7rUzYdeKEg7PZO','vuLecIaGicaGia','rgvJB2rLieffuW','u+g7KsdeKwNHU4DUihrO','Aw5Zzxj0swq','XjbHBMCGEog7RsbSW70','4BUhDsbS4BUXyW','4BUJCcbS4BUh','sgv4','icaGicaGicbtrq','ywnJB3vUDcb1Ba','z+g7RwKGECoQDsbJ4BQN','zMiZzdaYn2nHmq','x0Tfwq','z3PPCcWGzgvMBa','4Pwq4Pwq4Pwq4Pwq4Pwq4Pwq','ie9oihPHlLvjra','ksbbChbSzvDLyG','CIbtrvqGDg90yq','tKGGqSAV4BUAqYbuW4W','CwmUCg5N','BwjLCIWkicaGia','igTOB+g6O24GwMfS','BCoJigJdS2eGCMvX','4P2miepdSYbS4BUxAsb4','DxnLCG','ihvZzxi6','A2v5CW','C3rHDhvZ','vuLe','4P2mifjLCxvLC3qG','Bv9TB25LEq','qvrf','igJdRg5Oiog6O25O','icb6ys5Hy2ntDa','zgv0ywLS','W4fdie5i4BQStIK','CIWGAw1Hz2vvCG','DgJdOg5OigpdTg5N','Bg9N','yw1LlcakcqKjcq','zw5J','quvt','ihvSEMeUDxnLCG','rvfbl0flDhzzDW','zxf1zxn0ihJdS2e','ihrPBIbJ4BQNBIb0','nJK3otbAq3b6D2q','y291BNqGEMekia','yM9KEq','Dgu/ENb3x3zLCG','qMfZzty0','DhLWzq','cUkvKokvKokvKokvKokvKokvKokvKokvKokvKa','EhqVCgXHAw4Sia','y3j5ChrVlwPZ','CMDLzcWGDxnLxW','C29Tzq','su9ox0TfwsWGEG','EMeUru5duLLqva','Bsb0Aog6PxKGDxnL','CgfK','DxnLCKLeid0GpW','uK9nihrVB2XFCW','BMCGDgLUigpHUQDU','zmo5BMC','DxnLCKLe','q09ps0Lfx1PqvW','tYbHDxrVx3jLCq','icaGwMfSBYbvsq','cIaGicaGicaGia','8j+uJsdeKgfUzYbS4BQLEq','DMvYpty3mcz6Ca','y2H14BUxAsbqqvjb','ws4UlG','uMvZDwX0id0GpW','qu1tievYCM9YoG','ywnJB3vUDcb6yq','DgJHUQv5ihtdOgKGAW','CM9SBgjHy2S','BwvZC2fNzq','tog7L2KGAog7HYb0Aog7Kq','kI8Q','DMKTvK4','ifbbuKfnuY4UlG','id8SigzLzv9JAa','vKfmvuvticG/la','icaGicaGicaGEG','ntruz2H0rKW','ExbLptmWjM5Yzq','CgHVBMvoDw1Izq','Aw9U','4BUTAs4UlG','ievYCM9YoG','mZeYmtC1mKLKt0rWCa','u0vmrunuihvZzq','icaGicaGicbguG','u0vmrunuiaOGia','igZHU5DP','sK9jtIb1C2vYxW','rw5JB2rLieffuW','W61Hig5NXRdHU51PigC','4PYfiftdOgKGA2HV4BQJ','rLjptsb6ywXVxW','mdaWmdaWmdaWma','4PYfieHpW4boifriW4a','zYdeKEg7PY4Gq+g6P24G','u0vmrunuihrVDa','zw5Kl2DLDhbYBW','C29JAwfSl2zYAq','y2HHBMDLzf9WCG','r1rvwhvyyM9oDG','igXP4BUhDsbWCM9M','4BQ/BIbvsuq6','DwvZDcaODxnLCG','qxDbwufcAI8YzW','lwnOyxqYlxDWyq','qvbjihrY4BQJihBHU4e','ywXnB25LEsbguG','zgvK','r2v0ifbLCNnVBG','mcaOv2LUzg93CW','DxnLCK5HBwu','zxjYB3i','id0GpYWGC2vUza','CgeUy2HHDc56yq','A19HDxrVx3jLCq','rKfjteve','mZu4ndy0txHqAKXO','vuLelcb6ys5KAq','B19Yzxf1zxn0ia','rgvMyxvSDa','yxqUEMfSBY5Tzq','mZmXnZe0oeXmz05KyG','BIbAywXVoG','BM93','B+g6OxqGXjhHU5LUzYC','ENb3x3nLAZ0','uKfnuYbRAmo0BMC','id8GrK9sifvqra','CMvXpq','zxHLy3v0zq','Ahr0Chm6lY90Da','uhy0icyGsvb2nG','Ccb0W6XTigTP4BQ/Bq','zgLZCgXHEu5HBq','icaGieLotKvsia','zYb0Aw4Gy+g6P24G','EMfSB05HBwu','ie5uideWlJa7ia','y8o0BMCGy+g6OYaYia','yM90Aa','CxvLCNK','u+g7KsbKXRaGA2JdTg4','ChvZAa','su1fsq','EMfSB19JDxn0BW','lcbezxrHAwWGpq','qu1bD0vbqwHfra','DwvZDa','8j+tPcdeKgfUzYbN4BUTAq','mtm5mdmWme5UqK1vyG','XRdHU51PigFHU61PihrO','BMFgSog7NwKGz+g7RwKG','ifzbtfvfuYaOpW','AwXL','DgJHUQv0iglHUQfPoG','raOGicaGicaGia','nZG5mJq','Cg9YDfrPBwuGra','vxrMoa','imsrW6mGAog6V3qGAgK','DhvZid0Gj8sqyw4','CYbfCNjVCJO','vuLeoG','y291BNqGDwX6yq','C3vJy2vZCW','DgJHUQv5ihrOW7rUzW','suqGpsa/iefora','DEg7L2KGuefsqu1t','DwX0lcbezxrHAq','tsblsEg6VK0','D190ExbLptmWjG','svb2nG','lca/lca/kq','BI94lxD3DY1MBW','EMeUCgHVBMvoDq','t00GEMfSB19HyW','lMnOyxqUEMfSBW','uefsqu1tifBdGca','u0vmrunuihPHlG','4Pwq4Pwq4Pwq4Pwq4PwqcG','CgfYyw1Zpq','C3bSyxLoyw1Lla','icaGihPHlLvjra','ihrO4BUdihbOACoQBG','AcdHUQnUAcbWAmoTyq','tYb1C2vYx2XPBG','BCoJifbbuKfnuZO','zduXogu4nZHLna','icaGicaGt1jerq','id0Gj8sqyw5NigG','yxbWBgLJyxrPBW','u0vmrunuicOGrG','BMCGA2HPigFHU61P','Ag/HUQnU','Ahr0Chm6lY9JAa','Bsb0Aog6PxKGDmoGAq','tvmGA2JdTg5NigG','ECoQDsbJ4BQNDsaOsq','zYCkicaGicaGia','DxjS','DgLUig5NXRdHU51Pia','Dhj5pta','zgf0yq','s2JdTg5NihtdRg0G','DcbI4BQHAq','vgHP4BQ/Dsb0Amo0BG','DgvKihn1y2nLCW','AsbRAg/HUQnUifPH','r+g7RwKGDgJdOg5Oia','s2JdTg5NihrO4BUdia','Aw5JBhvKzxm','ufDFu0vlcIaGia','Dg9tDhjPBMC','B2rLoIa','8j+uKYdeKgfUzYbNAEg6OW','seNHUR5qicJeKmodifG','Bw9Kzq','cVcFK6qGr+g7RwKGAmoSBG','Dsb0Aog6PxqGyUg6OwK','BMCGy2HVihbOW6K','BgLUA196ywXVxW','ywDL','BwfW','Ag/HUQnUifPHBg8G','4P2mieFHU61PihNdQNuG','ofjlu2zOvq','4OkRihtHU6SGDmoGAsbR','icaGkhbOB25LtG','suqSihjLCuLekq','imsr4BQ/BIbvsuq6','DgJHUQv5ihvZzxi','4P2mifpHU5eGzmAWigTO'];a8_0x110f=function(){return _0x50c2d3;};return a8_0x110f();}(function(_0x24da31,_0x230508){const _0x5c5d84=a8_0x4307,_0x3e4597=_0x24da31();while(!![]){try{const _0x3cb87b=-parseInt(_0x5c5d84(0x113))/0x1+-parseInt(_0x5c5d84(0x126))/0x2+parseInt(_0x5c5d84(0x1e1))/0x3+parseInt(_0x5c5d84(0x1bf))/0x4+parseInt(_0x5c5d84(0x202))/0x5+parseInt(_0x5c5d84(0x1b9))/0x6*(parseInt(_0x5c5d84(0x190))/0x7)+parseInt(_0x5c5d84(0xd4))/0x8*(parseInt(_0x5c5d84(0x1e6))/0x9);if(_0x3cb87b===_0x230508)break;else _0x3e4597['push'](_0x3e4597['shift']());}catch(_0x4fe6a1){_0x3e4597['push'](_0x3e4597['shift']());}}}(a8_0x110f,0x7a8d4));const CryptoJS=require(a8_0x217c5e(0x198)),axios=require('../utils/a'+'xiosInstan'+'ce'),db=require(a8_0x217c5e(0x149)+a8_0x217c5e(0x12f)),{getZaloAccountConfig,sanitizeZaloAccount,sanitizeZaloAccounts,maskSensitiveData}=require('../utils/s'+'anitize');function a8_0x4307(_0x283f4d,_0x345118){_0x283f4d=_0x283f4d-0x95;const _0x110fa5=a8_0x110f();let _0x430736=_0x110fa5[_0x283f4d];if(a8_0x4307['lSgUxm']===undefined){var _0x1df7ec=function(_0x2a979e){const _0x386d05='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x235674='',_0xd35d32='';for(let _0x5a1be1=0x0,_0x22fa11,_0x4c8990,_0x2378e1=0x0;_0x4c8990=_0x2a979e['charAt'](_0x2378e1++);~_0x4c8990&&(_0x22fa11=_0x5a1be1%0x4?_0x22fa11*0x40+_0x4c8990:_0x4c8990,_0x5a1be1++%0x4)?_0x235674+=String['fromCharCode'](0xff&_0x22fa11>>(-0x2*_0x5a1be1&0x6)):0x0){_0x4c8990=_0x386d05['indexOf'](_0x4c8990);}for(let _0x1c69bb=0x0,_0xa41149=_0x235674['length'];_0x1c69bb<_0xa41149;_0x1c69bb++){_0xd35d32+='%'+('00'+_0x235674['charCodeAt'](_0x1c69bb)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0xd35d32);};a8_0x4307['nHBQTz']=_0x1df7ec,a8_0x4307['ARzrju']={},a8_0x4307['lSgUxm']=!![];}const _0x2c9957=_0x110fa5[0x0];a8_0x4307['aadRZA']!==_0x2c9957&&(a8_0x4307['ARzrju']={},a8_0x4307['aadRZA']=_0x2c9957);const _0x372d2d=a8_0x4307['ARzrju'][_0x283f4d];return _0x372d2d===undefined?(_0x430736=a8_0x4307['nHBQTz'](_0x430736),a8_0x4307['ARzrju'][_0x283f4d]=_0x430736):_0x430736=_0x372d2d,_0x430736;}function encodeAES(_0xd35d32,_0x5a1be1){const _0x49dc03=a8_0x217c5e;try{const _0x22fa11=CryptoJS['enc'][_0x49dc03(0x194)]['parse'](_0x5a1be1),_0x4c8990=CryptoJS[_0x49dc03(0x18b)][_0x49dc03(0x10d)](_0xd35d32,_0x22fa11,{'iv':CryptoJS[_0x49dc03(0x18a)][_0x49dc03(0x169)][_0x49dc03(0x145)](_0x49dc03(0x1c9)+_0x49dc03(0x1c9)+_0x49dc03(0x1c9)+'00'),'mode':CryptoJS[_0x49dc03(0xcb)]['CBC'],'padding':CryptoJS[_0x49dc03(0x19e)]['Pkcs7']});return _0x4c8990[_0x49dc03(0xe0)][_0x49dc03(0xc7)](CryptoJS['enc'][_0x49dc03(0x194)]);}catch(_0x2378e1){return console[_0x49dc03(0x1dc)](_0x49dc03(0x1c5)+_0x49dc03(0x1be),_0x2378e1),null;}}function decodeAES(_0x1c69bb,_0xa41149){const _0x241e93=a8_0x217c5e;try{const _0x137467=decodeURIComponent(_0x1c69bb),_0x5b6044=CryptoJS[_0x241e93(0x18a)]['Base64'][_0x241e93(0x145)](_0xa41149),_0x2873af=CryptoJS[_0x241e93(0x18b)]['decrypt']({'ciphertext':CryptoJS[_0x241e93(0x18a)][_0x241e93(0x194)][_0x241e93(0x145)](_0x137467),'salt':''},_0x5b6044,{'iv':CryptoJS[_0x241e93(0x18a)][_0x241e93(0x169)][_0x241e93(0x145)](_0x241e93(0x1c9)+_0x241e93(0x1c9)+_0x241e93(0x1c9)+'00'),'mode':CryptoJS[_0x241e93(0xcb)]['CBC'],'padding':CryptoJS[_0x241e93(0x19e)]['Pkcs7']});return _0x2873af[_0x241e93(0xc7)](CryptoJS['enc'][_0x241e93(0x20b)]);}catch(_0x82c12){return console[_0x241e93(0x1dc)](_0x241e93(0x163)+'\x20Error:',_0x82c12),null;}}async function getProfileInfo(_0x5cf42e,_0x107700){const _0x56cede=a8_0x217c5e;try{const _0x38eaa0={'phonebook_version':Math[_0x56cede(0xe2)](Date['now']()/0x3e8),'friend_pversion_map':[_0x5cf42e+'_0'],'avatar_size':0x78,'language':'vi','show_online_status':0x1,'imei':_0x107700['IMEI']},_0x1af9b8=JSON[_0x56cede(0xea)](_0x38eaa0),_0x570574=encodeAES(_0x1af9b8,_0x107700[_0x56cede(0xdc)+'_KEY']);if(!_0x570574)throw new Error(_0x56cede(0xc4)+_0x56cede(0x178)+_0x56cede(0x200));const _0x1b4b74=encodeURIComponent(_0x570574);console[_0x56cede(0x188)](_0x56cede(0x1a8)+_0x56cede(0x148)+_0x56cede(0x155)+_0x56cede(0x159),_0x5cf42e);const _0x3b710f=await axios[_0x56cede(0x11c)](_0x56cede(0x1ef)+'-profile-w'+_0x56cede(0x1de)+_0x56cede(0xf8)+_0x56cede(0x1ce)+_0x56cede(0x1cd)+_0x56cede(0x11d)+'pw_ver=671'+_0x56cede(0x10a)+'30',_0x56cede(0xa7)+_0x1b4b74,{'headers':{'Host':_0x56cede(0x14f)+'-wpa.chat.'+'zalo.me','Cookie':'zpw_sek='+_0x107700[_0x56cede(0x1a4)+_0x56cede(0x154)],'User-Agent':_0x56cede(0x143)+_0x56cede(0x1da)+'\x20NT\x2010.0;\x20'+_0x56cede(0x103)+_0x56cede(0x172)+_0x56cede(0x122),'Accept':_0x56cede(0xb1)+_0x56cede(0x12c)+_0x56cede(0x197)+'*/*','Content-Type':_0x56cede(0xb1)+_0x56cede(0xa0)+_0x56cede(0x130)+_0x56cede(0x1d8),'Origin':_0x56cede(0xb5)+'at.zalo.me','Referer':_0x56cede(0xb5)+_0x56cede(0x1e5)+'/'},'decompress':!![],'timeout':0x2710});if(_0x3b710f['data'][_0x56cede(0x123)]!==0x0)return{'success':![],'message':_0x3b710f[_0x56cede(0xbd)][_0x56cede(0x144)+_0x56cede(0xd0)]||_0x56cede(0x1d6)+_0x56cede(0x1c3)};if(_0x3b710f['data'][_0x56cede(0xbd)]&&typeof _0x3b710f[_0x56cede(0xbd)]['data']===_0x56cede(0xe9)){const _0x25ecd0=decodeAES(_0x3b710f['data'][_0x56cede(0xbd)],_0x107700[_0x56cede(0xdc)+_0x56cede(0x16e)]);if(!_0x25ecd0)return{'success':![],'message':_0x56cede(0xc4)+'giải\x20mã\x20dữ'+_0x56cede(0x1d1)+_0x56cede(0x206)};const _0x484b63=JSON[_0x56cede(0x145)](_0x25ecd0);if(_0x484b63[_0x56cede(0xbd)]&&_0x484b63[_0x56cede(0xbd)][_0x56cede(0x1cf)+'ofiles']){const _0x24064f=_0x484b63[_0x56cede(0xbd)][_0x56cede(0x1cf)+_0x56cede(0x125)],_0x19d4c9=Object[_0x56cede(0x17c)](_0x24064f)[0x0];if(_0x19d4c9){const _0x453d22=_0x24064f[_0x19d4c9];return console[_0x56cede(0x188)](_0x56cede(0xec)+_0x56cede(0x17b),{'userId':_0x453d22[_0x56cede(0x10e)],'name':_0x453d22[_0x56cede(0x1f2)+'e']}),{'success':!![],'data':{'userId':_0x453d22[_0x56cede(0x10e)],'displayName':_0x453d22['displayNam'+'e'],'zaloName':_0x453d22[_0x56cede(0x1f5)],'avatar':_0x453d22[_0x56cede(0x136)]}};}}}return{'success':![],'message':_0x56cede(0xbe)+'thấy\x20thông'+_0x56cede(0xf4)+'le'};}catch(_0x4a17ff){return console[_0x56cede(0x1dc)]('❌\x20Get\x20Prof'+'ile\x20Error:',_0x4a17ff[_0x56cede(0x1b1)]),{'success':![],'message':_0x56cede(0x138)+'y\x20profile:'+'\x20'+_0x4a17ff[_0x56cede(0x1b1)]};}}async function sendPhoto(_0x5c7345,_0x291d81,_0x1988d2,_0x4766f4=!![]){const _0x13d8f0=a8_0x217c5e;try{const _0x2c10a6=Date[_0x13d8f0(0x1e8)](),_0x33d071={'photoId':Math[_0x13d8f0(0xe2)](Math['random']()*0xe8d4a51000)[_0x13d8f0(0xc7)](),'clientId':_0x2c10a6,'desc':'','width':0x320,'height':0x230,'previewThumb':_0x13d8f0(0x1d4)+_0x13d8f0(0x1ff)+_0x13d8f0(0x18d)+_0x13d8f0(0x12a)+_0x13d8f0(0x1d0)+_0x13d8f0(0x1ab),'toid':_0x5c7345,'checksum':_0x13d8f0(0x16d)+_0x13d8f0(0xae)+'894cb30e3a'+'51','rawUrl':_0x291d81,'thumbUrl':_0x291d81,'normalUrl':_0x291d81,'hdUrl':_0x291d81,'hdSize':_0x13d8f0(0x209),'language':'vi','zsource':0x12e,'jcp':JSON[_0x13d8f0(0xea)]({'sendSource':0x12e,'convertible':'jxl'}),'ttl':0x0,'imei':_0x1988d2[_0x13d8f0(0x1fc)]},_0x17058b=JSON[_0x13d8f0(0xea)](_0x33d071),_0x404da6=encodeAES(_0x17058b,_0x1988d2['ENCRYPTION'+_0x13d8f0(0x16e)]);if(!_0x404da6)throw new Error(_0x13d8f0(0x12d)+_0x13d8f0(0xbf));const _0x3f1831=encodeURIComponent(_0x404da6);console['log'](_0x13d8f0(0x201)+'\x20yêu\x20cầu\x20đ'+_0x13d8f0(0x1d2),_0x5c7345);const _0x7a6f5d=await axios[_0x13d8f0(0x11c)](_0x13d8f0(0x1ef)+_0x13d8f0(0xde)+_0x13d8f0(0xa3)+_0x13d8f0(0xed)+'ssage/phot'+_0x13d8f0(0xfb)+_0x13d8f0(0x14b)+_0x13d8f0(0x1a9)+_0x13d8f0(0x9d)+'nretry=0',_0x13d8f0(0xa7)+_0x3f1831,{'headers':{'Host':'tt-files-w'+_0x13d8f0(0x1de)+_0x13d8f0(0x14c),'Cookie':_0x13d8f0(0x1ea)+_0x1988d2[_0x13d8f0(0x1a4)+_0x13d8f0(0x154)],'Content-Type':'applicatio'+_0x13d8f0(0xa0)+'rm-urlenco'+_0x13d8f0(0x1d8),'User-Agent':_0x13d8f0(0x143)+'0\x20(Windows'+_0x13d8f0(0x1f6)+_0x13d8f0(0x103)+_0x13d8f0(0x172)+_0x13d8f0(0x122),'Accept':'applicatio'+'n/json,\x20te'+_0x13d8f0(0x197)+_0x13d8f0(0x1b3),'Origin':_0x13d8f0(0xb5)+'at.zalo.me','Referer':'https://ch'+'at.zalo.me'+'/'},'decompress':!![],'timeout':0x2710});if(_0x7a6f5d[_0x13d8f0(0xbd)][_0x13d8f0(0x123)]!==0x0)return{'success':![],'result':'FAILED','detail':_0x7a6f5d[_0x13d8f0(0xbd)][_0x13d8f0(0x144)+_0x13d8f0(0xd0)]};const _0x269820=_0x7a6f5d[_0x13d8f0(0xbd)][_0x13d8f0(0xbd)],_0x34ae13=decodeAES(_0x269820,_0x1988d2[_0x13d8f0(0xdc)+_0x13d8f0(0x16e)]);if(!_0x34ae13)return{'success':![],'result':_0x13d8f0(0x12b),'detail':_0x13d8f0(0xc4)+_0x13d8f0(0x15f)+'sponse,\x20có'+_0x13d8f0(0xaa)+_0x13d8f0(0x14d)+_0x13d8f0(0x20c)+_0x13d8f0(0x167)};const _0x485ae5=JSON[_0x13d8f0(0x145)](_0x34ae13);if(_0x485ae5[_0x13d8f0(0x123)]===0x0){console[_0x13d8f0(0x188)](_0x13d8f0(0x139)+_0x13d8f0(0x115)+_0x13d8f0(0xe3));const _0x3cbd60=_0x485ae5[_0x13d8f0(0xbd)]?.[_0x13d8f0(0x101)];if(_0x4766f4&&_0x3cbd60)try{console[_0x13d8f0(0x188)](_0x13d8f0(0x12e)+_0x13d8f0(0x110)+_0x13d8f0(0xe7)+_0x13d8f0(0x1c6)+_0x13d8f0(0x1bd));const _0x40d710=Date[_0x13d8f0(0x1e8)](),_0x43616c={'toid':_0x5c7345,'cliMsgId':_0x40d710,'msgs':[{'cliMsgId':_0x2c10a6[_0x13d8f0(0xc7)](),'globalMsgId':_0x3cbd60,'ownerId':_0x1988d2[_0x13d8f0(0x17e)],'destId':_0x5c7345}],'onlyMe':0x1,'imei':_0x1988d2['IMEI']},_0x4191d0=JSON[_0x13d8f0(0xea)](_0x43616c),_0x5dba69=encodeAES(_0x4191d0,_0x1988d2['ENCRYPTION'+_0x13d8f0(0x16e)]);if(_0x5dba69){const _0x4000fa=encodeURIComponent(_0x5dba69),_0x430b32=await axios[_0x13d8f0(0x11c)](_0x13d8f0(0x1ef)+_0x13d8f0(0x1d5)+'.chat.zalo'+_0x13d8f0(0xed)+_0x13d8f0(0x10c)+_0x13d8f0(0x193)+_0x13d8f0(0x13c)+_0x13d8f0(0x1ba)+_0x13d8f0(0xbc),_0x13d8f0(0xa7)+_0x4000fa,{'headers':{'Host':'tt-chat2-w'+_0x13d8f0(0x1de)+_0x13d8f0(0x14c),'Cookie':_0x13d8f0(0x1ea)+_0x1988d2[_0x13d8f0(0x1a4)+_0x13d8f0(0x154)],'User-Agent':'Mozilla/5.'+'0\x20(Windows'+_0x13d8f0(0x1f6)+_0x13d8f0(0x103)+_0x13d8f0(0x172)+_0x13d8f0(0x122),'Accept':_0x13d8f0(0xb1)+_0x13d8f0(0x12c)+_0x13d8f0(0x197)+_0x13d8f0(0x1b3),'Content-Type':_0x13d8f0(0xb1)+_0x13d8f0(0xa0)+'rm-urlenco'+_0x13d8f0(0x1d8),'Origin':_0x13d8f0(0xb5)+_0x13d8f0(0x1e5),'Referer':_0x13d8f0(0xb5)+_0x13d8f0(0x1e5)+'/','Accept-Encoding':_0x13d8f0(0x16f)+'ate,\x20br'},'decompress':!![],'timeout':0x2710});if(_0x430b32[_0x13d8f0(0xbd)][_0x13d8f0(0x123)]===0x0){const _0x4e582e=decodeAES(_0x430b32[_0x13d8f0(0xbd)][_0x13d8f0(0xbd)],_0x1988d2[_0x13d8f0(0xdc)+_0x13d8f0(0x16e)]);if(_0x4e582e){const _0x274884=JSON[_0x13d8f0(0x145)](_0x4e582e);_0x274884[_0x13d8f0(0x123)]===0x0?console[_0x13d8f0(0x188)]('✅\x20Xóa\x20hình'+_0x13d8f0(0x121)+_0x13d8f0(0x204)+_0x13d8f0(0x187)+':',_0x274884):console[_0x13d8f0(0x1dc)]('❌\x20Xóa\x20hình'+_0x13d8f0(0x121)+_0x13d8f0(0x204)+_0x13d8f0(0x207),_0x274884['error_mess'+_0x13d8f0(0xd0)]);}}else console[_0x13d8f0(0x1dc)](_0x13d8f0(0x17f)+_0x13d8f0(0xfc)+'nh\x20phía\x20ng'+_0x13d8f0(0x203)+'ất\x20bại:',_0x430b32[_0x13d8f0(0xbd)][_0x13d8f0(0x144)+_0x13d8f0(0xd0)]);}else console[_0x13d8f0(0x1dc)]('❌\x20Không\x20th'+'ể\x20mã\x20hóa\x20r'+_0x13d8f0(0x18e)+_0x13d8f0(0x182));}catch(_0x2e2229){console[_0x13d8f0(0x1dc)]('❌\x20Có\x20lỗi\x20k'+_0x13d8f0(0xe8)+_0x13d8f0(0xab)+_0x13d8f0(0xfd)+':',_0x2e2229[_0x13d8f0(0x1b1)]);}return{'success':!![],'result':'SUCCESS','detail':'Gửi\x20yêu\x20cầ'+'u\x20thành\x20cô'+'ng','msgId':_0x3cbd60};}else return console['log'](_0x13d8f0(0xd3)+_0x13d8f0(0xf2)+'ại:\x20'+_0x485ae5[_0x13d8f0(0x144)+'age']+('\x20-\x20error_c'+_0x13d8f0(0xc8))+_0x485ae5[_0x13d8f0(0x123)]),{'success':![],'result':_0x13d8f0(0x1e0),'detail':_0x485ae5[_0x13d8f0(0x144)+_0x13d8f0(0xd0)]||_0x13d8f0(0xc4)+_0x13d8f0(0x16c)+'u'};}catch(_0x5ac759){return console['error'](_0x13d8f0(0x179)+_0x13d8f0(0x119),_0x5ac759[_0x13d8f0(0x1b1)]),{'success':![],'result':_0x13d8f0(0x12b),'detail':_0x5ac759[_0x13d8f0(0x1b1)]};}}async function getToolSetup(){const _0x5e2410=a8_0x217c5e,_0x5aaa79=await db[_0x5e2410(0x1f9)](_0x5e2410(0xb2)+_0x5e2410(0x1a0)+'etup\x20WHERE'+'\x20STT\x20=\x201');if(_0x5aaa79[_0x5e2410(0x112)]===0x0)return{'id':0x1,'uid_zalo_system':null,'zalo_system_money':0x7530,'zalo_custom_money':0x4e20,'imageUrl':null};return _0x5aaa79[0x0];}const getPersonalAccounts=async(_0x1cf871,_0x3023cd)=>{const _0x54e975=a8_0x217c5e;try{const _0x5d5762=await db['query'](_0x54e975(0x1c2)+'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x54e975(0xa9)+_0x54e975(0x13b)+_0x54e975(0x1b8)+'a.displayN'+_0x54e975(0x189)+_0x54e975(0xa1)+_0x54e975(0x176)+_0x54e975(0x141)+_0x54e975(0x183)+'atus\x0a\x20\x20\x20\x20\x20'+_0x54e975(0x1c1)+_0x54e975(0xa2)+_0x54e975(0x191)+_0x54e975(0x141)+_0x54e975(0xff)+_0x54e975(0x137)+'nk_zalo_ac'+_0x54e975(0x96)+_0x54e975(0x171)+_0x54e975(0x132)+_0x54e975(0x208)+_0x54e975(0xef)+_0x54e975(0x18c)+_0x54e975(0x99)+_0x54e975(0x104)+_0x54e975(0x20d)+_0x54e975(0x106)+_0x54e975(0xb9)+_0x54e975(0xaf)+_0x54e975(0x135)+_0x54e975(0x20a)+'ESC',[_0x1cf871['user'][_0x54e975(0x1a3)]]),_0xc75be2=_0x5d5762[_0x54e975(0xd1)](_0x7d072d=>({'UID':_0x7d072d[_0x54e975(0x17e)],'displayName':_0x7d072d[_0x54e975(0x1f2)+'e'],'phoneNumber':_0x7d072d[_0x54e975(0x1bb)+'r'],'accStatus':_0x7d072d['accStatus']}));_0x3023cd[_0x54e975(0x10b)]({'success':!![],'data':_0xc75be2});}catch(_0x1f9432){console[_0x54e975(0x1dc)](_0x54e975(0x1d9)+'al\x20Account'+_0x54e975(0x20e),_0x1f9432),_0x3023cd[_0x54e975(0x17d)](0x1f4)[_0x54e975(0x10b)]({'success':![],'message':_0x54e975(0x133)+'nh\x20sách\x20tà'+_0x54e975(0xc2)+'lo'});}},decodeFidAndGetProfile=async(_0x562de3,_0x528cfc)=>{const _0x48291b=a8_0x217c5e;try{let {encryptedFid:_0x316490,zaloUID:_0x216531,imageType:_0x567103,ipType:_0x3b8f1e}=_0x562de3[_0x48291b(0x192)];if(!_0x316490||!_0x216531)return _0x528cfc[_0x48291b(0x17d)](0x190)[_0x48291b(0x10b)]({'success':![],'message':_0x48291b(0xc0)+_0x48291b(0x1f4)+_0x48291b(0x15b)});console['log'](_0x48291b(0x196)+_0x48291b(0x100)+'══════════'+_0x48291b(0x100)+_0x48291b(0x100)+'══════'),console[_0x48291b(0x188)](_0x48291b(0x10f)+_0x48291b(0xa4)+'LẤY\x20THÔNG\x20'+_0x48291b(0x147)+'E'),console['log'](_0x48291b(0x1a6)+'D:',_0x216531),console['log']('\x20\x20\x20User\x20ID'+':',_0x562de3['user'][_0x48291b(0x1a3)]);const _0x3aa6ab=await getToolSetup();let _0x4a4e88=_0x3aa6ab[_0x48291b(0x1fd)+_0x48291b(0x180)];_0x567103===_0x48291b(0x105)&&(_0x4a4e88+=0x1388);_0x3b8f1e===_0x48291b(0x1f8)&&(_0x4a4e88*=0x2);console['log'](_0x48291b(0x116)+_0x48291b(0x13e),_0x4a4e88['toLocaleSt'+_0x48291b(0x131)](_0x48291b(0x1b4)),'₫');const _0x4d56c1=await db[_0x48291b(0x1f9)](_0x48291b(0x1cc)+_0x48291b(0x1d7)+_0x48291b(0x156)+_0x48291b(0x140)+_0x48291b(0xe4),[_0x562de3[_0x48291b(0x17a)]['userID']]);if(_0x4d56c1[_0x48291b(0x112)]===0x0)return console[_0x48291b(0x188)]('❌\x20Không\x20tì'+_0x48291b(0x19d)+'r'),console[_0x48291b(0x188)](_0x48291b(0x100)+_0x48291b(0x100)+'══════════'+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x194)['json']({'success':![],'message':'Không\x20tìm\x20'+_0x48291b(0xd9)});const _0x1965d5=parseFloat(_0x4d56c1[0x0][_0x48291b(0xdd)]);if(_0x1965d5<_0x4a4e88)return console[_0x48291b(0x188)](_0x48291b(0xda)+_0x48291b(0x161),_0x1965d5['toLocaleSt'+'ring']('vi-VN'),'<',_0x4a4e88[_0x48291b(0xe5)+'ring'](_0x48291b(0x1b4)),'₫'),console[_0x48291b(0x188)]('══════════'+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+'═════\x0a'),_0x528cfc[_0x48291b(0x17d)](0x190)[_0x48291b(0x10b)]({'success':![],'message':_0x48291b(0x1fa)+'g\x20đủ.\x20Cần\x20'+_0x4a4e88['toLocaleSt'+_0x48291b(0x131)]('vi-VN')+_0x48291b(0xf0)+_0x1965d5[_0x48291b(0xe5)+_0x48291b(0x131)]('vi-VN')+'₫','insufficientBalance':!![]});const _0x2b9be5=await db[_0x48291b(0x1f9)](_0x48291b(0xa5)+'UID,\x20za.di'+'splayName,'+'\x20za.IMEI,\x20'+_0x48291b(0x19c)+'ION_KEY,\x20z'+'a.COOKIE_Z'+'PW_SEK\x0a\x20\x20\x20'+_0x48291b(0x141)+_0x48291b(0x1c8)+'account\x20za'+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x48291b(0x1f3)+_0x48291b(0x1c4)+_0x48291b(0xcf)+_0x48291b(0x16b)+'za\x20ON\x20za.U'+'ID\x20=\x20ulza.'+_0x48291b(0x162)+_0x48291b(0x109)+_0x48291b(0x15d)+_0x48291b(0x15e)+'ND\x20za.UID\x20'+'=\x20?\x20AND\x20za'+'.accStatus'+_0x48291b(0xb0)+_0x48291b(0x1e9),[_0x562de3[_0x48291b(0x17a)][_0x48291b(0x1a3)],_0x216531]);if(_0x2b9be5[_0x48291b(0x112)]===0x0)return console['log']('❌\x20Không\x20tì'+_0x48291b(0xb6)+_0x48291b(0x177)+'o'),console[_0x48291b(0x188)](_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+'══════════'+'══════════'+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x190)['json']({'success':![],'message':_0x48291b(0xbe)+_0x48291b(0x1af)+_0x48291b(0xd2)+'hoặc\x20tài\x20k'+_0x48291b(0xee)+_0x48291b(0xdb)});const _0x599f34=getZaloAccountConfig(_0x2b9be5[0x0]);console[_0x48291b(0x188)](_0x48291b(0x1c7)+_0x48291b(0x1e7),_0x2b9be5[0x0][_0x48291b(0x1f2)+'e']),console[_0x48291b(0x188)](_0x48291b(0xc9)+'i\x20mã\x20chuỗi'+_0x48291b(0x1b5));const _0x11b786=decodeAES(_0x316490,_0x599f34['ENCRYPTION'+_0x48291b(0x16e)]);if(!_0x11b786)return console[_0x48291b(0x188)](_0x48291b(0x108)+_0x48291b(0x11f)+_0x48291b(0x1aa)+'MS'),console[_0x48291b(0x188)](_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+'══════════'+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x190)[_0x48291b(0x10b)]({'success':![],'message':_0x48291b(0xc4)+'giải\x20mã\x20ch'+_0x48291b(0x9a)});let _0x3ec4b8;try{_0x3ec4b8=JSON[_0x48291b(0x145)](_0x11b786);}catch(_0x51414e){return console['log'](_0x48291b(0x150)+_0x48291b(0x1eb)+'\x20hợp\x20lệ'),console['log']('══════════'+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x190)[_0x48291b(0x10b)]({'success':![],'message':'Chuỗi\x20PARA'+_0x48291b(0xb7)+_0x48291b(0x168)});}if(!_0x3ec4b8['fid'])return console[_0x48291b(0x188)](_0x48291b(0x117)+_0x48291b(0x151)+_0x48291b(0x1a1)+_0x48291b(0x158)+'ng\x20dữ\x20liệu'),console[_0x48291b(0x188)]('══════════'+_0x48291b(0x100)+'══════════'+'══════════'+_0x48291b(0x100)+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x190)[_0x48291b(0x10b)]({'success':![],'message':_0x48291b(0xbe)+_0x48291b(0x98)+_0x48291b(0x18f)+'hiết\x20trong'+'\x20dữ\x20liệu'});const _0x56bc79=_0x3ec4b8[_0x48291b(0x13a)];console[_0x48291b(0x188)]('✅\x20Đã\x20giải\x20'+_0x48291b(0xad),_0x56bc79);const _0xa619bc=await getProfileInfo(_0x56bc79,_0x599f34);if(!_0xa619bc[_0x48291b(0x97)])return console['log'](_0x48291b(0x108)+_0x48291b(0x11e)+'g\x20tin\x20prof'+'ile'),console['log'](_0x48291b(0x100)+'══════════'+_0x48291b(0x100)+_0x48291b(0x100)+'══════════'+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x194)[_0x48291b(0x10b)]({'success':![],'message':_0xa619bc[_0x48291b(0x1b1)]||_0x48291b(0xc4)+_0x48291b(0x146)+_0x48291b(0xbb)+_0x48291b(0x1a2)});console[_0x48291b(0x188)](_0x48291b(0x1ca)+_0x48291b(0x174)+_0x48291b(0x9c)),console['log'](_0x48291b(0x100)+_0x48291b(0x100)+'══════════'+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x10b)]({'success':!![],'data':{..._0xa619bc[_0x48291b(0xbd)],'fee':_0x4a4e88,'currentBalance':_0x1965d5}});}catch(_0x510c16){console[_0x48291b(0x1dc)]('Decode\x20PAR'+_0x48291b(0x1ad),_0x510c16),console[_0x48291b(0x188)](_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0x100)+_0x48291b(0xa6)),_0x528cfc[_0x48291b(0x17d)](0x1f4)[_0x48291b(0x10b)]({'success':![],'message':_0x48291b(0x1b2)+'ng'});}},sendImageByCardConfirmed=async(_0x426a80,_0x53a3e8)=>{const _0x203aed=a8_0x217c5e,_0x51ef37=await db[_0x203aed(0xf3)+_0x203aed(0x1bc)]();try{await _0x51ef37['beginTrans'+'action']();const {targetUID:_0xf7c0ef,targetName:_0x33066e,zaloUID:_0x35913b,targetAvatar:_0x2fa7c8,imageType:_0x2b2d09,ipType:_0x49f60c,autoDelete:_0x1090b8}=_0x426a80[_0x203aed(0x192)],_0x87599b=!!_0x1090b8;if(!_0xf7c0ef||!_0x33066e||!_0x35913b)return await _0x51ef37[_0x203aed(0x1b0)](),_0x53a3e8[_0x203aed(0x17d)](0x190)[_0x203aed(0x10b)]({'success':![],'message':_0x203aed(0xc0)+_0x203aed(0x1f4)+'thiết'});const _0x3617e9=_0x2fa7c8||'';console[_0x203aed(0x188)]('\x0a═════════'+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x170)),console[_0x203aed(0x188)](_0x203aed(0x114)+'QUA\x20DANH\x20T'+_0x203aed(0xca)+_0x203aed(0x185)),console[_0x203aed(0x188)]('\x20\x20\x20User\x20ID'+':',_0x426a80[_0x203aed(0x17a)][_0x203aed(0x1a3)]),console['log']('\x20\x20\x20Target\x20'+_0x203aed(0x95),_0xf7c0ef),console[_0x203aed(0x188)](_0x203aed(0x1a6)+'D:',_0x35913b);const [_0x53a6e2]=await _0x51ef37[_0x203aed(0x1ee)](_0x203aed(0x1c0)+'rID,\x20userN'+_0x203aed(0x127)+'Money\x20FROM'+_0x203aed(0xf1)+'E\x20userID\x20='+_0x203aed(0x1ec)+_0x203aed(0x181),[_0x426a80[_0x203aed(0x17a)]['userID']]);if(_0x53a6e2[_0x203aed(0x112)]===0x0)return await _0x51ef37[_0x203aed(0x1b0)](),console[_0x203aed(0x188)]('❌\x20Không\x20tì'+_0x203aed(0x19d)+'r'),console[_0x203aed(0x188)](_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0xa6)),_0x53a3e8[_0x203aed(0x17d)](0x194)[_0x203aed(0x10b)]({'success':![],'message':_0x203aed(0xbe)+_0x203aed(0xd9)});const _0x5c934d=_0x53a6e2[0x0],_0x1160a0=parseFloat(_0x5c934d['totalMoney']);console['log']('👤\x20User:',_0x5c934d[_0x203aed(0x1db)]),console['log']('💰\x20Số\x20dư:',_0x1160a0['toLocaleSt'+_0x203aed(0x131)](_0x203aed(0x1b4)),'₫');const _0x4710e4=await getToolSetup();let _0x140086=_0x4710e4[_0x203aed(0x1fd)+'m_money'];_0x2b2d09===_0x203aed(0x105)&&(_0x140086+=0x1388);_0x49f60c===_0x203aed(0x1f8)&&(_0x140086*=0x2);console[_0x203aed(0x188)](_0x203aed(0xf5),_0x140086[_0x203aed(0xe5)+_0x203aed(0x131)](_0x203aed(0x1b4)),'₫');if(_0x1160a0<_0x140086)return await _0x51ef37[_0x203aed(0x1b0)](),console[_0x203aed(0x188)](_0x203aed(0xda)+_0x203aed(0x142)),console[_0x203aed(0x188)]('══════════'+_0x203aed(0x100)+'══════════'+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0xa6)),_0x53a3e8[_0x203aed(0x17d)](0x190)[_0x203aed(0x10b)]({'success':![],'message':_0x203aed(0x1fa)+_0x203aed(0x1cb)+_0x140086['toLocaleSt'+_0x203aed(0x131)](_0x203aed(0x1b4))+'₫'});const [_0x4f65f2]=await _0x51ef37['execute']('SELECT\x20za.'+_0x203aed(0x1e2)+_0x203aed(0xa8)+'\x20za.IMEI,\x20'+_0x203aed(0x19c)+_0x203aed(0x19b)+_0x203aed(0x124)+_0x203aed(0xc6)+'\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x203aed(0x1c8)+_0x203aed(0x1ae)+_0x203aed(0x1a7)+_0x203aed(0x1f3)+'JOIN\x20user_'+_0x203aed(0xcf)+'account\x20ul'+'za\x20ON\x20za.U'+_0x203aed(0x107)+'UID\x0a\x20\x20\x20\x20\x20\x20'+_0x203aed(0x109)+_0x203aed(0x15d)+_0x203aed(0x15e)+'ND\x20za.UID\x20'+'=\x20?\x20AND\x20za'+_0x203aed(0x15a)+_0x203aed(0xb0)+'oạt\x20động\x27',[_0x426a80[_0x203aed(0x17a)][_0x203aed(0x1a3)],_0x35913b]);if(_0x4f65f2[_0x203aed(0x112)]===0x0)return await _0x51ef37[_0x203aed(0x1b0)](),console['log'](_0x203aed(0x117)+_0x203aed(0xb6)+'\x20khoản\x20Zal'+'o'),console[_0x203aed(0x188)](_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+_0x203aed(0x100)+'═════\x0a'),_0x53a3e8[_0x203aed(0x17d)](0x190)[_0x203aed(0x10b)]({'success':![],'message':_0x203aed(0x164)+_0x203aed(0x13d)+_0x203aed(0x134)+_0x203aed(0xeb)+_0x203aed(0xce)+_0x203aed(0x1f1)});const _0x5a5351=getZaloAccountConfig(_0x4f65f2[0x0]);console[_0x203aed(0x188)](_0x203aed(0x1c7)+_0x203aed(0x1e7),_0x4f65f2[0x0][_0x203aed(0x1f2)+'e']);let _0x3fa368=[];if(_0x49f60c===_0x203aed(0xf9))_0x3fa368[_0x203aed(0x1fb)]({'type':'IPv4','url':process.env.IMG_URL_V4||process.env.IMG_URL});else{if(_0x49f60c===_0x203aed(0x13f))_0x3fa368[_0x203aed(0x1fb)]({'type':_0x203aed(0x9e),'url':process.env.IMG_URL_V6||process.env.IMG_URL});else _0x49f60c==='both'?(_0x3fa368['push']({'type':_0x203aed(0x153),'url':process.env.IMG_URL_V4||process.env.IMG_URL}),_0x3fa368['push']({'type':'IPv6','url':process.env.IMG_URL_V6||process.env.IMG_URL})):_0x3fa368[_0x203aed(0x1fb)]({'type':_0x203aed(0x1e4),'url':process.env.IMG_URL});}const _0x43cc43=[];let _0x2afe20=0x0;for(const _0x220182 of _0x3fa368){let _0x51a9b2=_0x220182[_0x203aed(0xba)];if(_0x2b2d09===_0x203aed(0x105)){const _0x37b1c9='cus_user_'+_0x426a80[_0x203aed(0x17a)]['userID']+'.png';_0x51a9b2=_0x51a9b2[_0x203aed(0x14a)](_0x203aed(0x175),_0x37b1c9);}const [_0x31cc14]=await _0x51ef37[_0x203aed(0x1ee)](_0x203aed(0x152)+_0x203aed(0x1a5)+'uest\x20\x0a\x20\x20\x20\x20'+_0x203aed(0x141)+_0x203aed(0xd6)+'umber,\x20UID'+',\x20displayN'+_0x203aed(0xe6)+_0x203aed(0x186)+'l,\x20sendRes'+_0x203aed(0x9b)+_0x203aed(0x157)+_0x203aed(0x199)+_0x203aed(0x102)+'ount,\x20send'+'er_zalo_ui'+'d)\x0a\x20\x20\x20\x20\x20\x20\x20'+_0x203aed(0x141)+_0x203aed(0x1b7)+'\x20?,\x20?,\x20?,\x20'+_0x203aed(0xdf)+_0x203aed(0x9f),[_0x203aed(0xe1)+'p]',_0xf7c0ef,_0x33066e,_0x3617e9,_0x203aed(0xf7),'PENDING',_0x203aed(0x166)+'\x20'+_0x220182['type']+_0x203aed(0x120),0x0,0x0,_0x35913b]),_0x9cece1=_0x31cc14[_0x203aed(0x165)];await _0x51ef37['query'](_0x203aed(0x152)+_0x203aed(0xac)+_0x203aed(0x1df)+_0x203aed(0x1d3)+_0x203aed(0xd7)+_0x203aed(0x205)+_0x203aed(0x11a),[_0x426a80['user'][_0x203aed(0x1a3)],_0x9cece1]);const _0x323efb=''+_0x51a9b2+(_0x51a9b2[_0x203aed(0xc5)]('?')?'&':'?')+_0x203aed(0x1ed)+_0x9cece1;console[_0x203aed(0x188)](_0x203aed(0xcc)+'h\x20ảnh\x20'+_0x220182['type']+_0x203aed(0xd8),_0xf7c0ef),console['log']('🔗\x20URL:',_0x323efb);const _0x330dde=await sendPhoto(_0xf7c0ef,_0x323efb,_0x5a5351,_0x87599b);let _0x50085d=0x0;_0x330dde['success']&&(_0x50085d=_0x140086/_0x3fa368[_0x203aed(0x112)],_0x2afe20+=_0x50085d),await _0x51ef37['execute']('UPDATE\x20aut'+_0x203aed(0x1e3)+_0x203aed(0x1a7)+_0x203aed(0x16a)+'T\x20imageUrl'+_0x203aed(0x1dd)+_0x203aed(0x1ac)+_0x203aed(0x1fe)+_0x203aed(0x1b6)+_0x203aed(0xfa)+_0x203aed(0x141)+_0x203aed(0x109)+'RE\x20reqID\x20='+'\x20?',[_0x323efb,_0x330dde[_0x203aed(0x11b)],_0x330dde[_0x203aed(0x184)]+([_0x203aed(0x153),_0x203aed(0x9e)][_0x203aed(0xc5)](_0x220182[_0x203aed(0x195)])?'\x20('+_0x220182['type']+')':''),_0x50085d,_0x9cece1]),_0x43cc43[_0x203aed(0x1fb)]({'reqID':_0x9cece1,'type':_0x220182[_0x203aed(0x195)],..._0x330dde});}let _0x233a8d=_0x1160a0;_0x2afe20>0x0&&(await _0x51ef37[_0x203aed(0x1ee)]('UPDATE\x20use'+_0x203aed(0x173)+'lMoney\x20=\x20t'+'otalMoney\x20'+'-\x20?\x20WHERE\x20'+_0x203aed(0x19f),[_0x2afe20,_0x426a80['user'][_0x203aed(0x1a3)]]),_0x233a8d=_0x1160a0-_0x2afe20,console[_0x203aed(0x188)](_0x203aed(0x129)+_0x203aed(0x15c)+_0x2afe20[_0x203aed(0xe5)+_0x203aed(0x131)]('vi-VN')+(_0x203aed(0xd5)+_0x203aed(0xb4))));await _0x51ef37['commit'](),console[_0x203aed(0x188)](_0x203aed(0xfe)+_0x203aed(0x128)+_0x203aed(0xc1)+_0x203aed(0x14e));const _0x2700f5=_0x43cc43['every'](_0x5d82ac=>_0x5d82ac['success']),_0x3a7fb1=_0x43cc43[_0x43cc43[_0x203aed(0x112)]-0x1];if(_0x2700f5)return _0x53a3e8['json']({'success':!![],'message':_0x49f60c===_0x203aed(0x1f8)?_0x203aed(0xc3)+_0x203aed(0x1f7)+_0x203aed(0xb8)+_0x203aed(0x1f0)+')':_0x3a7fb1[_0x203aed(0x184)],'data':{'result':_0x3a7fb1[_0x203aed(0x11b)],'detail':_0x3a7fb1[_0x203aed(0x184)],'fee':_0x2afe20,'newBalance':_0x233a8d,'reqID':_0x43cc43[0x0]['reqID'],'results':_0x43cc43}});else{const _0x33dcac=_0x43cc43[_0x203aed(0x19a)](_0x1d65a7=>_0x1d65a7[_0x203aed(0x97)]);return _0x53a3e8['status'](_0x33dcac?0xc8:0x190)[_0x203aed(0x10b)]({'success':_0x33dcac,'message':_0x33dcac?'Gửi\x20thành\x20'+'công\x20một\x20p'+'hần\x20yêu\x20cầ'+'u':_0x203aed(0xf6)+_0x203aed(0xcd),'data':{'results':_0x43cc43,'fee':_0x2afe20,'newBalance':_0x233a8d}});}}catch(_0x4c60da){await _0x51ef37['rollback'](),console['error']('❌\x20Lỗi\x20khi\x20'+_0x203aed(0x16c)+_0x203aed(0x118),_0x4c60da),_0x53a3e8[_0x203aed(0x17d)](0x1f4)[_0x203aed(0x10b)]({'success':![],'message':_0x203aed(0x1b2)+_0x203aed(0xb3)+_0x203aed(0x111)});}finally{_0x51ef37[_0x203aed(0x160)]();}};module['exports']={'getPersonalAccounts':getPersonalAccounts,'decodeFidAndGetProfile':decodeFidAndGetProfile,'sendImageByCardConfirmed':sendImageByCardConfirmed};
+// Derived analysis copy. Original: recovered/ZL_SERVER/controllers/sendImageByCardController.js
+const CryptoJS = require("crypto-js"),
+  axios = require("../utils/axiosInstance"),
+  db = require("../config/database"),
+  {
+    getZaloAccountConfig,
+    sanitizeZaloAccount,
+    sanitizeZaloAccounts,
+    maskSensitiveData
+  } = require("../utils/sanitize");
+function encodeAES(_0xd35d32, _0x5a1be1) {
+  try {
+    const _0x22fa11 = CryptoJS.enc.Base64.parse(_0x5a1be1),
+      _0x4c8990 = CryptoJS.AES.encrypt(_0xd35d32, _0x22fa11, {
+        'iv': CryptoJS.enc.Hex.parse("00000000000000000000000000000000"),
+        'mode': CryptoJS.mode.CBC,
+        'padding': CryptoJS.pad.Pkcs7
+      });
+    return _0x4c8990.ciphertext.toString(CryptoJS.enc.Base64);
+  } catch (_0x2378e1) {
+    return console.error("Encode AES Error:", _0x2378e1), null;
+  }
+}
+function decodeAES(_0x1c69bb, _0xa41149) {
+  try {
+    const _0x137467 = decodeURIComponent(_0x1c69bb),
+      _0x5b6044 = CryptoJS.enc.Base64.parse(_0xa41149),
+      _0x2873af = CryptoJS.AES.decrypt({
+        'ciphertext': CryptoJS.enc.Base64.parse(_0x137467),
+        'salt': ''
+      }, _0x5b6044, {
+        'iv': CryptoJS.enc.Hex.parse("00000000000000000000000000000000"),
+        'mode': CryptoJS.mode.CBC,
+        'padding': CryptoJS.pad.Pkcs7
+      });
+    return _0x2873af.toString(CryptoJS.enc.Utf8);
+  } catch (_0x82c12) {
+    return console.error("Decode AES Error:", _0x82c12), null;
+  }
+}
+async function getProfileInfo(_0x5cf42e, _0x107700) {
+  try {
+    const _0x38eaa0 = {
+        'phonebook_version': Math.floor(Date.now() / 0x3e8),
+        'friend_pversion_map': [_0x5cf42e + '_0'],
+        'avatar_size': 0x78,
+        'language': 'vi',
+        'show_online_status': 0x1,
+        'imei': _0x107700.IMEI
+      },
+      _0x1af9b8 = JSON.stringify(_0x38eaa0),
+      _0x570574 = encodeAES(_0x1af9b8, _0x107700.ENCRYPTION_KEY);
+    if (!_0x570574) throw new Error("Không thể mã hóa request");
+    const _0x1b4b74 = encodeURIComponent(_0x570574);
+    console.log("🔍 Đang lấy thông tin profile với FID:", _0x5cf42e);
+    const _0x3b710f = await axios.post("https://tt-profile-wpa.chat.zalo.me/api/social/friend/getprofiles/v2?zpw_ver=671&zpw_type=30", "params=" + _0x1b4b74, {
+      'headers': {
+        'Host': "tt-profile-wpa.chat.zalo.me",
+        'Cookie': 'zpw_sek=' + _0x107700.COOKIE_ZPW_SEK,
+        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        'Accept': "application/json, text/plain, */*",
+        'Content-Type': "application/x-www-form-urlencoded",
+        'Origin': "https://chat.zalo.me",
+        'Referer': "https://chat.zalo.me/"
+      },
+      'decompress': true,
+      'timeout': 0x2710
+    });
+    if (_0x3b710f.data.error_code !== 0x0) return {
+      'success': false,
+      'message': _0x3b710f.data.error_message || "API trả về lỗi"
+    };
+    if (_0x3b710f.data.data && typeof _0x3b710f.data.data === "string") {
+      const _0x25ecd0 = decodeAES(_0x3b710f.data.data, _0x107700.ENCRYPTION_KEY);
+      if (!_0x25ecd0) return {
+        'success': false,
+        'message': "Không thể giải mã dữ liệu profile"
+      };
+      const _0x484b63 = JSON.parse(_0x25ecd0);
+      if (_0x484b63.data && _0x484b63.data.changed_profiles) {
+        const _0x24064f = _0x484b63.data.changed_profiles,
+          _0x19d4c9 = Object.keys(_0x24064f)[0x0];
+        if (_0x19d4c9) {
+          const _0x453d22 = _0x24064f[_0x19d4c9];
+          return console.log("✅ Tìm thấy user:", {
+            'userId': _0x453d22.userId,
+            'name': _0x453d22.displayName
+          }), {
+            'success': true,
+            'data': {
+              'userId': _0x453d22.userId,
+              'displayName': _0x453d22.displayName,
+              'zaloName': _0x453d22.zaloName,
+              'avatar': _0x453d22.avatar
+            }
+          };
+        }
+      }
+    }
+    return {
+      'success': false,
+      'message': "Không tìm thấy thông tin profile"
+    };
+  } catch (_0x4a17ff) {
+    return console.error("❌ Get Profile Error:", _0x4a17ff.message), {
+      'success': false,
+      'message': "Lỗi khi lấy profile: " + _0x4a17ff.message
+    };
+  }
+}
+async function sendPhoto(_0x5c7345, _0x291d81, _0x1988d2, _0x4766f4 = true) {
+  try {
+    const _0x2c10a6 = Date.now(),
+      _0x33d071 = {
+        'photoId': Math.floor(Math.random() * 0xe8d4a51000).toString(),
+        'clientId': _0x2c10a6,
+        'desc': '',
+        'width': 0x320,
+        'height': 0x230,
+        'previewThumb': "AwAYABj/2gAMAwEAAhEDEQA/AKtvYwIqvdSlc8hFGTUXuXboNvY...",
+        'toid': _0x5c7345,
+        'checksum': "fb3d027ca1d518e878e4894cb30e3a51",
+        'rawUrl': _0x291d81,
+        'thumbUrl': _0x291d81,
+        'normalUrl': _0x291d81,
+        'hdUrl': _0x291d81,
+        'hdSize': "78924",
+        'language': 'vi',
+        'zsource': 0x12e,
+        'jcp': JSON.stringify({
+          'sendSource': 0x12e,
+          'convertible': 'jxl'
+        }),
+        'ttl': 0x0,
+        'imei': _0x1988d2.IMEI
+      },
+      _0x17058b = JSON.stringify(_0x33d071),
+      _0x404da6 = encodeAES(_0x17058b, _0x1988d2.ENCRYPTION_KEY);
+    if (!_0x404da6) throw new Error("Mã hóa thất bại");
+    const _0x3f1831 = encodeURIComponent(_0x404da6);
+    console.log("📤 Đang gửi yêu cầu đến UID:", _0x5c7345);
+    const _0x7a6f5d = await axios.post("https://tt-files-wpa.chat.zalo.me/api/message/photo_original/send?zpw_ver=670&zpw_type=30&nretry=0", "params=" + _0x3f1831, {
+      'headers': {
+        'Host': "tt-files-wpa.chat.zalo.me",
+        'Cookie': "zpw_sek=" + _0x1988d2.COOKIE_ZPW_SEK,
+        'Content-Type': "application/x-www-form-urlencoded",
+        'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        'Accept': "application/json, text/plain, */*",
+        'Origin': "https://chat.zalo.me",
+        'Referer': "https://chat.zalo.me/"
+      },
+      'decompress': true,
+      'timeout': 0x2710
+    });
+    if (_0x7a6f5d.data.error_code !== 0x0) return {
+      'success': false,
+      'result': 'FAILED',
+      'detail': _0x7a6f5d.data.error_message
+    };
+    const _0x269820 = _0x7a6f5d.data.data,
+      _0x34ae13 = decodeAES(_0x269820, _0x1988d2.ENCRYPTION_KEY);
+    if (!_0x34ae13) return {
+      'success': false,
+      'result': "ERROR",
+      'detail': "Không thể giải mã response, có thể phiên đăng nhập đã hết hiệu lực"
+    };
+    const _0x485ae5 = JSON.parse(_0x34ae13);
+    if (_0x485ae5.error_code === 0x0) {
+      console.log("✅ Gửi yêu cầu thành công");
+      const _0x3cbd60 = _0x485ae5.data?.["msgId"];
+      if (_0x4766f4 && _0x3cbd60) try {
+        console.log("🗑️ Đang tự động xóa hình ảnh phía người gửi...");
+        const _0x40d710 = Date.now(),
+          _0x43616c = {
+            'toid': _0x5c7345,
+            'cliMsgId': _0x40d710,
+            'msgs': [{
+              'cliMsgId': _0x2c10a6.toString(),
+              'globalMsgId': _0x3cbd60,
+              'ownerId': _0x1988d2.UID,
+              'destId': _0x5c7345
+            }],
+            'onlyMe': 0x1,
+            'imei': _0x1988d2.IMEI
+          },
+          _0x4191d0 = JSON.stringify(_0x43616c),
+          _0x5dba69 = encodeAES(_0x4191d0, _0x1988d2.ENCRYPTION_KEY);
+        if (_0x5dba69) {
+          const _0x4000fa = encodeURIComponent(_0x5dba69),
+            _0x430b32 = await axios.post("https://tt-chat2-wpa.chat.zalo.me/api/message/delete?zpw_ver=683&zpw_type=30&nretry=0", "params=" + _0x4000fa, {
+              'headers': {
+                'Host': "tt-chat2-wpa.chat.zalo.me",
+                'Cookie': "zpw_sek=" + _0x1988d2.COOKIE_ZPW_SEK,
+                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                'Accept': "application/json, text/plain, */*",
+                'Content-Type': "application/x-www-form-urlencoded",
+                'Origin': "https://chat.zalo.me",
+                'Referer': "https://chat.zalo.me/",
+                'Accept-Encoding': "gzip, deflate, br"
+              },
+              'decompress': true,
+              'timeout': 0x2710
+            });
+          if (_0x430b32.data.error_code === 0x0) {
+            const _0x4e582e = decodeAES(_0x430b32.data.data, _0x1988d2.ENCRYPTION_KEY);
+            if (_0x4e582e) {
+              const _0x274884 = JSON.parse(_0x4e582e);
+              _0x274884.error_code === 0x0 ? console.log("✅ Xóa hình ảnh phía người gửi thành công:", _0x274884) : console.error("❌ Xóa hình ảnh phía người gửi thất bại:", _0x274884.error_message);
+            }
+          } else console.error("❌ Request xóa hình ảnh phía người gửi thất bại:", _0x430b32.data.error_message);
+        } else console.error("❌ Không thể mã hóa request xóa hình ảnh");
+      } catch (_0x2e2229) {
+        console.error("❌ Có lỗi khi xóa hình ảnh phía người gửi:", _0x2e2229.message);
+      }
+      return {
+        'success': true,
+        'result': 'SUCCESS',
+        'detail': "Gửi yêu cầu thành công",
+        'msgId': _0x3cbd60
+      };
+    } else return console.log("❌ Gửi yêu cầu thất bại: " + _0x485ae5.error_message + " - error_code: " + _0x485ae5.error_code), {
+      'success': false,
+      'result': "FAILED",
+      'detail': _0x485ae5.error_message || "Không thể gửi yêu cầu"
+    };
+  } catch (_0x5ac759) {
+    return console.error("❌ Có lỗi xử lý:", _0x5ac759.message), {
+      'success': false,
+      'result': "ERROR",
+      'detail': _0x5ac759.message
+    };
+  }
+}
+async function getToolSetup() {
+  const _0x5aaa79 = await db.query("SELECT * FROM tool_setup WHERE STT = 1");
+  if (_0x5aaa79.length === 0x0) return {
+    'id': 0x1,
+    'uid_zalo_system': null,
+    'zalo_system_money': 0x7530,
+    'zalo_custom_money': 0x4e20,
+    'imageUrl': null
+  };
+  return _0x5aaa79[0x0];
+}
+const getPersonalAccounts = async (_0x1cf871, _0x3023cd) => {
+    try {
+      const _0x5d5762 = await db.query("SELECT \n                za.UID, \n                za.displayName, \n\t\t\t\tza.phoneNumber,\n                za.accStatus\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.accStatus = 'Đang hoạt động'\n             ORDER BY za.ImportTime DESC", [_0x1cf871.user.userID]),
+        _0xc75be2 = _0x5d5762.map(_0x7d072d => ({
+          'UID': _0x7d072d.UID,
+          'displayName': _0x7d072d.displayName,
+          'phoneNumber': _0x7d072d.phoneNumber,
+          'accStatus': _0x7d072d.accStatus
+        }));
+      _0x3023cd.json({
+        'success': true,
+        'data': _0xc75be2
+      });
+    } catch (_0x1f9432) {
+      console.error("Get Personal Accounts Error:", _0x1f9432), _0x3023cd.status(0x1f4).json({
+        'success': false,
+        'message': "Lỗi lấy danh sách tài khoản Zalo"
+      });
+    }
+  },
+  decodeFidAndGetProfile = async (_0x562de3, _0x528cfc) => {
+    try {
+      let {
+        encryptedFid: _0x316490,
+        zaloUID: _0x216531,
+        imageType: _0x567103,
+        ipType: _0x3b8f1e
+      } = _0x562de3.body;
+      if (!_0x316490 || !_0x216531) return _0x528cfc.status(0x190).json({
+        'success': false,
+        'message': "Thiếu thông tin cần thiết"
+      });
+      console.log("\n═══════════════════════════════════════════════════════"), console.log("🔓 GIẢI MÃ PARAMS VÀ LẤY THÔNG TIN PROFILE"), console.log("   Zalo UID:", _0x216531), console.log("   User ID:", _0x562de3.user.userID);
+      const _0x3aa6ab = await getToolSetup();
+      let _0x4a4e88 = _0x3aa6ab.zalo_custom_money;
+      _0x567103 === "custom" && (_0x4a4e88 += 0x1388);
+      _0x3b8f1e === "both" && (_0x4a4e88 *= 0x2);
+      console.log("💸 Phí dự kiến:", _0x4a4e88.toLocaleString("vi-VN"), '₫');
+      const _0x4d56c1 = await db.query("SELECT totalMoney FROM user WHERE userID = ?", [_0x562de3.user.userID]);
+      if (_0x4d56c1.length === 0x0) return console.log("❌ Không tìm thấy user"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x194).json({
+        'success': false,
+        'message': "Không tìm thấy user"
+      });
+      const _0x1965d5 = parseFloat(_0x4d56c1[0x0].totalMoney);
+      if (_0x1965d5 < _0x4a4e88) return console.log("❌ Số dư không đủ:", _0x1965d5.toLocaleString('vi-VN'), '<', _0x4a4e88.toLocaleString("vi-VN"), '₫'), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x190).json({
+        'success': false,
+        'message': "Số dư không đủ. Cần " + _0x4a4e88.toLocaleString('vi-VN') + "₫, còn " + _0x1965d5.toLocaleString('vi-VN') + '₫',
+        'insufficientBalance': true
+      });
+      const _0x2b9be5 = await db.query("SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'", [_0x562de3.user.userID, _0x216531]);
+      if (_0x2b9be5.length === 0x0) return console.log("❌ Không tìm thấy tài khoản Zalo"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x190).json({
+        'success': false,
+        'message': "Không tìm thấy tài khoản Zalo hoặc tài khoản không hoạt động"
+      });
+      const _0x599f34 = getZaloAccountConfig(_0x2b9be5[0x0]);
+      console.log("✅ Tài khoản Zalo:", _0x2b9be5[0x0].displayName), console.log("🔓 Đang giải mã chuỗi PARAMS...");
+      const _0x11b786 = decodeAES(_0x316490, _0x599f34.ENCRYPTION_KEY);
+      if (!_0x11b786) return console.log("❌ Không thể giải mã chuỗi PARAMS"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x190).json({
+        'success': false,
+        'message': "Không thể giải mã chuỗi PARAMS"
+      });
+      let _0x3ec4b8;
+      try {
+        _0x3ec4b8 = JSON.parse(_0x11b786);
+      } catch (_0x51414e) {
+        return console.log("❌ Chuỗi PARAMS không hợp lệ"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x190).json({
+          'success': false,
+          'message': "Chuỗi PARAMS không hợp lệ"
+        });
+      }
+      if (!_0x3ec4b8.fid) return console.log("❌ Không tìm thấy thông tin cần thiết trong dữ liệu"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x190).json({
+        'success': false,
+        'message': "Không tìm thấy thông tin cần thiết trong dữ liệu"
+      });
+      const _0x56bc79 = _0x3ec4b8.fid;
+      console.log("✅ Đã giải mã PARAMS:", _0x56bc79);
+      const _0xa619bc = await getProfileInfo(_0x56bc79, _0x599f34);
+      // ✅ FIX: Get phoneNumber from database
+      const [phoneRows] = await db.query(
+        "SELECT phoneNumber FROM zalo_account WHERE UID = ?",
+        [_0x56bc79]
+      );
+      if (!_0xa619bc.success) return console.log("❌ Không thể lấy thông tin profile"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x194).json({
+        'success': false,
+        'message': _0xa619bc.message || "Không thể lấy thông tin người dùng"
+      });
+      console.log("✅ HOÀN THÀNH BƯỚC TÌM KIẾM"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.json({
+        'success': true,
+        'data': {
+          ..._0xa619bc.data,
+          'phoneNumber': phoneRows.length > 0 ? phoneRows[0].phoneNumber : null,
+          'fee': _0x4a4e88,
+          'currentBalance': _0x1965d5
+        }
+      });
+    } catch (_0x510c16) {
+      console.error("Decode PARAMS Error:", _0x510c16), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x1f4).json({
+        'success': false,
+        'message': "Lỗi hệ thống"
+      });
+    }
+  },
+  sendImageByCardConfirmed = async (_0x426a80, _0x53a3e8) => {
+    const _0x51ef37 = await db.getConnection();
+    try {
+      await _0x51ef37.beginTransaction();
+      const {
+          targetUID: _0xf7c0ef,
+          targetName: _0x33066e,
+          zaloUID: _0x35913b,
+          targetAvatar: _0x2fa7c8,
+          imageType: _0x2b2d09,
+          ipType: _0x49f60c,
+          autoDelete: _0x1090b8
+        } = _0x426a80.body,
+        _0x87599b = !!_0x1090b8;
+      if (!_0xf7c0ef || !_0x33066e || !_0x35913b) return await _0x51ef37.rollback(), _0x53a3e8.status(0x190).json({
+        'success': false,
+        'message': "Thiếu thông tin cần thiết"
+      });
+      const _0x3617e9 = _0x2fa7c8 || '';
+      console.log("\n═══════════════════════════════════════════════════════"), console.log("📤 GỬI ẢNH QUA DANH THIẾP (ĐÃ XÁC NHẬN)"), console.log("   User ID:", _0x426a80.user.userID), console.log("   Target UID:", _0xf7c0ef), console.log("   Zalo UID:", _0x35913b);
+      const [_0x53a6e2] = await _0x51ef37.execute("SELECT userID, userName, totalMoney FROM user WHERE userID = ? FOR UPDATE", [_0x426a80.user.userID]);
+      if (_0x53a6e2.length === 0x0) return await _0x51ef37.rollback(), console.log("❌ Không tìm thấy user"), console.log("═══════════════════════════════════════════════════════\n"), _0x53a3e8.status(0x194).json({
+        'success': false,
+        'message': "Không tìm thấy user"
+      });
+      const _0x5c934d = _0x53a6e2[0x0],
+        _0x1160a0 = parseFloat(_0x5c934d.totalMoney);
+      console.log('👤\x20User:', _0x5c934d.userName), console.log('💰\x20Số\x20dư:', _0x1160a0.toLocaleString("vi-VN"), '₫');
+      const _0x4710e4 = await getToolSetup();
+      let _0x140086 = _0x4710e4.zalo_custom_money;
+      _0x2b2d09 === "custom" && (_0x140086 += 0x1388);
+      _0x49f60c === "both" && (_0x140086 *= 0x2);
+      console.log("💸 Phí:", _0x140086.toLocaleString("vi-VN"), '₫');
+      if (_0x1160a0 < _0x140086) return await _0x51ef37.rollback(), console.log("❌ Số dư không đủ"), console.log("═══════════════════════════════════════════════════════\n"), _0x53a3e8.status(0x190).json({
+        'success': false,
+        'message': "Số dư không đủ. Cần " + _0x140086.toLocaleString("vi-VN") + '₫'
+      });
+      const [_0x4f65f2] = await _0x51ef37.execute("SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'", [_0x426a80.user.userID, _0x35913b]);
+      if (_0x4f65f2.length === 0x0) return await _0x51ef37.rollback(), console.log("❌ Không tìm thấy tài khoản Zalo"), console.log("═══════════════════════════════════════════════════════\n"), _0x53a3e8.status(0x190).json({
+        'success': false,
+        'message': "Số điện thoại chưa đăng ký Zalo hoặc không cho phép tìm kiếm"
+      });
+      const _0x5a5351 = getZaloAccountConfig(_0x4f65f2[0x0]);
+      console.log("✅ Tài khoản Zalo:", _0x4f65f2[0x0].displayName);
+      let _0x3fa368 = [];
+      if (_0x49f60c === "ipv4") _0x3fa368.push({
+        'type': 'IPv4',
+        'url': process.env.IMG_URL_V4 || process.env.IMG_URL
+      });else {
+        if (_0x49f60c === "ipv6") _0x3fa368.push({
+          'type': "IPv6",
+          'url': process.env.IMG_URL_V6 || process.env.IMG_URL
+        });else _0x49f60c === 'both' ? (_0x3fa368.push({
+          'type': "IPv4",
+          'url': process.env.IMG_URL_V4 || process.env.IMG_URL
+        }), _0x3fa368.push({
+          'type': 'IPv6',
+          'url': process.env.IMG_URL_V6 || process.env.IMG_URL
+        })) : _0x3fa368.push({
+          'type': "Default",
+          'url': process.env.IMG_URL
+        });
+      }
+      const _0x43cc43 = [];
+      let _0x2afe20 = 0x0;
+      for (const _0x220182 of _0x3fa368) {
+        let _0x51a9b2 = _0x220182.url;
+        if (_0x2b2d09 === "custom") {
+          const _0x37b1c9 = 'cus_user_' + _0x426a80.user.userID + '.png';
+          _0x51a9b2 = _0x51a9b2.replace("qc.png", _0x37b1c9);
+        }
+        const [_0x31cc14] = await _0x51ef37.execute("INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail, fee_charged, use_system_account, sender_zalo_uid)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", ["[Danh thiếp]", _0xf7c0ef, _0x33066e, _0x3617e9, "PENDING", 'PENDING', "Đang xử lý " + _0x220182.type + "...", 0x0, 0x0, _0x35913b]),
+          _0x9cece1 = _0x31cc14.insertId;
+        await _0x51ef37.query("INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)", [_0x426a80.user.userID, _0x9cece1]);
+        const _0x323efb = '' + _0x51a9b2 + (_0x51a9b2.includes('?') ? '&' : '?') + "req=" + _0x9cece1;
+        console.log("\n📤 Gửi hình ảnh " + _0x220182.type + " đến UID:", _0xf7c0ef), console.log('🔗\x20URL:', _0x323efb);
+        const _0x330dde = await sendPhoto(_0xf7c0ef, _0x323efb, _0x5a5351, _0x87599b);
+        let _0x50085d = 0x0;
+        _0x330dde.success && (_0x50085d = _0x140086 / _0x3fa368.length, _0x2afe20 += _0x50085d), await _0x51ef37.execute("UPDATE auto_request \n                 SET imageUrl = ?, sendResult = ?, Detail = ?, fee_charged = ?\n                 WHERE reqID = ?", [_0x323efb, _0x330dde.result, _0x330dde.detail + (["IPv4", "IPv6"].includes(_0x220182.type) ? '\x20(' + _0x220182.type + ')' : ''), _0x50085d, _0x9cece1]), _0x43cc43.push({
+          'reqID': _0x9cece1,
+          'type': _0x220182.type,
+          ..._0x330dde
+        });
+      }
+      let _0x233a8d = _0x1160a0;
+      _0x2afe20 > 0x0 && (await _0x51ef37.execute("UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?", [_0x2afe20, _0x426a80.user.userID]), _0x233a8d = _0x1160a0 - _0x2afe20, console.log("💳 Đã trừ tổng cộng " + _0x2afe20.toLocaleString('vi-VN') + "₫ từ tài khoản"));
+      await _0x51ef37.commit(), console.log("✅ Transaction committed successfully\n");
+      const _0x2700f5 = _0x43cc43.every(_0x5d82ac => _0x5d82ac.success),
+        _0x3a7fb1 = _0x43cc43[_0x43cc43.length - 0x1];
+      if (_0x2700f5) return _0x53a3e8.json({
+        'success': true,
+        'message': _0x49f60c === "both" ? "Gửi thành công cả 2 yêu cầu (IPv4 & IPv6)" : _0x3a7fb1.detail,
+        'data': {
+          'result': _0x3a7fb1.result,
+          'detail': _0x3a7fb1.detail,
+          'fee': _0x2afe20,
+          'newBalance': _0x233a8d,
+          'reqID': _0x43cc43[0x0].reqID,
+          'results': _0x43cc43
+        }
+      });else {
+        const _0x33dcac = _0x43cc43.some(_0x1d65a7 => _0x1d65a7.success);
+        return _0x53a3e8.status(_0x33dcac ? 0xc8 : 0x190).json({
+          'success': _0x33dcac,
+          'message': _0x33dcac ? "Gửi thành công một phần yêu cầu" : "Gửi yêu cầu thất bại",
+          'data': {
+            'results': _0x43cc43,
+            'fee': _0x2afe20,
+            'newBalance': _0x233a8d
+          }
+        });
+      }
+    } catch (_0x4c60da) {
+      await _0x51ef37.rollback(), console.error("❌ Lỗi khi gửi yêu cầu :", _0x4c60da), _0x53a3e8.status(0x1f4).json({
+        'success': false,
+        'message': "Lỗi hệ thống khi gửi yêu cầu"
+      });
+    } finally {
+      _0x51ef37.release();
+    }
+  };
+module.exports = {
+  'getPersonalAccounts': getPersonalAccounts,
+  'decodeFidAndGetProfile': decodeFidAndGetProfile,
+  'sendImageByCardConfirmed': sendImageByCardConfirmed
+};
