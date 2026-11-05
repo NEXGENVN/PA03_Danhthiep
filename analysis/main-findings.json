@@ -1,0 +1,3018 @@
+{
+  "scope": "Static review of recovered/MAIN_SERVER only; source was read, never imported or executed by this analysis script.",
+  "source_note": "Leading File: metadata is not JavaScript. It was stripped during recovery by parent; citations use current recovered files after stripping.",
+  "line_number_convention": "1-based lines in recovered source, not the uploaded source container/dump.",
+  "source_hashes": {
+    "main_server.js": "9a8fd078d65985cade1bf5c78825992194c89d19ea104a78e0a061dd46d2f8e6",
+    "config/database.js": "e54f8dd1f52c05bea657ac27a08229d73042b3c28521900cd7e47a66015f746c",
+    "controllers/adminController.js": "ddd5715d6a3f9a735c4aa4db81d04c651fb2398066a251a0c01d013e6afdc940",
+    "controllers/adminProductController.js": "2558dd49e5eda815b3f778538d96e3eff28cabe056cfad7aa3ae19d0871a68b1",
+    "controllers/authController.js": "920b72fbe698eac524f1ae444d23ab32b36662cff191170d4aa2e3d5b93c8ccd",
+    "controllers/captchaController.js": "181917955e3d473892a1649ae6d42e59f06977a67b5ffb4bd71444c757ccb68b",
+    "controllers/logsController.js": "f4261ea9beb5e5dbb4aec2f07c401d65f61c0411f48c508fde3b1b9a233d94ec",
+    "middleware/apiLogger.js": "8dd12f82f37b83d957b93074d45bfa951350cab7c741f15e24e22aee70728ff2",
+    "middleware/auth.js": "8abb14a4bfbf7926dbd7561a8c05a02cb864cc96fe5f58cfde1508a4c4ef573a",
+    "middleware/csrf.js": "3b4297bd0c694109ba0d68fa8a2165881ee6acb615a5860d99c265aaa6ddf701",
+    "middleware/rateLimiter.js": "c8b2dfac127a8b755ae206e28e218c09ac1047edd68e1cafc5917a4bd87dee12",
+    "routes/adminProductRoutes.js": "83ca8eb53582d2aa78859b2a5db0a03c4fb3e2f4f6e326faf8df329683ecdd3d",
+    "routes/adminRoutes.js": "79d8f54545f59a5e5c9382b1e683b81d94f2beb52315550e182e59f176821cd3",
+    "routes/authRoutes.js": "49d753c47363591ada6fc9765f423ab13caf1377e9fadf1c8a5054bdaabece38",
+    "routes/captchaRoutes.js": "fcbea5b2be41d3d96a148c85f7d2d70a747ee1dbac6c23070a4513c3c40d7a4b",
+    "routes/checkIpProxyRoutes.js": "f4b853046403e6e9d1b8c659d2f26b7b805f3942a7035eb1e61e9d887d246e80",
+    "routes/checkStatusProxyRoutes.js": "7c7ff51dff2743e323aaded67e1487d54fb6b860b1671b23891b44dcea50171e",
+    "routes/dataFindProxyRoutes.js": "d27843c4805fd5d85677673d204f35f170f92476dddaa783d976e9ed2c31d621",
+    "routes/licenseProxyRoutes.js": "8bdf1419cd1965f9090bcd60c9c092c0352b18ef871d86557ade914dfb252592",
+    "routes/linkProxyRoutes.js": "a0dac9a3c569635e5c919d153120db42cf971ff5c17545d973bb983f416fddef",
+    "routes/logsRoutes.js": "1747b0698f5fb2fc9c975b1b332084dabe4d8a38580487ab6a1723fa854aed98",
+    "routes/payosProxyRoutes.js": "5d0b6dcf2eeaa9e4a751605e8f522aee4f6a02285176e96a346893f89d774264",
+    "routes/sendImageByCardProxyRoutes.js": "5fcd90976cdb0605fda72ad32f60bc007e54b209bfcaac24469c88a9317ceaae",
+    "routes/sendImageProxyRoutes.js": "971572fa46db516ec3b93d538ad5f7be2546631943d79f7859582b5662f0db10",
+    "routes/sendImageV2ProxyRoutes.js": "2ada0d7fdce2d3bba8016bd17a4268a73fbf9f116bf6bb526bff35774bb0ed7d",
+    "routes/uploadProxyRoutes.js": "a00c1d64b4ceebfc3517d37a11ed72aef633d1d0b5e0c58ff3a30ace61d2f9e5",
+    "routes/zaloAccountProxyRoutes.js": "13e87aba69a98caca22bd730dd29fe2badc3916bc55d677c213d2397948333c4",
+    "routes/zaloOaProxyRoutes.js": "cd2e1e0d5b5c7f983718c8de373d6492b13a0cc18a24a7cc376efc6dc665d85b",
+    "routes/zaloTimerProxyRoutes.js": "adb53d4166888f13937e4464922bba5b50814b6e3faa9f0857872ea58df5841e",
+    "utils/sanitize.js": "fe660085188c65040df944f561e32ac431847974adfa0733158b6b39c6c0e304"
+  },
+  "architecture": {
+    "entrypoint": "recovered/MAIN_SERVER/main_server.js",
+    "purpose": "Express authentication/authorization and service routing hub",
+    "port": "MAIN_SERVER_PORT (comment mentions 3100; no code default)",
+    "dotenv": "recovered/.env, resolved from ../.env with override:true",
+    "database": "mysql2/promise connection pool; pool.execute returns rows through custom db.query",
+    "roles": {
+      "1": "admin",
+      "2": "regular registered user",
+      "3": "VIP",
+      "0": "default in admin createUser when role omitted; not documented consistently"
+    },
+    "authentication": "Bearer JWT required; current user role and active state re-read from DB on every request; password hashes bcryptjs for regular auth and bcrypt for admin",
+    "jwt_lifetimes": "Registration/login JWT_EXPIRE or 24h; admin login hard-coded 7d; no refresh/logout/revocation implementation",
+    "csrf": "Server-side synchronizer token stored in Map per userID:IP; 32 random bytes as 64 hex characters, 1h expiry, cleanup every 10min; safe methods exempt",
+    "middleware_order": [
+      "Helmet",
+      "CORS allowlist (no Origin allowed)",
+      "JSON/form body parsers",
+      "Morgan",
+      "globalLimiter",
+      "request console logging",
+      "routes: auth, role guard where present, API logging, CSRF, handler"
+    ],
+    "proxy_trust": "trust proxy=1; custom IP parsers also directly trust forwarded headers",
+    "internal_routing": "Mostly HTTP upstream requests with x-internal-auth; authenticated userID appended after client fields so caller cannot override it; upload is exception using only x-user-id."
+  },
+  "features": [
+    {
+      "name": "Regular account lifecycle",
+      "capabilities": [
+        "Register with required CAPTCHA; new role 2 and balance 0",
+        "Login by username + bcrypt password",
+        "Authenticated sanitized profile/balance",
+        "Change password with current password and minimum new length 6"
+      ],
+      "limitations": [
+        "No email verification/recovery/reset/refresh/logout route",
+        "No original admin seed included"
+      ]
+    },
+    {
+      "name": "Admin user management",
+      "capabilities": [
+        "Dedicated admin login",
+        "List/read/create/update/delete users",
+        "Change roles, active state, balances/passwords",
+        "Prevent self-delete and intended self-lock/demotion",
+        "Aggregate user, Zalo, request and fee statistics"
+      ]
+    },
+    {
+      "name": "CAPTCHA and IP blocks",
+      "capabilities": [
+        "6 mixed-case alphanumeric characters returned as base64 SVG",
+        "UUID challenge, SHA256 answer stored in DB, purpose register/login/admin_login, five-minute lifetime",
+        "Require login CAPTCHA after 2 failures within 15min",
+        "10 accumulated failures within 30min triggers 15min block",
+        "Admin block/list/unblock IPs",
+        "Generation limit 10 per minute"
+      ],
+      "limitations": [
+        "Failed counters combine all attempt types for blocking",
+        "Successful login deletes failed attempts for that IP/type; successful attempts are not recorded",
+        "No cleanup scheduler for expired DB captcha/attempt/block records in MAIN"
+      ]
+    },
+    {
+      "name": "Zalo accounts",
+      "capabilities": [
+        "List/detail/import/update/delete",
+        "Auto-fetch account",
+        "Single/all-account status checks"
+      ],
+      "upstream": "ZL_SERVER"
+    },
+    {
+      "name": "Immediate image sending",
+      "capabilities": [
+        "Standard send/history/stats for authenticated users",
+        "VIP/admin v2 phone search/send/account list",
+        "VIP/admin card/FID decode/send/personal-account list"
+      ],
+      "upstream": "ZL_SERVER"
+    },
+    {
+      "name": "Scheduled sending",
+      "capabilities": [
+        "VIP/admin v2 or card scheduling",
+        "Timer history, also exposed through general authenticated /api/zalo-timer"
+      ],
+      "upstream": "ZL_TIMER_SERVER (missing)"
+    },
+    {
+      "name": "Zalo OA administration",
+      "capabilities": [
+        "Token/read-refresh",
+        "Template CRUD/fetch latest",
+        "Send templates by phone or UID",
+        "Results/preview/status"
+      ],
+      "authorization": "admin only",
+      "upstream": "ZL_SERVER"
+    },
+    {
+      "name": "Tool pricing",
+      "capabilities": [
+        "Select system Zalo UID",
+        "Configure system/custom send fees, system/custom phone lookup, card lookup and data-leak lookup fees",
+        "Auto-create default tool_setup row on GET when table is empty"
+      ]
+    },
+    {
+      "name": "License storefront and administration",
+      "capabilities": [
+        "Authenticated catalog/license list/purchase proxy",
+        "Admin product CRUD/pricing (1/5/10 tiers)",
+        "Admin license list/filter/detail/revoke/usage-count extension/delete and statistics"
+      ],
+      "upstream": "Purchase/catalog through ZL_SERVER; admin CRUD local SQL"
+    },
+    {
+      "name": "IP lookup",
+      "capabilities": [
+        "Authenticated IP location lookup"
+      ],
+      "upstream": "MINI_SERVICE_SERVER (missing)"
+    },
+    {
+      "name": "Leak lookup",
+      "capabilities": [
+        "Admin phone/email lookup",
+        "Fee/balance precheck and payment-confirmed lookup",
+        "Own lookup history and global enriched admin history"
+      ],
+      "upstream": "DATA_FIND_SERVER (missing)"
+    },
+    {
+      "name": "Link management",
+      "capabilities": [
+        "Admin website metadata fetch",
+        "Template/domain CRUD",
+        "Link list/create/update",
+        "Thumbnail upload",
+        "Link/thumbnail result lists"
+      ],
+      "upstream": "LINK_SERVER (missing)"
+    },
+    {
+      "name": "File upload",
+      "capabilities": [
+        "Authenticated custom PNG upload, field custom_image, 3 MiB limit, forwarded in memory"
+      ],
+      "upstream": "FILES_SERVER"
+    },
+    {
+      "name": "Payments",
+      "capabilities": [
+        "Authenticated deposit creation, history and manual cancel",
+        "Return/cancel URLs point to first configured frontend origin + /dashboard.html"
+      ],
+      "upstream": "CASH_PAYOS (missing)"
+    },
+    {
+      "name": "Audit logs",
+      "capabilities": [
+        "Request timing, status, event/category, user/IP/body/query/error capture",
+        "Own/global/other-user log queries, stats/security alerts/search/cleanup"
+      ],
+      "limitations": [
+        "Authorization and DB-shape bugs detailed in findings",
+        "Async insert on response finish; logger DB failure never blocks response"
+      ]
+    },
+    {
+      "name": "Operations",
+      "capabilities": [
+        "JSON health endpoint",
+        "Helmet/CORS/Morgan/global+login limiters",
+        "Signal-based database-pool shutdown"
+      ],
+      "limitations": [
+        "Health does not test dependencies",
+        "No source package manifest/lockfile or original schema included"
+      ]
+    }
+  ],
+  "endpoint_count": 110,
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/auth/register",
+      "authorization": "public",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 14,
+      "declaration": "router.post('/register', authController.register);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "authorization": "public",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 15,
+      "declaration": "router.post('/login', loginLimiter, authController.login); // ✅ Rate limit: 5 lần/15 phút"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/profile",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 18,
+      "declaration": "router.get('/profile', authMiddleware, authController.getProfile);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 19,
+      "declaration": "router.post('/change-password', authMiddleware, authController.changePassword);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/csrf-token",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 22,
+      "declaration": "router.get('/csrf-token', authMiddleware, getCsrfToken);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/captcha/generate",
+      "authorization": "public",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+      "line": 36,
+      "declaration": "router.get('/generate', captchaLimiter, captchaController.generateCaptcha);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/captcha/check-required",
+      "authorization": "public",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+      "line": 44,
+      "declaration": "router.get('/check-required', captchaController.checkCaptchaRequired);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 26,
+      "declaration": "router.get('/users', adminController.getAllUsers);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users/:userID",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 32,
+      "declaration": "router.get('/users/:userID', adminController.getUserDetail);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/users",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 38,
+      "declaration": "router.post('/users', adminController.createUser);"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/users/:userID",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 44,
+      "declaration": "router.put('/users/:userID', adminController.updateUser);"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/users/:userID",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 50,
+      "declaration": "router.delete('/users/:userID', adminController.deleteUser);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/stats",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 56,
+      "declaration": "router.get('/stats', adminController.getSystemStats);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/tool-setup",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 62,
+      "declaration": "router.get('/tool-setup', adminController.getToolSetup);"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/tool-setup",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 68,
+      "declaration": "router.put('/tool-setup', adminController.updateToolSetup);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/zalo-accounts",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 78,
+      "declaration": "router.get('/zalo-accounts', adminController.getAllZaloAccounts);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/ip-blocks",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 88,
+      "declaration": "router.get('/ip-blocks', adminController.getBlockedIPsList);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/ip-blocks",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 95,
+      "declaration": "router.post('/ip-blocks', adminController.blockIPManual);"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/ip-blocks/:ipAddress",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 101,
+      "declaration": "router.delete('/ip-blocks/:ipAddress', adminController.unblockIPAddress);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/requests",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 111,
+      "declaration": "router.get('/requests', adminController.getAllAutoRequests);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/leak-history",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 121,
+      "declaration": "router.get('/leak-history', adminController.getGlobalLeakHistory);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/products",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 15,
+      "declaration": "router.get('/products', adminMiddleware, adminProductController.getAllProducts);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/products/stats",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 18,
+      "declaration": "router.get('/products/stats', adminMiddleware, adminProductController.getProductStats);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/products/:productID",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 21,
+      "declaration": "router.get('/products/:productID', adminMiddleware, adminProductController.getProductById);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/products",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 24,
+      "declaration": "router.post('/products', adminMiddleware, adminProductController.createProduct);"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/products/:productID",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 27,
+      "declaration": "router.put('/products/:productID', adminMiddleware, adminProductController.updateProduct);"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/products/:productID",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 30,
+      "declaration": "router.delete('/products/:productID', adminMiddleware, adminProductController.deleteProduct);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/licenses",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 37,
+      "declaration": "router.get('/licenses', adminMiddleware, adminProductController.getAllLicenses);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/licenses/stats",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 40,
+      "declaration": "router.get('/licenses/stats', adminMiddleware, adminProductController.getLicenseStats);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/licenses/:licenseKey",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 43,
+      "declaration": "router.get('/licenses/:licenseKey', adminMiddleware, adminProductController.getLicenseById);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/licenses/:licenseKey/revoke",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 46,
+      "declaration": "router.post('/licenses/:licenseKey/revoke', adminMiddleware, adminProductController.revokeLicense);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/licenses/:licenseKey/extend",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 49,
+      "declaration": "router.post('/licenses/:licenseKey/extend', adminMiddleware, adminProductController.extendLicense);"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/licenses/:licenseKey",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 52,
+      "declaration": "router.delete('/licenses/:licenseKey', adminMiddleware, adminProductController.deleteLicense);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 15,
+      "declaration": "router.get('/', logsController.getMyLogs);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/stats",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 18,
+      "declaration": "router.get('/stats', logsController.getMyStats);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/admin/all",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 25,
+      "declaration": "router.get('/admin/all', logsController.getAllLogs);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/admin/user/:userID",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 28,
+      "declaration": "router.get('/admin/user/:userID', logsController.getUserLogsById);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/admin/security",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 31,
+      "declaration": "router.get('/admin/security', logsController.getSecurityAlertsController);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/admin/system-stats",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 34,
+      "declaration": "router.get('/admin/system-stats', logsController.getSystemStats);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/logs/admin/search",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 37,
+      "declaration": "router.get('/admin/search', logsController.searchLogs);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/logs/admin/cleanup",
+      "authorization": "any active authenticated user; admin paths lack role check",
+      "csrf_required": true,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 40,
+      "declaration": "router.post('/admin/cleanup', logsController.cleanupLogsController);"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-accounts",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 60,
+      "declaration": "router.get('/', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-accounts', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-accounts/:uid",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 61,
+      "declaration": "router.get('/:uid', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-accounts/${req.params.uid}`, 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-accounts",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 62,
+      "declaration": "router.post('/', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-accounts', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-accounts/auto-fetch",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 63,
+      "declaration": "router.post('/auto-fetch', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-accounts/auto-fetch', 'POST'));"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/zalo-accounts/:uid",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 64,
+      "declaration": "router.put('/:uid', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-accounts/${req.params.uid}`, 'PUT'));"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/zalo-accounts/:uid",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 65,
+      "declaration": "router.delete('/:uid', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-accounts/${req.params.uid}`, 'DELETE'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-accounts/:uid/check-status",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 66,
+      "declaration": "router.post('/:uid/check-status', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-accounts/${req.params.uid}/check-status`, 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-accounts/check-all-status",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 67,
+      "declaration": "router.post('/check-all-status', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-accounts/check-all-status', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/token",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.get('/token', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/token', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-oa/token/refresh",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.post('/token/refresh', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/token/refresh', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/templates",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 33,
+      "declaration": "router.get('/templates', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/templates', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-oa/templates",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 34,
+      "declaration": "router.post('/templates', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/templates', 'POST'));"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/zalo-oa/templates/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 35,
+      "declaration": "router.put('/templates/:id', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-oa/templates/${req.params.id}`, 'PUT'));"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/zalo-oa/templates/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 36,
+      "declaration": "router.delete('/templates/:id', (req, res) => forwardToZLServer(req, res, `/zalo/zalo-oa/templates/${req.params.id}`, 'DELETE'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-oa/send-template",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 39,
+      "declaration": "router.post('/send-template', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/send-template', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-oa/send-template-uid",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 40,
+      "declaration": "router.post('/send-template-uid', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/send-template-uid', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/results",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 41,
+      "declaration": "router.get('/results', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/results', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/preview-data",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 42,
+      "declaration": "router.get('/preview-data', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/preview-data', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/message-status",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 43,
+      "declaration": "router.get('/message-status', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/message-status', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-oa/fetch-new-templates",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 44,
+      "declaration": "router.get('/fetch-new-templates', (req, res) => forwardToZLServer(req, res, '/zalo/zalo-oa/fetch-new-templates', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.post('/', (req, res) => forwardToZLServer(req, res, '/zalo/send-image', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image/history",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.get('/history', (req, res) => forwardToZLServer(req, res, '/zalo/send-image/history', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image/stats",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 31,
+      "declaration": "router.get('/stats', (req, res) => forwardToZLServer(req, res, '/zalo/send-image/stats', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-v2/send",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.post('/send', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-v2/send', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-v2/search",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.post('/search', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-v2/search', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image-v2/zalo-accounts",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 31,
+      "declaration": "router.get('/zalo-accounts', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-v2/zalo-accounts', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-by-card/send",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.post('/send', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-by-card/send', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image-by-card/personal-accounts",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.get('/personal-accounts', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-by-card/personal-accounts', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-by-card/decode-fid",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 31,
+      "declaration": "router.post('/decode-fid', (req, res) => forwardToZLServer(req, res, '/zalo/send-image-by-card/decode-fid', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image-v2-timer/history",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": false,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 37,
+      "declaration": "router.get('/history', async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/send-image-by-card-timer/history",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": false,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 37,
+      "declaration": "router.get('/history', async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/zalo-timer/history",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 37,
+      "declaration": "router.get('/history', async (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-v2-timer/send",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 60,
+      "declaration": "router.post('/send', (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/send-image-by-card-timer/send",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 60,
+      "declaration": "router.post('/send', (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo-timer/send",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_TIMER_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 60,
+      "declaration": "router.post('/send', (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/zalo/upload-custom-image",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "FILES_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+      "line": 31,
+      "declaration": "router.post('/', upload.single('custom_image'), async (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/check-status/pre-check",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.post('/pre-check', (req, res) => forwardToZLServer(req, res, '/zalo/check-status/pre-check', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/check-status/confirm",
+      "authorization": "admin (1) or VIP (3)",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.post('/confirm', (req, res) => forwardToZLServer(req, res, '/zalo/check-status/confirm', 'POST'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/licenses",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.get('/', (req, res) => forwardToZLServer(req, res, '/zalo/licenses', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/licenses/my-licenses",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 30,
+      "declaration": "router.get('/my-licenses', (req, res) => forwardToZLServer(req, res, '/zalo/licenses/my-licenses', 'GET'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/licenses/products",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 31,
+      "declaration": "router.get('/products', (req, res) => forwardToZLServer(req, res, '/zalo/licenses/products', 'GET'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/licenses/purchase",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "ZL_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 32,
+      "declaration": "router.post('/purchase', (req, res) => forwardToZLServer(req, res, '/zalo/licenses/purchase', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/check-ip/location",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "MINI_SERVICE_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/checkIpProxyRoutes.js",
+      "line": 29,
+      "declaration": "router.post('/location', (req, res) => forwardToMiniServer(req, res, '/api/check-ip/location', 'POST'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/leak-lookup/phone",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "DATA_FIND_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 45,
+      "declaration": "router.post('/phone', (req, res) => handleSearch(req, res, 'phone'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/leak-lookup/email",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "DATA_FIND_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 48,
+      "declaration": "router.post('/email', (req, res) => handleSearch(req, res, 'email'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/leak-lookup/pre-check",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "DATA_FIND_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 51,
+      "declaration": "router.post('/pre-check', async (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/leak-lookup/confirm",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "DATA_FIND_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 71,
+      "declaration": "router.post('/confirm', async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/leak-lookup/history",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "DATA_FIND_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 101,
+      "declaration": "router.get('/history', async (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/link/fetch-meta",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 48,
+      "declaration": "router.post('/fetch-meta', (req, res) => proxyToLinkServer(req, res, '/fetch-meta'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/link/templates",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 51,
+      "declaration": "router.get('/templates', (req, res) => proxyToLinkServer(req, res, '/templates'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/link/templates",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 52,
+      "declaration": "router.post('/templates', (req, res) => proxyToLinkServer(req, res, '/templates'));"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/link/templates/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 53,
+      "declaration": "router.put('/templates/:id', (req, res) => proxyToLinkServer(req, res, `/templates/${req.params.id}`));"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/link/templates/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 54,
+      "declaration": "router.delete('/templates/:id', (req, res) => proxyToLinkServer(req, res, `/templates/${req.params.id}`));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/link/domains",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 57,
+      "declaration": "router.get('/domains', (req, res) => proxyToLinkServer(req, res, '/domains'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/link/domains",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 58,
+      "declaration": "router.post('/domains', (req, res) => proxyToLinkServer(req, res, '/domains'));"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/link/domains/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 59,
+      "declaration": "router.put('/domains/:id', (req, res) => proxyToLinkServer(req, res, `/domains/${req.params.id}`));"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/link/domains/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 60,
+      "declaration": "router.delete('/domains/:id', (req, res) => proxyToLinkServer(req, res, `/domains/${req.params.id}`));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/link/links",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 63,
+      "declaration": "router.get('/links', (req, res) => proxyToLinkServer(req, res, '/links'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/link/links",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 64,
+      "declaration": "router.post('/links', (req, res) => proxyToLinkServer(req, res, '/links'));"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/link/links/:id",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 65,
+      "declaration": "router.put('/links/:id', (req, res) => proxyToLinkServer(req, res, `/links/${req.params.id}`));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/link/upload-thumbnail",
+      "authorization": "admin (1)",
+      "csrf_required": true,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 72,
+      "declaration": "router.post('/upload-thumbnail', upload.single('thumbnail'), async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/link/results",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 106,
+      "declaration": "router.get('/results', (req, res) => proxyToLinkServer(req, res, '/results'));"
+    },
+    {
+      "method": "GET",
+      "path": "/api/link/results-thumbnail",
+      "authorization": "admin (1)",
+      "csrf_required": false,
+      "implementation": "LINK_SERVER",
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 107,
+      "declaration": "router.get('/results-thumbnail', (req, res) => proxyToLinkServer(req, res, '/results-thumbnail'));"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payos/create",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "CASH_PAYOS",
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 14,
+      "declaration": "router.post('/create', async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/payos/history",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "CASH_PAYOS",
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 47,
+      "declaration": "router.get('/history', async (req, res) => {"
+    },
+    {
+      "method": "POST",
+      "path": "/api/payos/cancel",
+      "authorization": "any active authenticated user",
+      "csrf_required": true,
+      "implementation": "CASH_PAYOS",
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 68,
+      "declaration": "router.post('/cancel', async (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "authorization": "public",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 108,
+      "excerpt": "app.get('/health', (req, res) => {"
+    },
+    {
+      "method": "GET",
+      "path": "/api/csrf-token",
+      "authorization": "any active authenticated user",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 122,
+      "excerpt": "app.get('/api/csrf-token', authMiddleware, getCsrfToken);"
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/login",
+      "authorization": "public (admin credentials required)",
+      "csrf_required": false,
+      "implementation": "local",
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 150,
+      "excerpt": "app.post('/api/admin/login', loginLimiter, adminController.adminLogin);"
+    }
+  ],
+  "sql": {
+    "tables": [
+      {
+        "name": "user",
+        "columns_seen_in_MAIN_SQL": [
+          "userID",
+          "userName",
+          "password",
+          "email",
+          "userRole",
+          "totalMoney",
+          "isActive",
+          "lastLogin",
+          "lastIP",
+          "createdAt",
+          "updatedAt"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 115,
+            "excerpt": "'SELECT * FROM user WHERE userName = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 210,
+            "excerpt": "'UPDATE user SET lastLogin = NOW(), lastIP = ? WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 258,
+            "excerpt": "FROM user"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 291,
+            "excerpt": "'SELECT userID, userName, email, lastIP, lastLogin, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 330,
+            "excerpt": "console.log('✏️ Admin Update User:', userID, maskSensitiveData(req.body));"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 342,
+            "excerpt": "'SELECT * FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 372,
+            "excerpt": "'SELECT userID FROM user WHERE userName = ? AND userID != ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 387,
+            "excerpt": "'SELECT userID FROM user WHERE email = ? AND userID != ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 436,
+            "excerpt": "`UPDATE user SET ${updates.join(', ')} WHERE userID = ?`,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 442,
+            "excerpt": "'SELECT userID, userName, email, lastIP, lastLogin, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 458,
+            "excerpt": "console.error('❌ Update User Error:', error);"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 486,
+            "excerpt": "'SELECT userID FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 498,
+            "excerpt": "await db.query('DELETE FROM user WHERE userID = ?', [userID]);"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 537,
+            "excerpt": "'SELECT userID FROM user WHERE userName = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 550,
+            "excerpt": "'SELECT userID FROM user WHERE email = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 566,
+            "excerpt": "`INSERT INTO user (userName, password, email, totalMoney, userRole, isActive, createdAt, updatedAt)"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 579,
+            "excerpt": "'SELECT userID, userName, email, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 612,
+            "excerpt": "const totalUsers = await db.query('SELECT COUNT(*) as count FROM user');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 615,
+            "excerpt": "const activeUsers = await db.query('SELECT COUNT(*) as count FROM user WHERE isActive = 1');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 618,
+            "excerpt": "const totalAdmins = await db.query('SELECT COUNT(*) as count FROM user WHERE userRole = 1');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 1062,
+            "excerpt": "LEFT JOIN user u ON ular.userID = u.userID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 1134,
+            "excerpt": "'SELECT userID, userName FROM user WHERE userID IN (?)',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 473,
+            "excerpt": "LEFT JOIN user u ON ull.userID = u.userID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 495,
+            "excerpt": "LEFT JOIN user u ON ull.userID = u.userID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 558,
+            "excerpt": "LEFT JOIN user u ON ull.userID = u.userID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 95,
+            "excerpt": "'SELECT userID FROM user WHERE userName = ? OR email = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 112,
+            "excerpt": "`INSERT INTO user (userName, password, email, userRole, totalMoney, lastIP)"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 221,
+            "excerpt": "'SELECT userID, userName, password, email, userRole, isActive FROM user WHERE userName = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 338,
+            "excerpt": "FROM user WHERE userID = ?`,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 396,
+            "excerpt": "'SELECT password FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/authController.js",
+            "line": 423,
+            "excerpt": "'UPDATE user SET password = ? WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/auth.js",
+            "line": 30,
+            "excerpt": "'SELECT userID, userName, email, userRole, isActive FROM user WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/auth.js",
+            "line": 130,
+            "excerpt": "'UPDATE user SET lastLogin = NOW(), lastIP = ? WHERE userID = ?',"
+          }
+        ]
+      },
+      {
+        "name": "captcha_sessions",
+        "columns_seen_in_MAIN_SQL": [
+          "captchaID",
+          "captchaText",
+          "ipAddress",
+          "purpose",
+          "isUsed",
+          "expiresAt"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 384,
+            "excerpt": "`INSERT INTO captcha_sessions (captchaID, captchaText, ipAddress, purpose, expiresAt)"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 390,
+            "excerpt": "const saved = await db.query('SELECT captchaText, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?', [captchaID]);"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 487,
+            "excerpt": "`SELECT * FROM captcha_sessions"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 500,
+            "excerpt": "'SELECT captchaID, purpose, isUsed, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 534,
+            "excerpt": "'UPDATE captcha_sessions SET isUsed = TRUE WHERE captchaID = ?',"
+          }
+        ]
+      },
+      {
+        "name": "login_attempts",
+        "columns_seen_in_MAIN_SQL": [
+          "ipAddress",
+          "userName",
+          "attemptType",
+          "isSuccess",
+          "attemptTime"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 434,
+            "excerpt": "FROM login_attempts"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 557,
+            "excerpt": "`INSERT INTO login_attempts (ipAddress, userName, attemptType, isSuccess)"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 579,
+            "excerpt": "FROM login_attempts"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 606,
+            "excerpt": "`DELETE FROM login_attempts"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 747,
+            "excerpt": "FROM login_attempts"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 774,
+            "excerpt": "`DELETE FROM login_attempts WHERE ipAddress = ? AND isSuccess = FALSE`,"
+          }
+        ]
+      },
+      {
+        "name": "ip_blocks",
+        "columns_seen_in_MAIN_SQL": [
+          "blockID",
+          "ipAddress",
+          "blockType",
+          "reason",
+          "failedAttempts",
+          "blockedAt",
+          "expiresAt",
+          "isActive"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 642,
+            "excerpt": "FROM ip_blocks"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 691,
+            "excerpt": "`UPDATE ip_blocks SET isActive = FALSE WHERE ipAddress = ? AND isActive = TRUE`,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 697,
+            "excerpt": "`INSERT INTO ip_blocks (ipAddress, blockType, reason, failedAttempts, expiresAt)"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 719,
+            "excerpt": "`UPDATE ip_blocks SET isActive = FALSE WHERE ipAddress = ? AND isActive = TRUE`,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+            "line": 815,
+            "excerpt": "FROM ip_blocks"
+          }
+        ]
+      },
+      {
+        "name": "api_logs",
+        "columns_seen_in_MAIN_SQL": [
+          "ip_address",
+          "user_agent",
+          "request_method",
+          "request_path",
+          "request_query",
+          "userID",
+          "userName",
+          "request_body",
+          "response_status",
+          "response_time",
+          "event_type",
+          "event_category",
+          "event_description",
+          "error_message",
+          "session_id",
+          "csrf_token_valid",
+          "rate_limit_hit",
+          "created_at"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+            "line": 97,
+            "excerpt": "const [countResult] = await db.query('SELECT COUNT(*) as total FROM api_logs');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+            "line": 201,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+            "line": 216,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+            "line": 229,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+            "line": 241,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+            "line": 293,
+            "excerpt": "INSERT INTO api_logs ("
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+            "line": 372,
+            "excerpt": "'SELECT COUNT(*) as total FROM api_logs WHERE userID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+            "line": 424,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+            "line": 442,
+            "excerpt": "FROM api_logs"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+            "line": 464,
+            "excerpt": "DELETE FROM api_logs"
+          }
+        ]
+      },
+      {
+        "name": "tool_setup",
+        "columns_seen_in_MAIN_SQL": [
+          "STT",
+          "uid_zalo_system",
+          "zalo_system_money",
+          "zalo_custom_money",
+          "check_phone_system_money",
+          "check_phone_custom_money",
+          "check_card_money",
+          "check_data_leak_money"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 667,
+            "excerpt": "let toolSetup = await db.query('SELECT * FROM tool_setup LIMIT 1');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 672,
+            "excerpt": "`INSERT INTO tool_setup"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 676,
+            "excerpt": "toolSetup = await db.query('SELECT * FROM tool_setup LIMIT 1');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 786,
+            "excerpt": "const existing = await db.query('SELECT STT FROM tool_setup LIMIT 1');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 791,
+            "excerpt": "`INSERT INTO tool_setup"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 847,
+            "excerpt": "`UPDATE tool_setup SET ${updates.join(', ')} WHERE STT = ?`,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 854,
+            "excerpt": "const updatedSetup = await db.query('SELECT * FROM tool_setup LIMIT 1');"
+          }
+        ]
+      },
+      {
+        "name": "zalo_account",
+        "columns_seen_in_MAIN_SQL": [
+          "UID",
+          "displayName",
+          "phoneNumber",
+          "Avatar",
+          "accStatus",
+          "ImportTime"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 621,
+            "excerpt": "const totalZaloAccounts = await db.query('SELECT COUNT(*) as count FROM zalo_account');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 683,
+            "excerpt": "'SELECT UID, displayName, phoneNumber, Avatar, accStatus FROM zalo_account WHERE UID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 773,
+            "excerpt": "'SELECT UID FROM zalo_account WHERE UID = ?',"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 889,
+            "excerpt": "FROM zalo_account"
+          }
+        ]
+      },
+      {
+        "name": "auto_request",
+        "columns_seen_in_MAIN_SQL": [
+          "reqID",
+          "phoneNumber",
+          "UID",
+          "displayName",
+          "imageUrl",
+          "sendResult",
+          "Detail",
+          "created_at",
+          "fee_charged",
+          "use_system_account",
+          "sender_zalo_uid"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 624,
+            "excerpt": "const totalRequests = await db.query('SELECT COUNT(*) as count FROM auto_request');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 627,
+            "excerpt": "const successRequests = await db.query('SELECT COUNT(*) as count FROM auto_request WHERE sendResult = \"SUCCESS\"');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 630,
+            "excerpt": "const totalRevenue = await db.query('SELECT SUM(fee_charged) as total FROM auto_request WHERE fee_charged > 0');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 1060,
+            "excerpt": "FROM auto_request ar"
+          }
+        ]
+      },
+      {
+        "name": "user_link_auto_request",
+        "columns_seen_in_MAIN_SQL": [
+          "reqID",
+          "userID"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+            "line": 1061,
+            "excerpt": "LEFT JOIN user_link_auto_request ular ON ar.reqID = ular.reqID"
+          }
+        ]
+      },
+      {
+        "name": "product",
+        "columns_seen_in_MAIN_SQL": [
+          "productID",
+          "productName",
+          "productDesc",
+          "productOnePrice",
+          "productFivePrice",
+          "productTenPrice",
+          "productImage",
+          "isActive",
+          "createdAt",
+          "updatedAt"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 38,
+            "excerpt": "FROM product"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 87,
+            "excerpt": "FROM product"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 160,
+            "excerpt": "INSERT INTO product ("
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 227,
+            "excerpt": "const checkSql = 'SELECT productID FROM product WHERE productID = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 318,
+            "excerpt": "UPDATE product"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 367,
+            "excerpt": "const sql = 'UPDATE product SET isActive = FALSE WHERE productID = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 376,
+            "excerpt": "const sql = 'DELETE FROM product WHERE productID = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 408,
+            "excerpt": "FROM product p"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 493,
+            "excerpt": "INNER JOIN product p ON l.productID = p.productID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 556,
+            "excerpt": "INNER JOIN product p ON l.productID = p.productID"
+          }
+        ]
+      },
+      {
+        "name": "license",
+        "columns_seen_in_MAIN_SQL": [
+          "licenseID",
+          "licenseKey",
+          "productID",
+          "isActivated",
+          "pricePaid",
+          "status",
+          "activeTime",
+          "createdAt",
+          "updatedAt",
+          "countDown"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 357,
+            "excerpt": "FROM license"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 409,
+            "excerpt": "LEFT JOIN license l ON p.productID = l.productID"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 471,
+            "excerpt": "FROM license l"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 492,
+            "excerpt": "FROM license l"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 555,
+            "excerpt": "FROM license l"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 597,
+            "excerpt": "const checkSql = 'SELECT * FROM license WHERE licenseKey = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 610,
+            "excerpt": "UPDATE license"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 651,
+            "excerpt": "const checkSql = 'SELECT * FROM license WHERE licenseKey = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 667,
+            "excerpt": "// Update license"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 669,
+            "excerpt": "UPDATE license"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 704,
+            "excerpt": "const checkSql = 'SELECT * FROM license WHERE licenseKey = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 719,
+            "excerpt": "const sql = 'DELETE FROM license WHERE licenseKey = ?';"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 754,
+            "excerpt": "FROM license"
+          }
+        ]
+      },
+      {
+        "name": "user_link_license",
+        "columns_seen_in_MAIN_SQL": [
+          "licenseKey",
+          "userID",
+          "pricePaid",
+          "purchaseTime"
+        ],
+        "ddl_in_original_source": false,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 472,
+            "excerpt": "LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 494,
+            "excerpt": "LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 557,
+            "excerpt": "LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 716,
+            "excerpt": "await db.query('DELETE FROM user_link_license WHERE licenseKey = ?', [licenseKey]);"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 752,
+            "excerpt": "(SELECT SUM(pricePaid) FROM user_link_license) as totalRevenue,"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+            "line": 753,
+            "excerpt": "(SELECT COUNT(DISTINCT userID) FROM user_link_license) as totalUsers"
+          }
+        ]
+      },
+      {
+        "name": "fb_setup",
+        "columns_seen_in_MAIN_SQL": [
+          "id",
+          "group_scan_price",
+          "member_scan_price",
+          "post_scan_price",
+          "updatedAt"
+        ],
+        "ddl_in_original_source": true,
+        "references": [
+          {
+            "file": "recovered/MAIN_SERVER/config/database.js",
+            "line": 119,
+            "excerpt": "CREATE TABLE IF NOT EXISTS fb_setup ("
+          },
+          {
+            "file": "recovered/MAIN_SERVER/config/database.js",
+            "line": 128,
+            "excerpt": "const rows = await query('SELECT COUNT(*) as cnt FROM fb_setup');"
+          },
+          {
+            "file": "recovered/MAIN_SERVER/config/database.js",
+            "line": 130,
+            "excerpt": "await query('INSERT INTO fb_setup (group_scan_price, member_scan_price, post_scan_price) VALUES (0, 0, 0)');"
+          }
+        ]
+      }
+    ],
+    "views": [
+      {
+        "name": "v_api_logs_with_user",
+        "columns_seen": [
+          "*",
+          "userID",
+          "created_at"
+        ],
+        "definition_included": false
+      },
+      {
+        "name": "v_security_alerts",
+        "columns_seen": [
+          "*",
+          "created_at",
+          "alert_type"
+        ],
+        "definition_included": false
+      }
+    ],
+    "schema_artifact": "analysis/main-schema-inferred.sql",
+    "schema_warning": "Only fb_setup has original DDL. All other types/defaults/indexes/view definitions are inferred for local synthetic data, not an original schema."
+  },
+  "services": [
+    {
+      "name": "MySQL/MariaDB",
+      "source_included": false,
+      "required_for": "Authentication, roles, balances, captcha, IP blocks, logs, admin configuration, product/license records",
+      "config": [
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER_MAIN",
+        "DB_PASSWORD_MAIN",
+        "DB_NAME",
+        "DB_CONNECTION_LIMIT"
+      ],
+      "notes": "No original dump/migrations; analysis/main-schema-inferred.sql is a synthetic approximation."
+    },
+    {
+      "name": "ZL_SERVER",
+      "source_included": true,
+      "required_for": "Zalo account CRUD/import/status, immediate image sending, phone/card lookup, OA templates/tokens/results, license catalog and purchases",
+      "config": [
+        "ZL_SERVER_HOST",
+        "ZL_SERVER_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "notes": "Not executed as part of this read-only task; obfuscated implementation reviewed separately."
+    },
+    {
+      "name": "FILES_SERVER",
+      "source_included": true,
+      "required_for": "Custom PNG upload and hosted image retrieval",
+      "config": [
+        "FILES_SERVER_HOST",
+        "FILES_SERVER_PORT"
+      ],
+      "notes": "Proxy forwards multipart custom_image + x-user-id; shared-secret header absent."
+    },
+    {
+      "name": "ZL_TIMER_SERVER",
+      "source_included": false,
+      "required_for": "Scheduled v2/card sending and history",
+      "config": [
+        "ZL_TIMER_SERVER_HOST",
+        "ZL_TIMER_SERVER_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "upstream_paths": [
+        "POST /api/schedule/v2",
+        "POST /api/schedule/card",
+        "GET /api/history/:userID"
+      ]
+    },
+    {
+      "name": "MINI_SERVICE_SERVER",
+      "source_included": false,
+      "required_for": "IP geolocation lookup",
+      "config": [
+        "MINI_SERVICE_SERVER_HOST",
+        "MINI_SERVICE_SERVER_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "upstream_paths": [
+        "POST /api/check-ip/location"
+      ]
+    },
+    {
+      "name": "DATA_FIND_SERVER",
+      "source_included": false,
+      "required_for": "Admin phone/email leak lookup, fee precheck/confirm, own and global history",
+      "config": [
+        "DATA_FIND_SERVER_HOST",
+        "DATA_FIND_SERVER_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "upstream_paths": [
+        "POST /api/search",
+        "POST /api/pre-check",
+        "POST /api/confirm",
+        "GET /api/history/:userID",
+        "GET /api/admin/history"
+      ]
+    },
+    {
+      "name": "CASH_PAYOS",
+      "source_included": false,
+      "required_for": "Create deposit payment, history and cancel; provider callbacks and balance updates are outside MAIN",
+      "config": [
+        "PAYOS_HOST",
+        "PAYOS_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "upstream_paths": [
+        "POST /api/payos/create",
+        "GET /api/payos/history",
+        "POST /api/payos/cancel"
+      ]
+    },
+    {
+      "name": "LINK_SERVER",
+      "source_included": false,
+      "required_for": "Metadata fetch, domains/templates/links, thumbnail upload, result tracking",
+      "config": [
+        "LINK_SERVER_HOST",
+        "LINK_SERVER_PORT",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "notes": "Host defaults to 127.0.0.1; port defaults to 3130."
+    }
+  ],
+  "external_npm_dependencies": [
+    "axios",
+    "bcrypt",
+    "bcryptjs",
+    "cors",
+    "dotenv",
+    "express",
+    "express-rate-limit",
+    "form-data",
+    "helmet",
+    "jsonwebtoken",
+    "morgan",
+    "multer",
+    "mysql2/promise"
+  ],
+  "environment_variables": [
+    "BCRYPT_SALT_ROUNDS",
+    "CORS_ORIGIN",
+    "DATA_FIND_SERVER_HOST",
+    "DATA_FIND_SERVER_PORT",
+    "DB_CONNECTION_LIMIT",
+    "DB_HOST",
+    "DB_NAME",
+    "DB_PASSWORD_MAIN",
+    "DB_PORT",
+    "DB_USER_MAIN",
+    "DOCKER_HOST",
+    "FILES_SERVER_HOST",
+    "FILES_SERVER_PORT",
+    "GLOBAL_RATE_LIMIT_MAX_REQUESTS",
+    "GLOBAL_RATE_LIMIT_WINDOW_MS",
+    "INTERNAL_AUTH_KEY",
+    "JWT_EXPIRE",
+    "JWT_SECRET",
+    "LINK_SERVER_HOST",
+    "LINK_SERVER_PORT",
+    "LOGIN_RATE_LIMIT_MAX_REQUESTS",
+    "LOGIN_RATE_LIMIT_WINDOW_MS",
+    "MAIN_SERVER_HOST",
+    "MAIN_SERVER_PORT",
+    "MINI_SERVICE_SERVER_HOST",
+    "MINI_SERVICE_SERVER_PORT",
+    "NODE_ENV",
+    "PAYOS_HOST",
+    "PAYOS_PORT",
+    "ZL_SERVER_HOST",
+    "ZL_SERVER_PORT",
+    "ZL_TIMER_SERVER_HOST",
+    "ZL_TIMER_SERVER_PORT"
+  ],
+  "findings": [
+    {
+      "id": "MAIN-001",
+      "severity": "high",
+      "title": "Admin log routes have no admin authorization",
+      "detail": "The /api/logs mount requires a valid user but not role 1. Every /admin/* log endpoint also omits adminMiddleware and controllers never check roles. Any active user can reach global searches, another user's logs, security alerts, system statistics and destructive cleanup. Existing DB-result bugs do not make this safe: search returns the first matching row as an object and cleanup runs DELETE before throwing.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 157,
+          "excerpt": "app.use('/api/logs', authAndLog, csrfProtection, logsRoutes);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 37,
+          "excerpt": "router.get('/admin/search', logsController.searchLogs);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 40,
+          "excerpt": "router.post('/admin/cleanup', logsController.cleanupLogsController);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+          "line": 392,
+          "excerpt": "const cleanupLogsController = async (req, res) => {"
+        }
+      ],
+      "remediation": "Apply adminMiddleware to the complete /api/logs/admin router before handlers; verify role 2 and 3 receive 403, including cleanup."
+    },
+    {
+      "id": "MAIN-002",
+      "severity": "high",
+      "title": "Log APIs assume the wrong db.query return shape",
+      "detail": "The DB wrapper returns rows directly, not mysql2's [rows, fields]. Log helpers and controller destructure const [logs], const [stats], const [countResult], etc. getMyLogs/getAllLogs dereference countResult[0] on a row object; stats/security attempt reduce on a row object or undefined; cleanup destructures a non-iterable ResultSetHeader after DELETE has already committed. Most log APIs therefore fail or return a single malformed row.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 45,
+          "excerpt": "return rows;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 368,
+          "excerpt": "const [logs] = await db.query(query, [userID, limit, offset]);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 450,
+          "excerpt": "const [stats] = await db.query(query, params);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 468,
+          "excerpt": "const [result] = await db.query(query, [daysToKeep]);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+          "line": 97,
+          "excerpt": "const [countResult] = await db.query('SELECT COUNT(*) as total FROM api_logs');"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+          "line": 357,
+          "excerpt": "const [logs] = await db.query(query, params);"
+        }
+      ],
+      "remediation": "Keep a single DB wrapper contract and remove the extra destructuring in all log readers/deleters; verify result arrays, empty sets, counts and affectedRows."
+    },
+    {
+      "id": "MAIN-003",
+      "severity": "high",
+      "title": "CAPTCHA answers are delivered as machine-readable SVG text",
+      "detail": "generateCaptchaSVG emits the actual six answer characters as ordered SVG text nodes. The response is merely base64 SVG, so a program can read the answer without OCR. Distortion, curves and noise do not prevent extraction from the document. This defeats the compulsory registration CAPTCHA and login challenge.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 234,
+          "excerpt": "chars.forEach((char, index) => {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 265,
+          "excerpt": ">${char}</text>"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 407,
+          "excerpt": "captchaImage: `data:image/svg+xml;base64,${base64Image}`,"
+        }
+      ],
+      "remediation": "Use an established challenge service or rasterize text server-side into an image that does not include accessible answer text; use cryptographic randomness."
+    },
+    {
+      "id": "MAIN-004",
+      "severity": "high",
+      "title": "Client IP security relies on unconditionally trusted headers",
+      "detail": "CAPTCHA/login attempt/block helpers accept X-Forwarded-For or X-Real-IP directly; CSRF and audit helpers additionally accept CF-Connecting-IP directly. These values are not checked against the connecting reverse proxy. If the application is directly reachable or the ingress forwards client-supplied headers, clients can choose their block/captcha/audit identity. Express trust proxy = 1 also requires an actual single trusted ingress. Different helpers use different header priority, so auth, CSRF and rate limits can disagree on the same request's IP.",
+      "certainty": "confirmed trust issue; external exploitability depends on ingress configuration",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 342,
+          "excerpt": "return req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+          "line": 21,
+          "excerpt": "const cfIP = req.headers['cf-connecting-ip'];"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 14,
+          "excerpt": "if (req.headers['cf-connecting-ip']) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 50,
+          "excerpt": "app.set('trust proxy', 1);"
+        }
+      ],
+      "remediation": "Define trusted proxy addresses, keep the gateway inaccessible directly when appropriate, normalize one client-IP function from validated proxy information, and have ingress overwrite forwarding headers."
+    },
+    {
+      "id": "MAIN-005",
+      "severity": "high",
+      "title": "Password-change logs include both plaintext passwords",
+      "detail": "changePassword calls maskSensitiveData({currentPassword,newPassword}) and prints the result. maskSensitiveData's allowlist of sensitive names contains password but neither currentPassword nor newPassword, so both values remain unchanged in server logs. The API logger has a separate shallow list and does not redact currentPassword either.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/authController.js",
+          "line": 376,
+          "excerpt": "...maskSensitiveData({ currentPassword, newPassword })"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/utils/sanitize.js",
+          "line": 168,
+          "excerpt": "const sensitiveKeys = ["
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 45,
+          "excerpt": "const sensitiveFields = ["
+        }
+      ],
+      "remediation": "Do not log password-change request values. Centralize recursive redaction including currentPassword/newPassword and remove existing sensitive logs according to retention requirements."
+    },
+    {
+      "id": "MAIN-006",
+      "severity": "medium",
+      "title": "Malformed CSRF header causes 500 instead of controlled rejection",
+      "detail": "crypto.timingSafeEqual throws when buffer lengths differ. csrfProtection does not validate that the supplied header is a 64-character hexadecimal token or compare buffer lengths first, so a malformed authenticated request reaches the global error handler and receives 500.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+          "line": 136,
+          "excerpt": "if (!crypto.timingSafeEqual(Buffer.from(csrfToken), Buffer.from(storedData.token))) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 191,
+          "excerpt": "res.status(err.status || 500).json({"
+        }
+      ],
+      "remediation": "Validate header type/format and equal byte lengths before timingSafeEqual; return 403 for every invalid token."
+    },
+    {
+      "id": "MAIN-007",
+      "severity": "medium",
+      "title": "CSRF token storage prevents reliable multi-tab or multi-instance use",
+      "detail": "Only one token is retained for each userID:IP. Every GET token request replaces it, invalidating other tabs/devices behind the same IP. Tokens disappear on process restart and are not shared across workers, so requests can fail randomly behind a load balancer. The implementation is a server-side synchronizer token, despite comments calling it double-submit; there is no cookie comparison.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+          "line": 10,
+          "excerpt": "const csrfTokenStore = new Map();"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+          "line": 47,
+          "excerpt": "csrfTokenStore.set(key, {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+          "line": 164,
+          "excerpt": "const token = generateCsrfToken(req.user.userID, clientIP);"
+        }
+      ],
+      "remediation": "Use stable session-scoped tokens in a shared store or an appropriate signed stateless design; avoid invalidating an existing valid token every time it is requested."
+    },
+    {
+      "id": "MAIN-008",
+      "severity": "medium",
+      "title": "CSRF and session audit columns are never populated accurately",
+      "detail": "apiLogger reads req.csrfTokenValid before csrfProtection runs; csrfProtection never writes that property at all. req.user has no sessionId. All logged requests therefore have null csrf_token_valid and session_id, even when a CSRF check passes or fails.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 126,
+          "excerpt": "const authAndLog = [authMiddleware, apiLogger];"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 229,
+          "excerpt": "const csrfTokenValid = req.csrfTokenValid !== undefined ? req.csrfTokenValid : null;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 220,
+          "excerpt": "const sessionId = req.user?.sessionId || null;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/auth.js",
+          "line": 49,
+          "excerpt": "req.user = {"
+        }
+      ],
+      "remediation": "Capture CSRF result when the response finishes, explicitly set pass/fail in the CSRF middleware, and define a session identifier only if the authentication design has sessions."
+    },
+    {
+      "id": "MAIN-009",
+      "severity": "medium",
+      "title": "Database audit logging misses auth failures and rate-limit rejections",
+      "detail": "Public auth/captcha/admin-login and token endpoints do not attach apiLogger. Protected routes run authMiddleware and role checks before logger, and the global limiter runs even earlier. Login/register/password changes and unauthenticated/forbidden/global-rate-limit requests are therefore absent from api_logs despite event classification code for them.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 118,
+          "excerpt": "app.use('/api/auth', authRoutes);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 150,
+          "excerpt": "app.post('/api/admin/login', loginLimiter, adminController.adminLogin);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 127,
+          "excerpt": "const authVipAndLog = [authMiddleware, vipOrAdminMiddleware, apiLogger];"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 95,
+          "excerpt": "app.use(globalLimiter);"
+        }
+      ],
+      "remediation": "Install a request-finish audit hook early enough to observe rejects, while taking user identity at finish and aggressively redacting bodies."
+    },
+    {
+      "id": "MAIN-010",
+      "severity": "medium",
+      "title": "Audit request paths lose the API prefix",
+      "detail": "apiLogger captures req.path inside path-mounted middleware. Express has already trimmed that mount prefix, so /api/admin/users is recorded as /users and several unrelated roots as /. The event classifier also uses req.path rather than req.originalUrl/baseUrl, undermining /admin, /send-image and /zalo-accounts classification.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 212,
+          "excerpt": "const requestPath = req.path;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 75,
+          "excerpt": "const path = req.path;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 153,
+          "excerpt": "app.use('/api/admin', authAndLog, csrfProtection, adminRoutes);"
+        }
+      ],
+      "remediation": "Record a normalized path from req.originalUrl and classify from that captured full path; keep query values separate and sanitized."
+    },
+    {
+      "id": "MAIN-011",
+      "severity": "medium",
+      "title": "CAPTCHA verification is not bound to the issuing IP or atomic use",
+      "detail": "The verifier accepts an ip argument and stores ipAddress during creation, but its SELECT only checks captchaID, purpose, isUsed and expiry. It never compares stored IP. SELECT and UPDATE are separate, unguarded operations, so concurrent requests can both validate one challenge before either marks it used.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 473,
+          "excerpt": "exports.verifyCaptcha = async (captchaID, captchaValue, ip, purpose = 'login') => {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 489,
+          "excerpt": "AND purpose = ?"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 534,
+          "excerpt": "'UPDATE captcha_sessions SET isUsed = TRUE WHERE captchaID = ?',"
+        }
+      ],
+      "remediation": "Bind a challenge to its intended session/context and atomically consume it with a guarded update or transaction/row lock."
+    },
+    {
+      "id": "MAIN-012",
+      "severity": "medium",
+      "title": "CAPTCHA answers and submitted values are printed in every environment",
+      "detail": "Unconditional debug logging prints the plaintext generated answer and user-submitted answer, plus hashes and full challenge/session information. NODE_ENV does not gate these messages.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 376,
+          "excerpt": "console.log('🔐 Generated text (PLAIN):', captchaText);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 477,
+          "excerpt": "console.log('🔍 Input captchaValue:', captchaValue);"
+        }
+      ],
+      "remediation": "Remove answer/input debug output and log only non-sensitive challenge outcomes."
+    },
+    {
+      "id": "MAIN-013",
+      "severity": "blocker",
+      "title": "Mandatory environment configuration is dereferenced before validation",
+      "detail": "Several modules execute process.env.DOCKER_HOST.trim() at import time, so a missing value throws before the server can start. MAIN_SERVER_PORT/host, DB values, JWT_SECRET and rate-limit numbers have no complete startup validation. No original .env or package manifest was included in recovered source at this analysis stage.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 37,
+          "excerpt": "const DOCKER_HOST = process.env.DOCKER_HOST.trim().toLowerCase() == 'true';"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 12,
+          "excerpt": "if (process.env.DOCKER_HOST.trim().toLowerCase() == 'true') {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/rateLimiter.js",
+          "line": 13,
+          "excerpt": "windowMs: parseInt(process.env.GLOBAL_RATE_LIMIT_WINDOW_MS),"
+        }
+      ],
+      "remediation": "Supply a documented local .env, validate required values and numeric ranges before importing dependent modules, and use explicit safe defaults where intended."
+    },
+    {
+      "id": "MAIN-014",
+      "severity": "medium",
+      "title": "No readiness validation or automatic core schema initialization",
+      "detail": "startServer calls app.listen without db.testConnection or schema migrations. /health returns success unconditionally. database.js only defines fb_setup DDL and exports initFbSetup; MAIN never invokes it. The other tables and both log views must already exist, so a green /health does not demonstrate that login or admin APIs work.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 108,
+          "excerpt": "app.get('/health', (req, res) => {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 210,
+          "excerpt": "app.listen(PORT, HOST, () => {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 56,
+          "excerpt": "async function testConnection() {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 116,
+          "excerpt": "async function initFbSetup() {"
+        }
+      ],
+      "remediation": "Provide explicit migrations/schema and a readiness check that verifies database connectivity and required migrations, while retaining a lightweight liveness route."
+    },
+    {
+      "id": "MAIN-015",
+      "severity": "medium",
+      "title": "Admin self-update checks have type and omission bugs",
+      "detail": "When updating the current admin, userRole !== 1 rejects requests that omit userRole, even though later code treats it as optional. Self-lock protection only recognizes numeric 0; boolean false or string 0 can pass and persist an inactive account. Incoming role, active flag and balance are otherwise not validated.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 354,
+          "excerpt": "if (parseInt(userID) === req.user.userID && isActive === 0) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 362,
+          "excerpt": "if (parseInt(userID) === req.user.userID && userRole !== 1) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 421,
+          "excerpt": "if (userRole !== undefined) {"
+        }
+      ],
+      "remediation": "Normalize and validate role/boolean/money fields once, then apply self-protection only to explicitly provided normalized changes."
+    },
+    {
+      "id": "MAIN-016",
+      "severity": "medium",
+      "title": "License extension can concatenate strings and lose concurrent updates",
+      "detail": "count is only checked for truthiness and count < 1, so numeric strings and fractional values are accepted. license.countDown + count concatenates a string count instead of adding numerically. The result is assigned to undeclared global newCountDown and written using read-modify-write without a transaction, allowing concurrent extensions to overwrite one another.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 641,
+          "excerpt": "const { count } = req.body; // Số tháng gia hạn"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 665,
+          "excerpt": "newCountDown = license.countDown + count;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 670,
+          "excerpt": "SET countDown = ?"
+        }
+      ],
+      "remediation": "Validate a finite positive integer and use an atomic UPDATE countDown = countDown + ? with a scoped result variable."
+    },
+    {
+      "id": "MAIN-017",
+      "severity": "medium",
+      "title": "Product statistics uses inconsistent license fields",
+      "detail": "getProductStats counts licenseID and aggregates license.isActivated/license.pricePaid, while the license screens and updates use status/countDown and store purchase price in user_link_license. Without the original schema it cannot be proved which fields exist; on a schema matching the other handlers this endpoint will fail or report stale/wrong totals. Adding compatibility columns alone does not synchronize them.",
+      "certainty": "confirmed inconsistency; actual missing-column error depends on unavailable original schema",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 405,
+          "excerpt": "COUNT(l.licenseID) as totalLicenses,"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 406,
+          "excerpt": "SUM(CASE WHEN l.isActivated = TRUE THEN 1 ELSE 0 END) as activatedLicenses,"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 407,
+          "excerpt": "SUM(l.pricePaid) as totalRevenue"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 752,
+          "excerpt": "(SELECT SUM(pricePaid) FROM user_link_license) as totalRevenue,"
+        }
+      ],
+      "remediation": "Confirm the original schema and derive per-product activated counts from status and revenue from purchase records consistently."
+    },
+    {
+      "id": "MAIN-018",
+      "severity": "medium",
+      "title": "Multi-step destructive operations are not transactional",
+      "detail": "deleteLicense removes user_link_license rows and then deletes the license in a separate query; failure of the second statement leaves the purchase links missing. deleteProduct checks for licenses and then deletes/updates without a transaction, leaving a race with purchases. DB transaction helpers exist but are unused by these controllers.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 716,
+          "excerpt": "await db.query('DELETE FROM user_link_license WHERE licenseKey = ?', [licenseKey]);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 719,
+          "excerpt": "const sql = 'DELETE FROM license WHERE licenseKey = ?';"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 355,
+          "excerpt": "const checkLicenseSql = `"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 73,
+          "excerpt": "async function transaction(callback) {"
+        }
+      ],
+      "remediation": "Use transactions and the appropriate foreign keys/locking; make deletions and product availability checks consistent with purchase transactions."
+    },
+    {
+      "id": "MAIN-019",
+      "severity": "medium",
+      "title": "Global rate limiter exempts all auth and admin routes",
+      "detail": "globalLimiter skips any path starting /api/admin or /api/auth. Only the two login routes attach loginLimiter. Registration, profile and password-change endpoints, plus admin data/mutation routes, have no request limiter at this layer. CAPTCHA generation has its own 10/minute limit but the SVG answer is extractable.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/middleware/rateLimiter.js",
+          "line": 20,
+          "excerpt": "return req.path.startsWith('/api/admin') || req.path.startsWith('/api/auth') || req.path === '/api/csrf-token';"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 14,
+          "excerpt": "router.post('/register', authController.register);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 19,
+          "excerpt": "router.post('/change-password', authMiddleware, authController.changePassword);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+          "line": 17,
+          "excerpt": "max: 10, // Tối đa 10 CAPTCHA/phút"
+        }
+      ],
+      "remediation": "Define route-specific limits for registration, credential changes and expensive admin operations; avoid blanket prefix exemptions."
+    },
+    {
+      "id": "MAIN-020",
+      "severity": "medium",
+      "title": "Password changes do not revoke existing JWTs",
+      "detail": "Authentication verifies JWT signature/expiry and checks only user existence/isActive. changePassword only updates the password hash. An already-issued token remains valid after password reset until its original expiry, including the admin login's fixed 7-day token. There is no implemented logout, refresh, revocation list or token version.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/middleware/auth.js",
+          "line": 26,
+          "excerpt": "const decoded = jwt.verify(token, process.env.JWT_SECRET);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/auth.js",
+          "line": 30,
+          "excerpt": "'SELECT userID, userName, email, userRole, isActive FROM user WHERE userID = ?',"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/authController.js",
+          "line": 423,
+          "excerpt": "'UPDATE user SET password = ? WHERE userID = ?',"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 205,
+          "excerpt": "{ expiresIn: '7d' }"
+        }
+      ],
+      "remediation": "If password changes are intended to end other sessions, introduce token-version/session revocation and increment/revoke it on credential changes."
+    },
+    {
+      "id": "MAIN-021",
+      "severity": "medium",
+      "title": "New-account and credential input validation is incomplete",
+      "detail": "Registration checks only presence of userName/password/email, then hashes and inserts; it does not enforce a minimum password length, email shape, string types or length bounds. Password change enforces length >= 6 but not a complete type contract. Admin creation similarly has only presence checks and defaults an omitted role to 0 although registration uses role 2.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/authController.js",
+          "line": 51,
+          "excerpt": "if (!userName || !password || !email) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/authController.js",
+          "line": 387,
+          "excerpt": "if (newPassword.length < 6) {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 573,
+          "excerpt": "userRole || 0"
+        }
+      ],
+      "remediation": "Use shared schemas for string type/length/email/role validation and consistent policy for registration, admin creation and password changes."
+    },
+    {
+      "id": "MAIN-022",
+      "severity": "medium",
+      "title": "Global leak-history lookup sends an array to one prepared placeholder",
+      "detail": "getGlobalLeakHistory executes WHERE userID IN (?) with [userIDs]. The DB wrapper uses mysql2 pool.execute prepared statements, which do not expand a JavaScript array into an IN list. For non-empty multi-user history this can throw or fail to match intended IDs.",
+      "certainty": "confirmed prepared-statement contract mismatch; exact error depends on mysql2/server versions",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 1134,
+          "excerpt": "'SELECT userID, userName FROM user WHERE userID IN (?)',"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/config/database.js",
+          "line": 44,
+          "excerpt": "const [rows] = await pool.execute(sql, params);"
+        }
+      ],
+      "remediation": "Generate one placeholder per validated user ID, or use an explicitly supported set-valued SQL mechanism; keep values bound individually."
+    },
+    {
+      "id": "MAIN-023",
+      "severity": "medium",
+      "title": "PayOS forwarding has no timeout",
+      "detail": "The create, history and cancel Axios calls have no timeout. A stalled payment upstream can keep requests open indefinitely. Return/cancel URLs also always use the first CORS_ORIGIN rather than the actual allowed origin selected for the user.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 20,
+          "excerpt": "const baseUrl = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',')[0] : 'http://localhost';"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 24,
+          "excerpt": "const response = await axios.post(`${PAYOS_URL}/api/payos/create`, {"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 51,
+          "excerpt": "const response = await axios.get(`${PAYOS_URL}/api/payos/history?userID=${userID}`, {"
+        }
+      ],
+      "remediation": "Set bounded upstream deadlines/cancellation and explicitly configure the user-facing payment return URL."
+    },
+    {
+      "id": "MAIN-024",
+      "severity": "medium",
+      "title": "Link thumbnail upload buffers files without a limit",
+      "detail": "The admin-only link upload uses multer.memoryStorage without file-size or file-type limits. Even an accidental large upload can consume server memory. The regular PNG upload has a 3 MiB limit, but trusts client-provided MIME metadata rather than file bytes.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 68,
+          "excerpt": "const upload = multer({ storage: multer.memoryStorage() });"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+          "line": 23,
+          "excerpt": "if (file.mimetype === 'image/png') {"
+        }
+      ],
+      "remediation": "Set explicit per-file/part limits and validate decoded image content; avoid unbounded in-memory buffering."
+    },
+    {
+      "id": "MAIN-025",
+      "severity": "medium",
+      "title": "Upload proxy does not propagate internal authentication",
+      "detail": "Most service proxy requests carry x-internal-auth. The file-upload proxy sends only multipart headers and x-user-id, so FILES_SERVER cannot authenticate this call using the shared secret from this request. If FILES_SERVER relies only on x-user-id and is reachable directly, callers can impersonate users. Exact downstream behavior is outside this MAIN analysis.",
+      "certainty": "confirmed missing header; downstream exposure requires FILES_SERVER/ingress review",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+          "line": 55,
+          "excerpt": "'x-user-id': userID // Gửi UID cho FILES_SERVER"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 33,
+          "excerpt": "'x-internal-auth': process.env.INTERNAL_AUTH_KEY"
+        }
+      ],
+      "remediation": "Use authenticated internal service-to-service requests and ensure FILES_SERVER validates caller identity before trusting x-user-id."
+    },
+    {
+      "id": "MAIN-026",
+      "severity": "medium",
+      "title": "Pagination and cleanup retention bounds are not enforced",
+      "detail": "Log limit/offset/days and daysToKeep are parsed without positive bounds or maximum values. Negative retention days select a future threshold and may delete recent/all logs; very large limits allow expensive responses. License list limits have a lower bound but no upper bound.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+          "line": 394,
+          "excerpt": "const daysToKeep = parseInt(req.query.daysToKeep) || 90;"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+          "line": 465,
+          "excerpt": "WHERE created_at < DATE_SUB(NOW(), INTERVAL ? DAY)"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+          "line": 465,
+          "excerpt": "const limitNum = Math.max(1, parseInt(limit) || 50);"
+        }
+      ],
+      "remediation": "Validate positive bounded integers, use a fixed safe retention policy or explicit validated range, and cap page sizes."
+    },
+    {
+      "id": "MAIN-027",
+      "severity": "low",
+      "title": "Initial tool-setup insertion replaces explicit zero prices with defaults",
+      "detail": "updateToolSetup permits zero in validation but initial INSERT uses value || default for each fee. A requested free fee is silently replaced by a nonzero default when no setup row exists. Subsequent UPDATE preserves zero, making behavior depend on whether setup was initialized.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 796,
+          "excerpt": "zalo_system_money || 30000.00,"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+          "line": 801,
+          "excerpt": "check_data_leak_money || 5000.00"
+        }
+      ],
+      "remediation": "Use explicit undefined/null fallback or nullish coalescing so valid zero values persist."
+    },
+    {
+      "id": "MAIN-028",
+      "severity": "medium",
+      "title": "CAPTCHA and block checks fail open on database errors",
+      "detail": "isCaptchaRequired returns false and isIPBlocked returns {blocked:false} on database exceptions. A missing captcha/login/IP-block table can disable extra login protection while ordinary user-table login still works. recordLoginAttempt also catches and ignores its write error, so counters can silently stop working.",
+      "certainty": "confirmed by static inspection",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 457,
+          "excerpt": "console.error('Check CAPTCHA Required Error:', error);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 672,
+          "excerpt": "console.error('Check IP Blocked Error:', error);"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+          "line": 565,
+          "excerpt": "console.error('Record Login Attempt Error:', error);"
+        }
+      ],
+      "remediation": "Treat unavailable security state explicitly: fail closed for the affected authentication operation or use a clearly designed fallback, and validate security tables during startup."
+    },
+    {
+      "id": "MAIN-029",
+      "severity": "high",
+      "title": "General timer mount bypasses the VIP card-scheduling guard",
+      "detail": "The same timer router is mounted at /api/send-image-by-card-timer with authVipAndLog and at /api/zalo-timer with only authAndLog. Both expose POST /send. The handler chooses /api/schedule/card for every base URL not containing v2, so a regular role-2 user can reach the same card scheduling upstream through POST /api/zalo-timer/send. MAIN therefore does not enforce the intended VIP/admin gate consistently; a separate upstream check would be needed to prevent actual scheduling.",
+      "certainty": "confirmed gateway authorization bypass; successful scheduling additionally depends on missing timer upstream",
+      "evidence": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 137,
+          "excerpt": "app.use('/api/send-image-by-card-timer', authVipAndLog, csrfProtection, require('./routes/zaloTimerProxyRoutes'));"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 138,
+          "excerpt": "app.use('/api/zalo-timer', authAndLog, csrfProtection, require('./routes/zaloTimerProxyRoutes'));"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+          "line": 61,
+          "excerpt": "const endpoint = req.baseUrl.includes('v2') ? '/api/schedule/v2' : '/api/schedule/card';"
+        }
+      ],
+      "remediation": "Mount only read-only history at the general timer path, or apply the VIP/admin guard to its scheduling handler; enforce the same rule upstream."
+    }
+  ],
+  "verification_limits": [
+    "Static inspection only: no external provider/network calls, source execution, production DB or real user data were used.",
+    "Dependencies versions are unknown because no original package manifest/lockfile was recovered.",
+    "Missing upstream functions cannot be verified through a successful MAIN health response.",
+    "Some issues depend on original schema/ingress versions; those findings explicitly state that uncertainty.",
+    "No source edits made by this analysis task; the parent handles runtime setup."
+  ]
+}

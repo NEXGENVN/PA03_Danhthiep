@@ -1,0 +1,4120 @@
+{
+  "scope": {
+    "method": "static inspection only; no recovered JS executed; no browser, API calls, real accounts or messages",
+    "files_reviewed": 8,
+    "total_lines": 7697,
+    "line_number_basis": "current recovered files after parent stripped exactly one File: metadata header",
+    "language": "vi-VN",
+    "source_changes_made_by_this_agent": false
+  },
+  "architecture": {
+    "style": "Vanilla JavaScript, same-origin /api, global functions and inline onclick/onsubmit, dynamic innerHTML",
+    "user_auth": "localStorage token/user, Bearer header; GET /auth/profile refresh; CSRF header for mutations; retry once on CSRF 403",
+    "admin_auth": "separate localStorage admin_token/admin_user; admin-products explicitly checks role 1; other admin pages depend on token presence and server authorization",
+    "role_model": {
+      "1": "Admin",
+      "3": "VIP",
+      "other": "User"
+    },
+    "load_order": "Dashboard HTML must load dashboard.js and its OA/Link/DataFind modules as browser classic scripts sharing globals; do not load admin scripts into the same document because const API_URL and helper names collide.",
+    "role_limit": "Client role gates are display/navigation controls. Actual API authorization requires backend verification; frontend alone cannot establish it."
+  },
+  "feature_matrix": [
+    {
+      "id": "user_shell",
+      "screen": "Dashboard và điều hướng hub",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 40
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Đọc token/user từ localStorage; chuyển index.html khi chưa có token",
+        "Lấy CSRF token, làm mới profile, chuyển nội dung Zalo/công cụ sang các tab",
+        "Điều hướng Trang chủ, Zalo, Công cụ khác, Nạp tiền, Profile và ba hub admin",
+        "Đăng xuất"
+      ],
+      "inputs": [],
+      "endpoints": [
+        "GET /api/auth/csrf-token",
+        "GET /api/auth/profile"
+      ],
+      "notes": [
+        "Giao diện dùng hàm global và inline onclick; không có framework hoặc bundler trong 8 tệp.",
+        "Role 1 = Admin, role 3 = VIP; còn lại hiển thị User. Hub OA, Link, Leak có kiểm tra role 1 trong showPage."
+      ]
+    },
+    {
+      "id": "profile",
+      "screen": "Thông tin cá nhân / đổi mật khẩu",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1532
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Xem username/email/vai trò/số dư/lần đăng nhập cuối",
+        "Đổi mật khẩu và kiểm tra xác nhận khớp"
+      ],
+      "inputs": [
+        "currentPassword",
+        "newPassword",
+        "confirmPassword"
+      ],
+      "endpoints": [
+        "GET /api/auth/profile",
+        "POST /api/auth/change-password"
+      ],
+      "notes": []
+    },
+    {
+      "id": "zalo_accounts",
+      "screen": "Tài khoản Zalo của người dùng",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 958
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Liệt kê avatar, UID, tên, điện thoại, trạng thái",
+        "Thêm tự động từ IMEI và cookie zpw_sek",
+        "Có handler thêm thủ công",
+        "Xóa tài khoản",
+        "Kiểm tra một hoặc tất cả trạng thái"
+      ],
+      "inputs": [
+        "IMEI",
+        "COOKIE_ZPW_SEK",
+        "UID/displayName/phoneNumber/Avatar/ENCRYPTION_KEY (handler thủ công)"
+      ],
+      "endpoints": [
+        "GET /api/zalo-accounts",
+        "POST /api/zalo-accounts",
+        "POST /api/zalo-accounts/auto-fetch",
+        "DELETE /api/zalo-accounts/{uid}",
+        "POST /api/zalo-accounts/{uid}/check-status",
+        "POST /api/zalo-accounts/check-all-status"
+      ],
+      "notes": [
+        "Form do showAddZaloForm tạo chỉ nối handler tự động; handler thủ công cần HTML khác chưa được cung cấp."
+      ]
+    },
+    {
+      "id": "zalo_phone_image",
+      "screen": "Zalo: gửi ảnh theo số điện thoại / yêu cầu lấy IP",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1744
+      },
+      "roles": [
+        "Admin (1)",
+        "VIP (3) theo ẩn tab lúc init"
+      ],
+      "actions": [
+        "Bước 1 chọn tài khoản hoạt động và tìm người nhận",
+        "Bước 2 xem người nhận/tài khoản gửi/phí/số dư rồi xác nhận",
+        "Bước 3 hiển thị kết quả/phí; tải lại thống kê và lịch sử",
+        "Chọn ảnh mặc định hoặc PNG tự tải; chọn IPv4/IPv6/cả hai và autoDelete",
+        "Hẹn giờ ít nhất khoảng 5 phút trong tương lai"
+      ],
+      "inputs": [
+        "zaloUID",
+        "phoneNumber",
+        "imageType",
+        "ipType",
+        "autoDelete",
+        "isTimer",
+        "runTime",
+        "PNG tối đa 3 MB"
+      ],
+      "endpoints": [
+        "GET /api/send-image-v2/zalo-accounts",
+        "POST /api/zalo/upload-custom-image",
+        "POST /api/send-image-v2/search",
+        "POST /api/send-image-v2/send",
+        "POST /api/send-image-v2-timer/send"
+      ],
+      "notes": [
+        "Tài khoản hệ thống hoặc tài khoản cá nhân có thể xuất hiện từ API.",
+        "Chỉ mô tả tĩnh; không gửi tin hoặc truy cập tài khoản thực."
+      ]
+    },
+    {
+      "id": "zalo_card_image",
+      "screen": "Zalo: gửi ảnh qua danh thiếp/PARAMS",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2076
+      },
+      "roles": [
+        "Admin (1)",
+        "VIP (3) theo ẩn tab lúc init"
+      ],
+      "actions": [
+        "Chọn tài khoản cá nhân hoạt động, giải mã FID/PARAMS và tìm người nhận",
+        "Xem phí/người nhận rồi xác nhận gửi hoặc hẹn giờ",
+        "Ảnh custom, loại IP, autoDelete và kết quả tương tự luồng số điện thoại"
+      ],
+      "inputs": [
+        "encryptedFid",
+        "zaloUID",
+        "imageType",
+        "ipType",
+        "autoDelete",
+        "isTimer",
+        "runTime"
+      ],
+      "endpoints": [
+        "GET /api/send-image-by-card/personal-accounts",
+        "POST /api/zalo/upload-custom-image",
+        "POST /api/send-image-by-card/decode-fid",
+        "POST /api/send-image-by-card/send",
+        "POST /api/send-image-by-card-timer/send"
+      ],
+      "notes": []
+    },
+    {
+      "id": "zalo_send_history",
+      "screen": "Zalo: thống kê và lịch sử gửi",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1378
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Tổng gửi/thành công/thất bại/lỗi",
+        "Danh sách ngày, điện thoại, tên, phí, loại tài khoản, kết quả, chi tiết",
+        "Phân trang 30 bản ghi"
+      ],
+      "inputs": [],
+      "endpoints": [
+        "GET /api/send-image/stats",
+        "GET /api/send-image/history?page={page}&limit=30"
+      ],
+      "notes": []
+    },
+    {
+      "id": "zalo_timer_history",
+      "screen": "Zalo: lịch sử hẹn giờ",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1429
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Xem thời gian tạo/chạy, mục tiêu, kết quả, trạng thái chờ/xử lý/thất bại/thành công",
+        "Phân trang 30 bản ghi"
+      ],
+      "inputs": [],
+      "endpoints": [
+        "GET /api/zalo-timer/history?page={page}&limit=30"
+      ],
+      "notes": [
+        "Không thấy chức năng hủy/sửa lịch ở frontend."
+      ]
+    },
+    {
+      "id": "zalo_status_phone",
+      "screen": "Zalo: tra last-online theo điện thoại",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 3137
+      },
+      "roles": [
+        "người dùng đã đăng nhập; không có role guard riêng trong handler"
+      ],
+      "actions": [
+        "Chọn tài khoản cá nhân hoặc SYSTEM",
+        "Pre-check xem profile, phí và số dư",
+        "Xác nhận trả phí, xem avatar/UID/last-online và cập nhật số dư"
+      ],
+      "inputs": [
+        "phoneNumber",
+        "zaloUID",
+        "type=phone"
+      ],
+      "endpoints": [
+        "GET /api/send-image-v2/zalo-accounts",
+        "POST /api/check-status/pre-check",
+        "POST /api/check-status/confirm"
+      ],
+      "notes": []
+    },
+    {
+      "id": "zalo_status_card",
+      "screen": "Zalo: tra last-online theo danh thiếp",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 3293
+      },
+      "roles": [
+        "người dùng đã đăng nhập; không có role guard riêng trong handler"
+      ],
+      "actions": [
+        "Chọn tài khoản cá nhân, nhập PARAMS",
+        "Pre-check giải mã và xem profile/phí",
+        "Xác nhận trả phí và xem last-online"
+      ],
+      "inputs": [
+        "encryptedFid",
+        "zaloUID",
+        "type=card"
+      ],
+      "endpoints": [
+        "GET /api/send-image-v2/zalo-accounts",
+        "POST /api/check-status/pre-check",
+        "POST /api/check-status/confirm"
+      ],
+      "notes": []
+    },
+    {
+      "id": "ip_lookup",
+      "screen": "Công cụ khác: vị trí IP",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2397
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Kiểm tra định dạng IP",
+        "Xem kết quả từ nhiều nguồn, vùng/thành phố/quốc gia/ISP/tọa độ",
+        "Nhúng mapUrl bằng iframe"
+      ],
+      "inputs": [
+        "ip (IPv4 hoặc IPv6)"
+      ],
+      "endpoints": [
+        "POST /api/check-ip/location"
+      ],
+      "notes": []
+    },
+    {
+      "id": "license_store",
+      "screen": "Zalo: cửa hàng license",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2580
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Xem sản phẩm và giá gói 1/5/10 lượt",
+        "Làm mới số dư, xác nhận mua, hiển thị modal key và copy",
+        "Xem license đã mua, lượt còn lại, giá/ngày mua/kích hoạt/trạng thái"
+      ],
+      "inputs": [
+        "productID",
+        "licenseType=1/2/3 (tương ứng 1/5/10 lượt)"
+      ],
+      "endpoints": [
+        "GET /api/licenses/products",
+        "POST /api/licenses/purchase",
+        "GET /api/licenses/my-licenses",
+        "GET /api/auth/profile"
+      ],
+      "notes": [
+        "Không thấy thao tác kích hoạt license từ dashboard; chỉ mua/xem/copy."
+      ]
+    },
+    {
+      "id": "payos_deposit",
+      "screen": "Nạp tiền PayOS: tạo và lịch sử",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2905
+      },
+      "roles": [
+        "người dùng đã đăng nhập"
+      ],
+      "actions": [
+        "Tạo yêu cầu nạp từ 10.000 VND và hiển thị checkoutUrl",
+        "Xem lịch sử chờ/thành công/hủy",
+        "Tiếp tục thanh toán bằng cashLink hoặc hủy giao dịch chờ"
+      ],
+      "inputs": [
+        "amount",
+        "addInfo (hủy)"
+      ],
+      "endpoints": [
+        "POST /api/payos/create",
+        "GET /api/payos/history",
+        "POST /api/payos/cancel"
+      ],
+      "notes": [
+        "Không có SDK PayOS phía trình duyệt hoặc polling tự cập nhật; nút mở link thanh toán do server cấp."
+      ]
+    },
+    {
+      "id": "leak_phone",
+      "screen": "Tra cứu dữ liệu rò rỉ: điện thoại",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_datafind.js",
+        "line": 82
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Chuẩn hóa số 0xxxxxxxxx sang 84xxxxxxxxx",
+        "Xem phí/số dư, chặn confirm nếu không đủ tiền",
+        "Xác nhận, cập nhật số dư nếu charged, hiển thị bản ghi theo nguồn và trường dữ liệu"
+      ],
+      "inputs": [
+        "type=phone",
+        "value"
+      ],
+      "endpoints": [
+        "POST /api/leak-lookup/pre-check",
+        "POST /api/leak-lookup/confirm"
+      ],
+      "notes": [
+        "Thông điệp UI nói chỉ tính phí khi tìm thấy dữ liệu."
+      ]
+    },
+    {
+      "id": "leak_email",
+      "screen": "Tra cứu dữ liệu rò rỉ: email",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_datafind.js",
+        "line": 82
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Luồng ba bước nhập → phí/xác nhận → kết quả"
+      ],
+      "inputs": [
+        "type=email",
+        "value"
+      ],
+      "endpoints": [
+        "POST /api/leak-lookup/pre-check",
+        "POST /api/leak-lookup/confirm"
+      ],
+      "notes": []
+    },
+    {
+      "id": "leak_facebook",
+      "screen": "Tra cứu dữ liệu rò rỉ: Facebook",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_datafind.js",
+        "line": 99
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Nhận điện thoại, UID số hoặc URL",
+        "URL được giải UID qua API; số 84xxxxxxxxx chuyển thành 0xxxxxxxxx",
+        "Sau đó dùng luồng phí/xác nhận/kết quả chung"
+      ],
+      "inputs": [
+        "type=facebook",
+        "value",
+        "link (giải UID)"
+      ],
+      "endpoints": [
+        "POST /api/facebook/find-uid",
+        "POST /api/leak-lookup/pre-check",
+        "POST /api/leak-lookup/confirm"
+      ],
+      "notes": []
+    },
+    {
+      "id": "leak_history",
+      "screen": "Tra cứu dữ liệu rò rỉ: lịch sử",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_datafind.js",
+        "line": 307
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Xem loại/từ khóa/số kết quả/phí/ngày",
+        "Phân trang 30 bản ghi",
+        "Xem lại resultsData trong modal"
+      ],
+      "inputs": [
+        "page"
+      ],
+      "endpoints": [
+        "GET /api/leak-lookup/history?page={page}&limit=30"
+      ],
+      "notes": []
+    },
+    {
+      "id": "link_templates",
+      "screen": "Link: trang mẫu",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 61
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Liệt kê/tạo/sửa/xóa mẫu",
+        "Lấy metadata tiêu đề/thumbnail từ URL",
+        "Upload thumbnail và preview"
+      ],
+      "inputs": [
+        "name",
+        "link",
+        "title",
+        "thumbnail",
+        "template_id",
+        "file thumbnail"
+      ],
+      "endpoints": [
+        "GET /api/link/templates",
+        "POST /api/link/templates",
+        "PUT /api/link/templates/{id}",
+        "DELETE /api/link/templates/{id}",
+        "POST /api/link/fetch-meta",
+        "POST /api/link/upload-thumbnail"
+      ],
+      "notes": [
+        "Thông báo xóa mẫu cho biết xóa cả các link liên quan."
+      ]
+    },
+    {
+      "id": "links",
+      "screen": "Link: danh sách/tạo/sửa",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 253
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Tạo từ mẫu và domain, gợi ý domain theo facebook/tiktok/baomoi",
+        "Xem/copy URL đầy đủ và rút gọn",
+        "Sửa tên và chế độ vị trí"
+      ],
+      "inputs": [
+        "name",
+        "template_id",
+        "domain_id",
+        "location_type"
+      ],
+      "endpoints": [
+        "GET /api/link/links",
+        "POST /api/link/links",
+        "PUT /api/link/links/{id}",
+        "GET /api/link/templates",
+        "GET /api/link/domains"
+      ],
+      "notes": [
+        "location_type: 0 không lấy vị trí, 1 chỉ lấy vị trí, 2 kèm giải thích, 3 phải cấp quyền mới tải nội dung.",
+        "Không có nút xóa link riêng; comment cũ nói không sửa nhưng mã hiện có sửa."
+      ]
+    },
+    {
+      "id": "link_domains",
+      "screen": "Link: quản lý domain",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 510
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Xem/tạo/sửa/xóa domain và chi tiết"
+      ],
+      "inputs": [
+        "domain",
+        "detail"
+      ],
+      "endpoints": [
+        "GET /api/link/domains",
+        "POST /api/link/domains",
+        "PUT /api/link/domains/{id}",
+        "DELETE /api/link/domains/{id}"
+      ],
+      "notes": []
+    },
+    {
+      "id": "link_results",
+      "screen": "Link: kết quả và kết quả thumbnail",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 649
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Hai tab kết quả riêng",
+        "Lọc tại client theo ID/tên link",
+        "Xem kết quả dạng text và ngày tạo"
+      ],
+      "inputs": [
+        "từ khóa lọc"
+      ],
+      "endpoints": [
+        "GET /api/link/results",
+        "GET /api/link/results-thumbnail"
+      ],
+      "notes": []
+    },
+    {
+      "id": "oa_token",
+      "screen": "Zalo OA: token",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 81
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Xem hạn token và một phần refresh token",
+        "Nhập refresh token hoặc để trống để dùng token DB",
+        "Tự refresh khi chuyển tab nếu token hết hạn hoặc còn dưới 60 giây"
+      ],
+      "inputs": [
+        "refresh_token"
+      ],
+      "endpoints": [
+        "GET /api/zalo-oa/token",
+        "POST /api/zalo-oa/token/refresh"
+      ],
+      "notes": []
+    },
+    {
+      "id": "oa_templates",
+      "screen": "Zalo OA: mẫu tin",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 166
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Tạo/sửa/xóa template",
+        "Tự lấy template mới, chọn nhiều dòng, nhập chi tiết và lưu từng template"
+      ],
+      "inputs": [
+        "template_id",
+        "detail",
+        "params (CSV)"
+      ],
+      "endpoints": [
+        "GET /api/zalo-oa/templates",
+        "POST /api/zalo-oa/templates",
+        "PUT /api/zalo-oa/templates/{id}",
+        "DELETE /api/zalo-oa/templates/{id}",
+        "GET /api/zalo-oa/fetch-new-templates"
+      ],
+      "notes": []
+    },
+    {
+      "id": "oa_send_phone",
+      "screen": "Zalo OA: gửi theo điện thoại",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 511
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Chọn IPv4/IPv6/cả hai; lọc template theo chuỗi v4/v6 trong detail",
+        "Tạo form động từ params, lấy preview cho date/order_code/price/phone_number",
+        "Nhập trường custom, xác nhận gửi, xem kết quả"
+      ],
+      "inputs": [
+        "phone_number",
+        "template_id (chuỗi hoặc mảng)",
+        "custom_params"
+      ],
+      "endpoints": [
+        "GET /api/zalo-oa/templates",
+        "GET /api/zalo-oa/preview-data",
+        "POST /api/zalo-oa/send-template"
+      ],
+      "notes": []
+    },
+    {
+      "id": "oa_send_uid",
+      "screen": "Zalo OA: gửi theo UID",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 868
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Luồng tương tự điện thoại; phone_number trong params phải tự nhập nếu cần"
+      ],
+      "inputs": [
+        "user_id",
+        "template_id (chuỗi hoặc mảng)",
+        "custom_params"
+      ],
+      "endpoints": [
+        "GET /api/zalo-oa/templates",
+        "GET /api/zalo-oa/preview-data",
+        "POST /api/zalo-oa/send-template-uid"
+      ],
+      "notes": []
+    },
+    {
+      "id": "oa_results",
+      "screen": "Zalo OA: kết quả gửi / trạng thái",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 269
+      },
+      "roles": [
+        "Admin (1) ở hub"
+      ],
+      "actions": [
+        "Xem order_code, điện thoại hoặc UID, template, message status, kết quả và chi tiết",
+        "Cập nhật status từng message"
+      ],
+      "inputs": [
+        "message_id",
+        "phone",
+        "id"
+      ],
+      "endpoints": [
+        "GET /api/zalo-oa/results",
+        "GET /api/zalo-oa/message-status?message_id={msgId}&phone={phone}&id={id}"
+      ],
+      "notes": []
+    },
+    {
+      "id": "admin_users",
+      "screen": "Admin: người dùng và thống kê",
+      "source": {
+        "file": "recovered/FRONTEND/admin-dashboard.js",
+        "line": 146
+      },
+      "roles": [
+        "admin_token/admin_user được đọc; không kiểm role 1 ngay trong checkAuth"
+      ],
+      "actions": [
+        "Thống kê tổng/active/admin",
+        "Tìm theo tên/email/ID",
+        "Tạo/sửa/xóa người dùng",
+        "Ẩn nút tự xóa"
+      ],
+      "inputs": [
+        "userName",
+        "email",
+        "password",
+        "totalMoney",
+        "userRole",
+        "isActive"
+      ],
+      "endpoints": [
+        "GET /api/admin/stats",
+        "GET /api/admin/users",
+        "POST /api/admin/users",
+        "PUT /api/admin/users/{id}",
+        "DELETE /api/admin/users/{id}"
+      ],
+      "notes": []
+    },
+    {
+      "id": "admin_ip_blocks",
+      "screen": "Admin: chặn IP",
+      "source": {
+        "file": "recovered/FRONTEND/admin-dashboard.js",
+        "line": 428
+      },
+      "roles": [
+        "admin session"
+      ],
+      "actions": [
+        "Xem/lọc IP block và số login/api/both",
+        "Chặn IP theo loại, lý do, thời lượng",
+        "Gỡ chặn"
+      ],
+      "inputs": [
+        "ipAddress",
+        "blockType=login/api/both",
+        "reason",
+        "blockMinutes"
+      ],
+      "endpoints": [
+        "GET /api/admin/ip-blocks",
+        "POST /api/admin/ip-blocks",
+        "DELETE /api/admin/ip-blocks/{ip}"
+      ],
+      "notes": []
+    },
+    {
+      "id": "admin_zalo",
+      "screen": "Admin: Zalo hệ thống và phí",
+      "source": {
+        "file": "recovered/FRONTEND/admin-zalo.js",
+        "line": 128
+      },
+      "roles": [
+        "admin_token/admin_user được đọc; không kiểm role 1 ngay trong checkAuth"
+      ],
+      "actions": [
+        "Xem toàn bộ tài khoản Zalo hệ thống",
+        "Chọn UID hệ thống và sửa năm mức phí gửi/check status",
+        "Xem/lọc auto requests; đếm thành công/thất bại và doanh thu"
+      ],
+      "inputs": [
+        "uid_zalo_system",
+        "zalo_system_money",
+        "zalo_custom_money",
+        "check_phone_system_money",
+        "check_phone_custom_money",
+        "check_card_money"
+      ],
+      "endpoints": [
+        "GET /api/admin/zalo-accounts",
+        "GET /api/admin/tool-setup",
+        "PUT /api/admin/tool-setup",
+        "GET /api/admin/requests"
+      ],
+      "notes": []
+    },
+    {
+      "id": "admin_products",
+      "screen": "Admin: sản phẩm",
+      "source": {
+        "file": "recovered/FRONTEND/admin-products.js",
+        "line": 168
+      },
+      "roles": [
+        "Admin (1) theo init"
+      ],
+      "actions": [
+        "Liệt kê/tạo/sửa/xóa sản phẩm và giá 1/5/10 lượt; bật/tắt sản phẩm"
+      ],
+      "inputs": [
+        "productName",
+        "productDesc",
+        "productOnePrice",
+        "productFivePrice",
+        "productTenPrice",
+        "productImage",
+        "isActive"
+      ],
+      "endpoints": [
+        "GET /api/admin/products",
+        "GET /api/admin/products/{id}",
+        "POST /api/admin/products",
+        "PUT /api/admin/products/{id}",
+        "DELETE /api/admin/products/{id}"
+      ],
+      "notes": [
+        "Thông báo UI cho biết xóa sản phẩm đã có license mua chỉ vô hiệu hóa."
+      ]
+    },
+    {
+      "id": "admin_licenses",
+      "screen": "Admin: license",
+      "source": {
+        "file": "recovered/FRONTEND/admin-products.js",
+        "line": 352
+      },
+      "roles": [
+        "Admin (1) theo init"
+      ],
+      "actions": [
+        "Lọc theo sản phẩm, trạng thái, username; phân trang 20",
+        "Xem/copy key và chi tiết",
+        "Tăng lượt dùng",
+        "Vô hiệu hóa với lý do"
+      ],
+      "inputs": [
+        "productID",
+        "status",
+        "userName",
+        "count",
+        "reason"
+      ],
+      "endpoints": [
+        "GET /api/admin/licenses?page={page}&limit=20&productID={id}&status={status}&userName={name}",
+        "GET /api/admin/licenses/{key}",
+        "POST /api/admin/licenses/{key}/extend",
+        "POST /api/admin/licenses/{key}/revoke"
+      ],
+      "notes": []
+    },
+    {
+      "id": "admin_leak",
+      "screen": "Admin: cấu hình phí và lịch sử tra cứu rò rỉ",
+      "source": {
+        "file": "recovered/FRONTEND/admin-dataleak.js",
+        "line": 137
+      },
+      "roles": [
+        "có admin_token; không có role check phía client"
+      ],
+      "actions": [
+        "Sửa phí tra cứu",
+        "Xem lịch sử toàn hệ thống, phân trang 20",
+        "Xem resultsData JSON trong modal",
+        "Tổng lượt, doanh thu server trả, số kết quả trung bình trên trang hiện tại"
+      ],
+      "inputs": [
+        "check_data_leak_money",
+        "page"
+      ],
+      "endpoints": [
+        "GET /api/admin/tool-setup",
+        "PUT /api/admin/tool-setup",
+        "GET /api/admin/leak-history?page={page}&limit=20"
+      ],
+      "notes": []
+    }
+  ],
+  "missing_artifacts": [
+    {
+      "artifact": "HTML entry pages and dashboard DOM",
+      "status": "absent from recovered source tree at inspection",
+      "detail": "Không có .html. Cần ít nhất index.html và admin.html được redirect tới, dashboard host và các trang admin ứng với 4 script. Tên HTML host còn lại chưa thể suy ra chắc chắn.",
+      "requirements": [
+        "Mọi ID literal/dynamic trong modules[].dom_contract",
+        ".page-section/.menu-item/.sub-menu-item",
+        ".zalo-tab/.other-tab/.deposit-tab/.leak-tab/.link-tab/.zalo-oa-tab",
+        "forms, tables, step indicators, hub cards and modal shells referenced by JS",
+        "dashboard modules must be included, with inline event wiring; no static HTML can be faithfully reconstructed from logic alone"
+      ]
+    },
+    {
+      "artifact": "CSS/theme/responsive styles",
+      "status": "absent",
+      "detail": "Script có style inline cho một số nội dung động nhưng không định nghĩa đầy đủ sidebar/page tabs/active/completed/modals/cards/tables/badges/spinner; không thể thấy UI hoàn chỉnh."
+    },
+    {
+      "artifact": "Flatpickr JS, CSS, Vietnamese locale",
+      "status": "not bundled in recovered frontend",
+      "detail": "dashboard.js gọi global flatpickr với locale vn cho send-image-run-time và send-card-run-time; khi các input tồn tại mà thư viện thiếu sẽ ReferenceError."
+    },
+    {
+      "artifact": "SweetAlert2 JS (global Swal)",
+      "status": "not bundled",
+      "detail": "dashboard_datafind.js gọi Swal.fire cho lỗi/validation; thiếu thư viện sẽ làm luồng lỗi không hiển thị đúng."
+    },
+    {
+      "artifact": "Font Awesome CSS/font assets",
+      "status": "not bundled",
+      "detail": "Có markup fas fa-chevron-left/right và fa-database; cần stylesheet/fonts để hiện icon."
+    },
+    {
+      "artifact": "Login/register/admin-login browser code and views",
+      "status": "not present among 8 JS files",
+      "detail": "Các script chỉ đọc token đã có; không có handler đăng nhập/đăng ký để tạo localStorage session."
+    },
+    {
+      "artifact": "Images/static public assets",
+      "status": "no image files in recovered tree",
+      "detail": "Avatar/product/template images dựa trên dữ liệu API hoặc dịch vụ placeholder bên ngoài. Map iframe cần URL từ API và mạng."
+    },
+    {
+      "artifact": "Direct UI build configuration",
+      "status": "no package/build manifest in FRONTEND",
+      "detail": "Có thể phục vụ classic scripts trực tiếp sau khi có host HTML/CSS; chưa có bằng chứng ứng dụng React/Vue hoặc yêu cầu npm frontend."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FE-01",
+      "severity": "P2",
+      "title": "Biến select ngoài phạm vi khi không có Zalo cá nhân hoạt động",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2033
+      },
+      "impact": "loadSendCardZaloAccounts chỉ khai báo const select trong nhánh activeAccounts.length > 0; nhánh else ném ReferenceError, bị catch và chỉ log; dropdown/cảnh báo không được cập nhật.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard.js",
+          "line": 2016
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-02",
+      "severity": "P2",
+      "title": "Hủy nạp tiền gọi sai chữ ký showAlert",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2962
+      },
+      "impact": "showAlert yêu cầu (elementId,message,type). Ba lệnh trong cancelPayOSDeposit truyền (message,type), nên tìm element bằng chính nội dung thông báo và return; người dùng không thấy success/error.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard.js",
+          "line": 348
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard.js",
+          "line": 2969
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-03",
+      "severity": "P2",
+      "title": "Đọc body response hai lần với 403 không phải CSRF",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 735
+      },
+      "impact": "apiCall đã response.json() khi status 403; nếu thông điệp không có CSRF thì rơi xuống response.json() lần hai. Kết quả là lỗi body already consumed thay vì thông báo permission gốc.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/admin-products.js",
+          "line": 135
+        },
+        {
+          "file": "recovered/FRONTEND/admin-dataleak.js",
+          "line": 78
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-04",
+      "severity": "P2",
+      "title": "Lần đầu mở OA gửi UID tải dropdown của tab điện thoại",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 754
+      },
+      "impact": "loadOaTemplatesForSendUid gọi loadOaTemplatesForSend khi cache rỗng. Hàm đó chỉ gọi onOaIpTypeChange (controls điện thoại), không gọi onOaIpTypeChangeUid. Dropdown UID thiếu dữ liệu ở lần vào đầu tiên.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+          "line": 396
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-05",
+      "severity": "P1",
+      "title": "Dữ liệu tra cứu được chèn vào innerHTML chưa escape",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_datafind.js",
+        "line": 283
+      },
+      "impact": "renderLeakResults chèn source/key/value trực tiếp vào HTML; searchValue trong lịch sử và value ở confirm cũng chưa escape. Nếu API/kho dữ liệu chứa HTML, có thể thực thi markup/script event trong phiên người dùng. Cần đối chiếu ràng buộc/sanitize server.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard_datafind.js",
+          "line": 295
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard_datafind.js",
+          "line": 345
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-06",
+      "severity": "P1",
+      "title": "Nhiều bảng/template/modal khác nội suy API vào HTML và thuộc tính",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 85
+      },
+      "impact": "Link templates/links/results, OA template/result/param, Zalo account/history, admin products và IP blocks có trường API chưa escape trong innerHTML/thuộc tính/inline handler. escapeHtml có tồn tại nhưng áp dụng không nhất quán. Khả năng khai thác phụ thuộc dữ liệu đầu vào server.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard_link.js",
+          "line": 87
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+          "line": 182
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard.js",
+          "line": 999
+        },
+        {
+          "file": "recovered/FRONTEND/admin-products.js",
+          "line": 207
+        },
+        {
+          "file": "recovered/FRONTEND/admin-dashboard.js",
+          "line": 462
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-07",
+      "severity": "P2",
+      "title": "Log cookie xác thực Zalo vào console",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1107
+      },
+      "impact": "handleAddZaloAccountAuto log cookie zpw_sek hai lần và IMEI; console/log collection có thể lộ dữ liệu phiên. Không đưa giá trị thực vào báo cáo.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-08",
+      "severity": "P2",
+      "title": "Cập nhật sai thuộc tính số dư sau gửi ảnh danh thiếp",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2282
+      },
+      "impact": "Các luồng profile/license/check-status dùng currentUser.totalMoney. Ghi balance để totalMoney trong localStorage cũ; số dư client không đồng bộ sau tính phí.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-09",
+      "severity": "P2",
+      "title": "Gửi ảnh theo điện thoại không đồng bộ currentUser.totalMoney",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 1943
+      },
+      "impact": "Luồng gửi thường hiển thị newBalance nhưng chỉ reload history/stats, không cập nhật local user hoặc profile. Số dư đã cache tiếp tục cũ cho đến refreshCurrentUser/load lại.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-10",
+      "severity": "P2",
+      "title": "Phụ thuộc biến event global trong handler async",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_link.js",
+        "line": 129
+      },
+      "impact": "fetchWebMetaForModal/saveEditLink/submitCreateLink và OA autoFetch/saveAutoFetchedTemplates không nhận event tham số, dùng Window.event đã cũ/không đáng tin. Gọi bằng mã hoặc môi trường không hỗ trợ sẽ lỗi; click vào phần tử con có thể disable sai node.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard_link.js",
+          "line": 318
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard_link.js",
+          "line": 464
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+          "line": 613
+        },
+        {
+          "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+          "line": 688
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-11",
+      "severity": "P2",
+      "title": "Parse thời gian hẹn giờ chưa xử lý chuỗi sai",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 158
+      },
+      "impact": "validateAndGetTimer split thủ công ngoài try; chuỗi thiếu ngày có thể ném TypeError, ngày không hợp lệ có thể đến toISOString ném RangeError. Flatpickr chưa được cung cấp và giá trị input có thể không đúng định dạng.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-12",
+      "severity": "P2",
+      "title": "Giá trị phí bằng 0 bị thay thành giá mặc định",
+      "source": {
+        "file": "recovered/FRONTEND/admin-dataleak.js",
+        "line": 103
+      },
+      "impact": "loadToolSetup dùng || nên phí cấu hình 0 hiển thị 50.000; admin-zalo openToolSetupModal cũng thay năm giá 0 bằng 30.000/20.000/10.000/5.000. Mở/lưu form có thể đổi mức miễn phí ngoài ý muốn.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/admin-zalo.js",
+          "line": 244
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-13",
+      "severity": "P2",
+      "title": "Kiểm tra số tiền chấp nhận giá âm/NaN ở một số form",
+      "source": {
+        "file": "recovered/FRONTEND/admin-products.js",
+        "line": 292
+      },
+      "impact": "Form sản phẩm chỉ loại tất cả giá bằng 0, cho qua giá âm. Admin Zalo chỉ isNaN và không loại âm; admin leak so sánh chuỗi <0 nhưng thiếu Number.isFinite. Server phải xác thực; đây là thiếu sót validation phía client.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/admin-zalo.js",
+          "line": 294
+        },
+        {
+          "file": "recovered/FRONTEND/admin-dataleak.js",
+          "line": 113
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-14",
+      "severity": "P2",
+      "title": "Không thoát bootstrap admin sau redirect khi thiếu session",
+      "source": {
+        "file": "recovered/FRONTEND/admin-dashboard.js",
+        "line": 42
+      },
+      "impact": "checkAuth return sau gán location, callback DOMContentLoaded vẫn gọi API tải users/stats/IP. Tương tự admin-zalo. Thường trình duyệt chuyển trang sớm nhưng vẫn có request không hợp lệ/UI lỗi trong quá trình chuyển.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/admin-zalo.js",
+          "line": 41
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-15",
+      "severity": "P2",
+      "title": "Dashboard có token nhưng thiếu/hỏng user làm init lỗi",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 48
+      },
+      "impact": "Không try/catch JSON hoặc kiểm null trước đọc currentUser.userName. Trạng thái localStorage không nhất quán làm dashboard dừng trước profile refresh.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-16",
+      "severity": "P2",
+      "title": "Kiểm tra trạng thái và tải dropdown chạy đồng thời",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 238
+      },
+      "impact": "showZaloTab không await check-all trước load danh sách và lọc tài khoản active. Dropdown có thể dựa trên trạng thái cũ; sau check xong không refresh dropdown.",
+      "confidence": "high",
+      "related": [
+        {
+          "file": "recovered/FRONTEND/dashboard.js",
+          "line": 242
+        }
+      ],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-17",
+      "severity": "P2",
+      "title": "UID và số điện thoại OA dùng chung nút update status nhưng chỉ truyền phone_number",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 323
+      },
+      "impact": "Bảng hiển thị user_id khi phone_number trống, nhưng nút truyền phone_number trực tiếp (có thể thành chuỗi undefined). Có thể không kiểm tra được tin gửi UID; cần đối chiếu hợp đồng endpoint message-status.",
+      "confidence": "medium",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-18",
+      "severity": "P2",
+      "title": "So sánh template_id chặt với giá trị select dạng chuỗi",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+        "line": 460
+      },
+      "impact": "Nếu API trả template_id dạng số, select.value là chuỗi nên find không ra template và params động rỗng; ảnh hưởng cả phone và UID. Cần chuẩn hóa kiểu hoặc xác nhận schema API.",
+      "confidence": "medium",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-19",
+      "severity": "P3",
+      "title": "Số lượt license còn lại bằng 0 bị hiển thị dấu gạch",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2829
+      },
+      "impact": "Truthiness bỏ mất số 0 thay vì hiển thị đã hết lượt.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    },
+    {
+      "id": "FE-20",
+      "severity": "P3",
+      "title": "Regex IPv4 không kiểm tra dải octet",
+      "source": {
+        "file": "recovered/FRONTEND/dashboard.js",
+        "line": 2406
+      },
+      "impact": "Chuỗi như 999.999.999.999 vượt qua kiểm tra browser và vẫn gửi API. Đây là thiếu validation client, chưa kết luận server chấp nhận IP sai.",
+      "confidence": "high",
+      "related": [],
+      "verification": "static source inspection; not browser-tested"
+    }
+  ],
+  "modules": [
+    {
+      "file": "recovered/FRONTEND/admin-dashboard.js",
+      "line_count": 588,
+      "bytes": 24142,
+      "sha256": "c0142e48d4e9d567695d4dba8855e833b0b51cbc7e6a74505e8d014848f563c6",
+      "api_prefix": "/api/admin",
+      "functions": [
+        {
+          "name": "fetchCsrfToken",
+          "line": 19
+        },
+        {
+          "name": "checkAuth",
+          "line": 52
+        },
+        {
+          "name": "logout",
+          "line": 71
+        },
+        {
+          "name": "apiCall",
+          "line": 83
+        },
+        {
+          "name": "loadStats",
+          "line": 131
+        },
+        {
+          "name": "loadUsers",
+          "line": 146
+        },
+        {
+          "name": "displayUsers",
+          "line": 170
+        },
+        {
+          "name": "filterUsers",
+          "line": 215
+        },
+        {
+          "name": "openEditModal",
+          "line": 231
+        },
+        {
+          "name": "closeEditModal",
+          "line": 246
+        },
+        {
+          "name": "openCreateModal",
+          "line": 285
+        },
+        {
+          "name": "closeCreateModal",
+          "line": 289
+        },
+        {
+          "name": "deleteUser",
+          "line": 327
+        },
+        {
+          "name": "showAlert",
+          "line": 360
+        },
+        {
+          "name": "formatMoney",
+          "line": 370
+        },
+        {
+          "name": "formatDateTime",
+          "line": 378
+        },
+        {
+          "name": "escapeHtml",
+          "line": 390
+        },
+        {
+          "name": "loadIPBlocks",
+          "line": 428
+        },
+        {
+          "name": "renderIPBlocks",
+          "line": 445
+        },
+        {
+          "name": "updateIPStats",
+          "line": 475
+        },
+        {
+          "name": "getBlockTypeBadge",
+          "line": 483
+        },
+        {
+          "name": "formatBlockType",
+          "line": 492
+        },
+        {
+          "name": "filterIPs",
+          "line": 501
+        },
+        {
+          "name": "openBlockIPModal",
+          "line": 514
+        },
+        {
+          "name": "closeBlockIPModal",
+          "line": 519
+        },
+        {
+          "name": "unblockIP",
+          "line": 570
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "userName",
+          "line": 64
+        },
+        {
+          "id_or_template": "userAvatar",
+          "line": 65
+        },
+        {
+          "id_or_template": "totalUsers",
+          "line": 136
+        },
+        {
+          "id_or_template": "activeUsers",
+          "line": 137
+        },
+        {
+          "id_or_template": "totalAdmins",
+          "line": 138
+        },
+        {
+          "id_or_template": "usersTableBody",
+          "line": 148
+        },
+        {
+          "id_or_template": "searchInput",
+          "line": 216
+        },
+        {
+          "id_or_template": "editUserID",
+          "line": 235
+        },
+        {
+          "id_or_template": "editUserName",
+          "line": 236
+        },
+        {
+          "id_or_template": "editEmail",
+          "line": 237
+        },
+        {
+          "id_or_template": "editPassword",
+          "line": 238
+        },
+        {
+          "id_or_template": "editTotalMoney",
+          "line": 239
+        },
+        {
+          "id_or_template": "editUserRole",
+          "line": 240
+        },
+        {
+          "id_or_template": "editIsActive",
+          "line": 241
+        },
+        {
+          "id_or_template": "editModal",
+          "line": 243
+        },
+        {
+          "id_or_template": "editForm",
+          "line": 248
+        },
+        {
+          "id_or_template": "createModal",
+          "line": 286
+        },
+        {
+          "id_or_template": "createForm",
+          "line": 291
+        },
+        {
+          "id_or_template": "createUserName",
+          "line": 298
+        },
+        {
+          "id_or_template": "createEmail",
+          "line": 299
+        },
+        {
+          "id_or_template": "createPassword",
+          "line": 300
+        },
+        {
+          "id_or_template": "createTotalMoney",
+          "line": 301
+        },
+        {
+          "id_or_template": "createUserRole",
+          "line": 302
+        },
+        {
+          "id_or_template": "createIsActive",
+          "line": 303
+        },
+        {
+          "id_or_template": "alert",
+          "line": 361
+        },
+        {
+          "id_or_template": "ipBlocksTableBody",
+          "line": 446
+        },
+        {
+          "id_or_template": "totalBlockedIPs",
+          "line": 476
+        },
+        {
+          "id_or_template": "loginBlockedIPs",
+          "line": 477
+        },
+        {
+          "id_or_template": "apiBlockedIPs",
+          "line": 479
+        },
+        {
+          "id_or_template": "searchIPInput",
+          "line": 502
+        },
+        {
+          "id_or_template": "blockIPModal",
+          "line": 515
+        },
+        {
+          "id_or_template": "blockIPForm",
+          "line": 516
+        },
+        {
+          "id_or_template": "blockIPAddress",
+          "line": 533
+        },
+        {
+          "id_or_template": "blockType",
+          "line": 534
+        },
+        {
+          "id_or_template": "blockReason",
+          "line": 535
+        },
+        {
+          "id_or_template": "blockMinutes",
+          "line": 536
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/auth/csrf-token",
+          "line": 21
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 101
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 113
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/stats",
+          "line": 133
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/users",
+          "line": 151
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/users/${userID}",
+          "line": 265
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/users",
+          "line": 307
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/users/${userID}",
+          "line": 341
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/ip-blocks",
+          "line": 430
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/ip-blocks",
+          "line": 551
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/ip-blocks/${encodeURIComponent(ipAddress)}",
+          "line": 576
+        }
+      ],
+      "script_dependencies": [],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; several admin forms/modals are bound immediately at script evaluation, so DOM must already exist"
+    },
+    {
+      "file": "recovered/FRONTEND/admin-dataleak.js",
+      "line_count": 264,
+      "bytes": 10830,
+      "sha256": "52b8a11600bdeaf84d3dd75f03a63957bbbad701bebc65e5e51983e99cb47384",
+      "api_prefix": "/api/admin",
+      "functions": [
+        {
+          "name": "fetchCsrfToken",
+          "line": 25
+        },
+        {
+          "name": "apiCall",
+          "line": 58
+        },
+        {
+          "name": "loadToolSetup",
+          "line": 98
+        },
+        {
+          "name": "updateFee",
+          "line": 111
+        },
+        {
+          "name": "loadHistory",
+          "line": 137
+        },
+        {
+          "name": "renderHistory",
+          "line": 158
+        },
+        {
+          "name": "renderPagination",
+          "line": 187
+        },
+        {
+          "name": "viewDetails",
+          "line": 210
+        },
+        {
+          "name": "showAlert",
+          "line": 234
+        },
+        {
+          "name": "calculateStats",
+          "line": 245
+        },
+        {
+          "name": "updateStatsPlaceholder",
+          "line": 259
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "leakLookupFee",
+          "line": 103
+        },
+        {
+          "id_or_template": "historyTableBody",
+          "line": 138
+        },
+        {
+          "id_or_template": "pagination",
+          "line": 188
+        },
+        {
+          "id_or_template": "jsonContent",
+          "line": 226
+        },
+        {
+          "id_or_template": "dataModal",
+          "line": 227
+        },
+        {
+          "id_or_template": "alert",
+          "line": 235
+        },
+        {
+          "id_or_template": "statTotalSearches",
+          "line": 246
+        },
+        {
+          "id_or_template": "statTotalRevenue",
+          "line": 249
+        },
+        {
+          "id_or_template": "statAvgResults",
+          "line": 255
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/auth/csrf-token",
+          "line": 27
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 76
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 85
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/tool-setup",
+          "line": 100
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/tool-setup",
+          "line": 118
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/leak-history?page=${page}&limit=20",
+          "line": 142
+        }
+      ],
+      "script_dependencies": [],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; several admin forms/modals are bound immediately at script evaluation, so DOM must already exist"
+    },
+    {
+      "file": "recovered/FRONTEND/admin-products.js",
+      "line_count": 708,
+      "bytes": 26942,
+      "sha256": "5bb812add291e6690c1831bf80a3f06b183dbdfb69615b583fa13e9527aea5ed",
+      "api_prefix": "/api",
+      "functions": [
+        {
+          "name": "init",
+          "line": 20
+        },
+        {
+          "name": "switchTab",
+          "line": 51
+        },
+        {
+          "name": "fetchCsrfToken",
+          "line": 89
+        },
+        {
+          "name": "apiCall",
+          "line": 112
+        },
+        {
+          "name": "loadProducts",
+          "line": 168
+        },
+        {
+          "name": "displayProducts",
+          "line": 183
+        },
+        {
+          "name": "openCreateModal",
+          "line": 231
+        },
+        {
+          "name": "openEditModal",
+          "line": 240
+        },
+        {
+          "name": "closeProductModal",
+          "line": 268
+        },
+        {
+          "name": "deleteProduct",
+          "line": 326
+        },
+        {
+          "name": "loadLicenses",
+          "line": 352
+        },
+        {
+          "name": "displayLicenses",
+          "line": 385
+        },
+        {
+          "name": "viewLicenseDetails",
+          "line": 431
+        },
+        {
+          "name": "showLicenseModal",
+          "line": 447
+        },
+        {
+          "name": "getLicenseStatusClass",
+          "line": 499
+        },
+        {
+          "name": "getLicenseStatusText",
+          "line": 506
+        },
+        {
+          "name": "closeLicenseModal",
+          "line": 515
+        },
+        {
+          "name": "showExtendForm",
+          "line": 521
+        },
+        {
+          "name": "hideExtendForm",
+          "line": 525
+        },
+        {
+          "name": "confirmExtend",
+          "line": 529
+        },
+        {
+          "name": "revokeLicense",
+          "line": 562
+        },
+        {
+          "name": "updatePagination",
+          "line": 596
+        },
+        {
+          "name": "changeLicensePage",
+          "line": 604
+        },
+        {
+          "name": "loadProductsForFilter",
+          "line": 615
+        },
+        {
+          "name": "showAlert",
+          "line": 633
+        },
+        {
+          "name": "formatCurrency",
+          "line": 643
+        },
+        {
+          "name": "formatDateTime",
+          "line": 651
+        },
+        {
+          "name": "truncateText",
+          "line": 663
+        },
+        {
+          "name": "escapeHtml",
+          "line": 669
+        },
+        {
+          "name": "copyToClipboard",
+          "line": 675
+        },
+        {
+          "name": "logout",
+          "line": 685
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "userName",
+          "line": 36
+        },
+        {
+          "id_or_template": "userAvatar",
+          "line": 37
+        },
+        {
+          "id_or_template": "productsTab",
+          "line": 77
+        },
+        {
+          "id_or_template": "licensesTab",
+          "line": 80
+        },
+        {
+          "id_or_template": "productsTableBody",
+          "line": 184
+        },
+        {
+          "id_or_template": "modalTitle",
+          "line": 233
+        },
+        {
+          "id_or_template": "productForm",
+          "line": 234
+        },
+        {
+          "id_or_template": "productID",
+          "line": 235
+        },
+        {
+          "id_or_template": "isActive",
+          "line": 236
+        },
+        {
+          "id_or_template": "productModal",
+          "line": 237
+        },
+        {
+          "id_or_template": "productName",
+          "line": 250
+        },
+        {
+          "id_or_template": "productDesc",
+          "line": 251
+        },
+        {
+          "id_or_template": "productOnePrice",
+          "line": 252
+        },
+        {
+          "id_or_template": "productFivePrice",
+          "line": 253
+        },
+        {
+          "id_or_template": "productTenPrice",
+          "line": 254
+        },
+        {
+          "id_or_template": "productImage",
+          "line": 255
+        },
+        {
+          "id_or_template": "filterProduct",
+          "line": 357
+        },
+        {
+          "id_or_template": "filterstatus",
+          "line": 358
+        },
+        {
+          "id_or_template": "filterUserName",
+          "line": 359
+        },
+        {
+          "id_or_template": "licensesTableBody",
+          "line": 386
+        },
+        {
+          "id_or_template": "licenseDetails",
+          "line": 495
+        },
+        {
+          "id_or_template": "licenseModal",
+          "line": 496
+        },
+        {
+          "id_or_template": "extendForm",
+          "line": 517
+        },
+        {
+          "id_or_template": "extendCount",
+          "line": 532
+        },
+        {
+          "id_or_template": "pageInfo",
+          "line": 598
+        },
+        {
+          "id_or_template": "prevPageBtn",
+          "line": 600
+        },
+        {
+          "id_or_template": "nextPageBtn",
+          "line": 601
+        },
+        {
+          "id_or_template": "alert",
+          "line": 634
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/auth/csrf-token",
+          "line": 91
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}${endpoint}",
+          "line": 125
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}${endpoint}",
+          "line": 143
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products",
+          "line": 170
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products/${productID}",
+          "line": 242
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products/${productID}",
+          "line": 301
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products",
+          "line": 306
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products/${productID}",
+          "line": 332
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/licenses?${params.toString()}",
+          "line": 371
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/licenses/${licenseKey}",
+          "line": 433
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/licenses/${currentViewingLicense.licenseKey}/extend",
+          "line": 544
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/licenses/${currentViewingLicense.licenseKey}/revoke",
+          "line": 574
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/admin/products",
+          "line": 617
+        }
+      ],
+      "script_dependencies": [],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; several admin forms/modals are bound immediately at script evaluation, so DOM must already exist"
+    },
+    {
+      "file": "recovered/FRONTEND/admin-zalo.js",
+      "line_count": 453,
+      "bytes": 20293,
+      "sha256": "e1bfa52f8e731341ec532a317f794bcd8055bb9817b21e4b5b9a89ccde73ca4b",
+      "api_prefix": "/api/admin",
+      "functions": [
+        {
+          "name": "fetchCsrfToken",
+          "line": 18
+        },
+        {
+          "name": "checkAuth",
+          "line": 51
+        },
+        {
+          "name": "logout",
+          "line": 70
+        },
+        {
+          "name": "apiCall",
+          "line": 82
+        },
+        {
+          "name": "loadZaloAccounts",
+          "line": 128
+        },
+        {
+          "name": "loadToolSetup",
+          "line": 172
+        },
+        {
+          "name": "displayToolSetupInfo",
+          "line": 185
+        },
+        {
+          "name": "openToolSetupModal",
+          "line": 238
+        },
+        {
+          "name": "closeToolSetupModal",
+          "line": 277
+        },
+        {
+          "name": "updateToolSetup",
+          "line": 281
+        },
+        {
+          "name": "loadAutoRequests",
+          "line": 328
+        },
+        {
+          "name": "renderAutoRequests",
+          "line": 345
+        },
+        {
+          "name": "updateRequestStats",
+          "line": 371
+        },
+        {
+          "name": "filterRequests",
+          "line": 388
+        },
+        {
+          "name": "showAlert",
+          "line": 403
+        },
+        {
+          "name": "formatMoney",
+          "line": 415
+        },
+        {
+          "name": "formatDateTime",
+          "line": 420
+        },
+        {
+          "name": "escapeHtml",
+          "line": 432
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "userName",
+          "line": 63
+        },
+        {
+          "id_or_template": "userAvatar",
+          "line": 64
+        },
+        {
+          "id_or_template": "zaloAccountsTableBody",
+          "line": 131
+        },
+        {
+          "id_or_template": "totalZaloAccounts",
+          "line": 136
+        },
+        {
+          "id_or_template": "toolSetupInfo",
+          "line": 186
+        },
+        {
+          "id_or_template": "toolSetupModal",
+          "line": 239
+        },
+        {
+          "id_or_template": "setup_uid_zalo_system",
+          "line": 243
+        },
+        {
+          "id_or_template": "setup_zalo_system_money",
+          "line": 244
+        },
+        {
+          "id_or_template": "setup_zalo_custom_money",
+          "line": 245
+        },
+        {
+          "id_or_template": "setup_check_phone_system_money",
+          "line": 246
+        },
+        {
+          "id_or_template": "setup_check_phone_custom_money",
+          "line": 247
+        },
+        {
+          "id_or_template": "setup_check_card_money",
+          "line": 248
+        },
+        {
+          "id_or_template": "updateToolSetupBtn",
+          "line": 282
+        },
+        {
+          "id_or_template": "requestsTableBody",
+          "line": 346
+        },
+        {
+          "id_or_template": "totalRequests",
+          "line": 372
+        },
+        {
+          "id_or_template": "successRequests",
+          "line": 376
+        },
+        {
+          "id_or_template": "failedRequests",
+          "line": 380
+        },
+        {
+          "id_or_template": "totalRevenue",
+          "line": 384
+        },
+        {
+          "id_or_template": "searchRequestInput",
+          "line": 389
+        },
+        {
+          "id_or_template": "alert",
+          "line": 404
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/auth/csrf-token",
+          "line": 20
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 100
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL2}${endpoint}",
+          "line": 110
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts",
+          "line": 130
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/tool-setup",
+          "line": 174
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/tool-setup",
+          "line": 299
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/requests",
+          "line": 330
+        }
+      ],
+      "script_dependencies": [],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; several admin forms/modals are bound immediately at script evaluation, so DOM must already exist"
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard.js",
+      "line_count": 3447,
+      "bytes": 133182,
+      "sha256": "cdfa84d6cda047c144f909eb64ca3d99a4b127ef9306b6d009ed851946804e1c",
+      "api_prefix": "/api",
+      "functions": [
+        {
+          "name": "fetchCsrfToken",
+          "line": 17
+        },
+        {
+          "name": "init",
+          "line": 40
+        },
+        {
+          "name": "initZaloTimerPickers",
+          "line": 98
+        },
+        {
+          "name": "toggleTimerInput",
+          "line": 119
+        },
+        {
+          "name": "validateAndGetTimer",
+          "line": 145
+        },
+        {
+          "name": "moveZaloContentToTabs",
+          "line": 177
+        },
+        {
+          "name": "showZaloTab",
+          "line": 209
+        },
+        {
+          "name": "showOtherTab",
+          "line": 280
+        },
+        {
+          "name": "refreshCurrentUser",
+          "line": 317
+        },
+        {
+          "name": "showAlert",
+          "line": 348
+        },
+        {
+          "name": "highlightMyLicenses",
+          "line": 374
+        },
+        {
+          "name": "showSuccessModal",
+          "line": 402
+        },
+        {
+          "name": "closeSuccessModal",
+          "line": 594
+        },
+        {
+          "name": "showZaloAlert",
+          "line": 607
+        },
+        {
+          "name": "showSendAlert",
+          "line": 632
+        },
+        {
+          "name": "copyLicenseKeyFromModal",
+          "line": 639
+        },
+        {
+          "name": "apiCall",
+          "line": 708
+        },
+        {
+          "name": "showPage",
+          "line": 775
+        },
+        {
+          "name": "logout",
+          "line": 948
+        },
+        {
+          "name": "loadZaloAccounts",
+          "line": 958
+        },
+        {
+          "name": "showAddZaloForm",
+          "line": 1026
+        },
+        {
+          "name": "handleAddZaloAccount",
+          "line": 1067
+        },
+        {
+          "name": "handleAddZaloAccountAuto",
+          "line": 1097
+        },
+        {
+          "name": "deleteZaloAccount",
+          "line": 1157
+        },
+        {
+          "name": "updateStatus",
+          "line": 1183
+        },
+        {
+          "name": "checkAllAccountsStatus",
+          "line": 1227
+        },
+        {
+          "name": "checkAllAccountsStatusSilent",
+          "line": 1269
+        },
+        {
+          "name": "checkAllAccountsStatusCardSilent",
+          "line": 1339
+        },
+        {
+          "name": "loadStats",
+          "line": 1348
+        },
+        {
+          "name": "loadHistory",
+          "line": 1378
+        },
+        {
+          "name": "loadZaloTimerHistory",
+          "line": 1429
+        },
+        {
+          "name": "renderPagination",
+          "line": 1496
+        },
+        {
+          "name": "loadProfile",
+          "line": 1532
+        },
+        {
+          "name": "handleChangePassword",
+          "line": 1556
+        },
+        {
+          "name": "loadSendZaloAccounts",
+          "line": 1603
+        },
+        {
+          "name": "updateSendStepIndicator",
+          "line": 1663
+        },
+        {
+          "name": "showSendStep",
+          "line": 1676
+        },
+        {
+          "name": "togglePhoneImageUpload",
+          "line": 1686
+        },
+        {
+          "name": "toggleCardImageUpload",
+          "line": 1695
+        },
+        {
+          "name": "uploadCustomImage",
+          "line": 1704
+        },
+        {
+          "name": "searchPhoneNumber",
+          "line": 1744
+        },
+        {
+          "name": "sendImageConfirm",
+          "line": 1892
+        },
+        {
+          "name": "goBackToStep1Send",
+          "line": 1986
+        },
+        {
+          "name": "resetSendImageForm",
+          "line": 1991
+        },
+        {
+          "name": "loadSendCardZaloAccounts",
+          "line": 2004
+        },
+        {
+          "name": "showSendCardAlert",
+          "line": 2047
+        },
+        {
+          "name": "showSendCardStep",
+          "line": 2052
+        },
+        {
+          "name": "decodeFidAndSearch",
+          "line": 2076
+        },
+        {
+          "name": "sendImageByCardConfirm",
+          "line": 2222
+        },
+        {
+          "name": "goBackToStep1Card",
+          "line": 2330
+        },
+        {
+          "name": "resetSendCardForm",
+          "line": 2335
+        },
+        {
+          "name": "openImageModal",
+          "line": 2356
+        },
+        {
+          "name": "closeImageModal",
+          "line": 2370
+        },
+        {
+          "name": "handleCheckIp",
+          "line": 2397
+        },
+        {
+          "name": "displayIpResult",
+          "line": 2469
+        },
+        {
+          "name": "loadProducts",
+          "line": 2580
+        },
+        {
+          "name": "displayProducts",
+          "line": 2600
+        },
+        {
+          "name": "purchaseLicense",
+          "line": 2674
+        },
+        {
+          "name": "loadUserLicenses",
+          "line": 2762
+        },
+        {
+          "name": "displayUserLicenses",
+          "line": 2782
+        },
+        {
+          "name": "getLicenseStatusClass",
+          "line": 2847
+        },
+        {
+          "name": "getLicenseStatusText",
+          "line": 2854
+        },
+        {
+          "name": "copyLicenseKey",
+          "line": 2865
+        },
+        {
+          "name": "formatCurrency",
+          "line": 2880
+        },
+        {
+          "name": "formatDateTime",
+          "line": 2890
+        },
+        {
+          "name": "createPayOSDepositRequest",
+          "line": 2905
+        },
+        {
+          "name": "cancelPayOSDeposit",
+          "line": 2954
+        },
+        {
+          "name": "showDepositTab",
+          "line": 2977
+        },
+        {
+          "name": "loadDepositHistory",
+          "line": 3015
+        },
+        {
+          "name": "loadCheckStatusZaloAccounts",
+          "line": 3084
+        },
+        {
+          "name": "showCheckPhoneStep",
+          "line": 3120
+        },
+        {
+          "name": "checkZaloStatusPhoneStep1",
+          "line": 3137
+        },
+        {
+          "name": "checkZaloStatusPhoneStep2",
+          "line": 3220
+        },
+        {
+          "name": "resetCheckPhone",
+          "line": 3264
+        },
+        {
+          "name": "showCheckCardStep",
+          "line": 3276
+        },
+        {
+          "name": "checkZaloStatusCardStep1",
+          "line": 3293
+        },
+        {
+          "name": "checkZaloStatusCardStep2",
+          "line": 3372
+        },
+        {
+          "name": "resetCheckCard",
+          "line": 3412
+        },
+        {
+          "name": "renderCheckStatusResult",
+          "line": 3420
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "user-name",
+          "line": 49
+        },
+        {
+          "id_or_template": "zalo-tab-send-image",
+          "line": 70
+        },
+        {
+          "id_or_template": "zalo-tab-send-image-by-card",
+          "line": 71
+        },
+        {
+          "id_or_template": "zalo-tab-zalo-accounts",
+          "line": 79
+        },
+        {
+          "id_or_template": "send-image-run-time",
+          "line": 108
+        },
+        {
+          "id_or_template": "send-card-run-time",
+          "line": 111
+        },
+        {
+          "id_or_template": "${type}-is-timer",
+          "line": 120
+        },
+        {
+          "id_or_template": "${type}-timer-group",
+          "line": 121
+        },
+        {
+          "id_or_template": "${type}-run-time",
+          "line": 127
+        },
+        {
+          "id_or_template": "check-ip",
+          "line": 197
+        },
+        {
+          "id_or_template": "other-tab-check-ip",
+          "line": 198
+        },
+        {
+          "id_or_template": "hub-zalo",
+          "line": 217
+        },
+        {
+          "id_or_template": "hub-other",
+          "line": 288
+        },
+        {
+          "id_or_template": "success-modal",
+          "line": 595
+        },
+        {
+          "id_or_template": "hub-deposit",
+          "line": 876
+        },
+        {
+          "id_or_template": "hub-leak-lookup",
+          "line": 895
+        },
+        {
+          "id_or_template": "hub-link",
+          "line": 911
+        },
+        {
+          "id_or_template": "hub-zalo-oa",
+          "line": 929
+        },
+        {
+          "id_or_template": "zalo-accounts-list",
+          "line": 959
+        },
+        {
+          "id_or_template": "zalo-uid",
+          "line": 1071
+        },
+        {
+          "id_or_template": "zalo-displayname",
+          "line": 1072
+        },
+        {
+          "id_or_template": "zalo-phonenumber",
+          "line": 1073
+        },
+        {
+          "id_or_template": "zalo-avatar",
+          "line": 1074
+        },
+        {
+          "id_or_template": "zalo-imei",
+          "line": 1075
+        },
+        {
+          "id_or_template": "zalo-key",
+          "line": 1076
+        },
+        {
+          "id_or_template": "zalo-cookie-zpw-sek",
+          "line": 1077
+        },
+        {
+          "id_or_template": "zalo-imei-auto",
+          "line": 1100
+        },
+        {
+          "id_or_template": "zalo-cookie-zpw-sek-auto",
+          "line": 1102
+        },
+        {
+          "id_or_template": "add-zalo-auto-btn",
+          "line": 1104
+        },
+        {
+          "id_or_template": "add-zalo-alert",
+          "line": 1105
+        },
+        {
+          "id_or_template": "check-all-status-btn",
+          "line": 1230
+        },
+        {
+          "id_or_template": "stats-grid",
+          "line": 1354
+        },
+        {
+          "id_or_template": "history-body",
+          "line": 1379
+        },
+        {
+          "id_or_template": "history-pagination",
+          "line": 1418
+        },
+        {
+          "id_or_template": "zalo-timer-history-body",
+          "line": 1430
+        },
+        {
+          "id_or_template": "zalo-timer-pagination",
+          "line": 1445
+        },
+        {
+          "id_or_template": "profile-info",
+          "line": 1533
+        },
+        {
+          "id_or_template": "current-password",
+          "line": 1559
+        },
+        {
+          "id_or_template": "new-password",
+          "line": 1560
+        },
+        {
+          "id_or_template": "confirm-password",
+          "line": 1561
+        },
+        {
+          "id_or_template": "profile-alert",
+          "line": 1562
+        },
+        {
+          "id_or_template": "change-password-form",
+          "line": 1583
+        },
+        {
+          "id_or_template": "send-zalo-account",
+          "line": 1604
+        },
+        {
+          "id_or_template": "step-indicator-${i}",
+          "line": 1665
+        },
+        {
+          "id_or_template": "step-indicator-${step}",
+          "line": 1672
+        },
+        {
+          "id_or_template": "send-image-step1",
+          "line": 1677
+        },
+        {
+          "id_or_template": "send-image-step2",
+          "line": 1678
+        },
+        {
+          "id_or_template": "send-image-step3",
+          "line": 1679
+        },
+        {
+          "id_or_template": "send-image-step${step}",
+          "line": 1681
+        },
+        {
+          "id_or_template": "phone-custom-image-group",
+          "line": 1690
+        },
+        {
+          "id_or_template": "card-custom-image-group",
+          "line": 1699
+        },
+        {
+          "id_or_template": "send-phone-number",
+          "line": 1746
+        },
+        {
+          "id_or_template": "send-image-ip-type",
+          "line": 1750
+        },
+        {
+          "id_or_template": "send-image-auto-delete",
+          "line": 1751
+        },
+        {
+          "id_or_template": "send-image-is-timer",
+          "line": 1753
+        },
+        {
+          "id_or_template": "send-search-btn",
+          "line": 1767
+        },
+        {
+          "id_or_template": "send-phone-custom-image",
+          "line": 1773
+        },
+        {
+          "id_or_template": "send-confirm-avatar",
+          "line": 1826
+        },
+        {
+          "id_or_template": "send-confirm-name",
+          "line": 1827
+        },
+        {
+          "id_or_template": "send-confirm-uid",
+          "line": 1829
+        },
+        {
+          "id_or_template": "send-confirm-phone",
+          "line": 1830
+        },
+        {
+          "id_or_template": "send-confirm-sender",
+          "line": 1832
+        },
+        {
+          "id_or_template": "send-confirm-fee-info",
+          "line": 1836
+        },
+        {
+          "id_or_template": "send-confirm-btn",
+          "line": 1893
+        },
+        {
+          "id_or_template": "send-result-container",
+          "line": 1906
+        },
+        {
+          "id_or_template": "send-card-zalo-account",
+          "line": 2016
+        },
+        {
+          "id_or_template": "send-card-step${i}",
+          "line": 2055
+        },
+        {
+          "id_or_template": "step-card-indicator-${i}",
+          "line": 2057
+        },
+        {
+          "id_or_template": "send-card-step${step}",
+          "line": 2062
+        },
+        {
+          "id_or_template": "step-card-indicator-${step}",
+          "line": 2064
+        },
+        {
+          "id_or_template": "send-card-search-btn",
+          "line": 2077
+        },
+        {
+          "id_or_template": "send-card-fid-string",
+          "line": 2079
+        },
+        {
+          "id_or_template": "send-card-ip-type",
+          "line": 2085
+        },
+        {
+          "id_or_template": "send-card-auto-delete",
+          "line": 2086
+        },
+        {
+          "id_or_template": "send-card-is-timer",
+          "line": 2088
+        },
+        {
+          "id_or_template": "send-card-custom-image",
+          "line": 2107
+        },
+        {
+          "id_or_template": "send-card-confirm-avatar",
+          "line": 2158
+        },
+        {
+          "id_or_template": "send-card-confirm-name",
+          "line": 2160
+        },
+        {
+          "id_or_template": "send-card-confirm-uid",
+          "line": 2162
+        },
+        {
+          "id_or_template": "send-card-confirm-sender",
+          "line": 2164
+        },
+        {
+          "id_or_template": "send-card-confirm-zalo-name",
+          "line": 2168
+        },
+        {
+          "id_or_template": "send-card-confirm-fee-info",
+          "line": 2173
+        },
+        {
+          "id_or_template": "send-card-confirm-btn",
+          "line": 2223
+        },
+        {
+          "id_or_template": "imageModal",
+          "line": 2357
+        },
+        {
+          "id_or_template": "modalImage",
+          "line": 2358
+        },
+        {
+          "id_or_template": "modalCaption",
+          "line": 2359
+        },
+        {
+          "id_or_template": "ip-address",
+          "line": 2400
+        },
+        {
+          "id_or_template": "check-ip-btn",
+          "line": 2401
+        },
+        {
+          "id_or_template": "check-ip-alert",
+          "line": 2402
+        },
+        {
+          "id_or_template": "ip-result-card",
+          "line": 2403
+        },
+        {
+          "id_or_template": "ip-result-content",
+          "line": 2471
+        },
+        {
+          "id_or_template": "products-container",
+          "line": 2601
+        },
+        {
+          "id_or_template": "license-type-${productID}",
+          "line": 2675
+        },
+        {
+          "id_or_template": "my-licenses-container",
+          "line": 2783
+        },
+        {
+          "id_or_template": "deposit-amount",
+          "line": 2906
+        },
+        {
+          "id_or_template": "payos-checkout-link",
+          "line": 2928
+        },
+        {
+          "id_or_template": "deposit-qr-area",
+          "line": 2931
+        },
+        {
+          "id_or_template": "deposit-history-body",
+          "line": 3016
+        },
+        {
+          "id_or_template": "check-phone-step-1",
+          "line": 3121
+        },
+        {
+          "id_or_template": "check-phone-step-2",
+          "line": 3122
+        },
+        {
+          "id_or_template": "check-phone-step-3",
+          "line": 3123
+        },
+        {
+          "id_or_template": "check-phone-step-\" + i + \"-indicator",
+          "line": 3129
+        },
+        {
+          "id_or_template": "check-status-phone-next-btn",
+          "line": 3138
+        },
+        {
+          "id_or_template": "check-status-phone-number",
+          "line": 3140
+        },
+        {
+          "id_or_template": "check-status-phone-account",
+          "line": 3142
+        },
+        {
+          "id_or_template": "check-phone-confirm-avatar",
+          "line": 3168
+        },
+        {
+          "id_or_template": "check-phone-confirm-name",
+          "line": 3170
+        },
+        {
+          "id_or_template": "check-phone-confirm-uid",
+          "line": 3172
+        },
+        {
+          "id_or_template": "check-phone-confirm-phone",
+          "line": 3174
+        },
+        {
+          "id_or_template": "check-phone-confirm-sender",
+          "line": 3179
+        },
+        {
+          "id_or_template": "check-status-phone-confirm-btn",
+          "line": 3221
+        },
+        {
+          "id_or_template": "check-card-step-1",
+          "line": 3277
+        },
+        {
+          "id_or_template": "check-card-step-2",
+          "line": 3278
+        },
+        {
+          "id_or_template": "check-card-step-3",
+          "line": 3279
+        },
+        {
+          "id_or_template": "check-card-step-\" + i + \"-indicator",
+          "line": 3285
+        },
+        {
+          "id_or_template": "check-status-card-next-btn",
+          "line": 3294
+        },
+        {
+          "id_or_template": "check-status-card-fid",
+          "line": 3296
+        },
+        {
+          "id_or_template": "check-status-card-account",
+          "line": 3298
+        },
+        {
+          "id_or_template": "check-card-confirm-avatar",
+          "line": 3324
+        },
+        {
+          "id_or_template": "check-card-confirm-name",
+          "line": 3326
+        },
+        {
+          "id_or_template": "check-card-confirm-uid",
+          "line": 3328
+        },
+        {
+          "id_or_template": "check-card-confirm-sender",
+          "line": 3333
+        },
+        {
+          "id_or_template": "check-card-confirm-fee-info",
+          "line": 3336
+        },
+        {
+          "id_or_template": "check-status-card-confirm-btn",
+          "line": 3373
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/auth/csrf-token",
+          "line": 19
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/auth/profile",
+          "line": 319
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}${endpoint}",
+          "line": 725
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}${endpoint}",
+          "line": 743
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts",
+          "line": 963
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts",
+          "line": 1081
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts/auto-fetch",
+          "line": 1124
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts/${uid}",
+          "line": 1161
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts/${uid}/check-status",
+          "line": 1194
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts/check-all-status",
+          "line": 1236
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-accounts/check-all-status",
+          "line": 1285
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image/stats",
+          "line": 1350
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image/history?page=${page}&limit=${limit}",
+          "line": 1385
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-timer/history?page=${page}&limit=${limit}",
+          "line": 1438
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/auth/profile",
+          "line": 1537
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/auth/change-password",
+          "line": 1574
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image-v2/zalo-accounts",
+          "line": 1607
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/zalo/upload-custom-image",
+          "line": 1731
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image-v2/search",
+          "line": 1792
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image-by-card/personal-accounts",
+          "line": 2006
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image-by-card/decode-fid",
+          "line": 2126
+        },
+        {
+          "callee": "fetch",
+          "endpoint_expression": "${API_URL}/check-ip/location",
+          "line": 2425
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/licenses/products",
+          "line": 2582
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/licenses/purchase",
+          "line": 2717
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/licenses/my-licenses",
+          "line": 2764
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/payos/create",
+          "line": 2922
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/payos/cancel",
+          "line": 2957
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/payos/history",
+          "line": 3023
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/send-image-v2/zalo-accounts",
+          "line": 3093
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/check-status/pre-check",
+          "line": 3158
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/check-status/confirm",
+          "line": 3235
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/check-status/pre-check",
+          "line": 3314
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/check-status/confirm",
+          "line": 3384
+        }
+      ],
+      "script_dependencies": [],
+      "external_js": [
+        "flatpickr with Vietnamese locale"
+      ],
+      "initialization": "DOMContentLoaded; module globals must share the main dashboard browsing context"
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_datafind.js",
+      "line_count": 449,
+      "bytes": 19558,
+      "sha256": "4154d898bd992421fdbb5a2f2c17dedec42c06f74144818fee0d462ab5203b57",
+      "api_prefix": "/api",
+      "functions": [
+        {
+          "name": "showLeakStep",
+          "line": 18
+        },
+        {
+          "name": "showLeakTab",
+          "line": 40
+        },
+        {
+          "name": "handlePreCheckLeak",
+          "line": 82
+        },
+        {
+          "name": "confirmLeakSearch",
+          "line": 207
+        },
+        {
+          "name": "resetLeakLookup",
+          "line": 248
+        },
+        {
+          "name": "renderLeakResults",
+          "line": 258
+        },
+        {
+          "name": "loadLeakHistory",
+          "line": 307
+        },
+        {
+          "name": "renderLeakPagination",
+          "line": 369
+        },
+        {
+          "name": "viewLeakResult",
+          "line": 391
+        },
+        {
+          "name": "closeLeakModal",
+          "line": 415
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "leak-${tab}-step-1",
+          "line": 19
+        },
+        {
+          "id_or_template": "leak-${tab}-step-2",
+          "line": 20
+        },
+        {
+          "id_or_template": "leak-${tab}-step-3",
+          "line": 21
+        },
+        {
+          "id_or_template": "leak-${tab}-step-${i}-indicator",
+          "line": 29
+        },
+        {
+          "id_or_template": "hub-leak-lookup",
+          "line": 46
+        },
+        {
+          "id_or_template": "leak-${tab}-input",
+          "line": 84
+        },
+        {
+          "id_or_template": "leak-${tab}-next-btn",
+          "line": 100
+        },
+        {
+          "id_or_template": "leak-${tab}-confirm-fee-info",
+          "line": 163
+        },
+        {
+          "id_or_template": "leak-${tab}-confirm-btn",
+          "line": 188
+        },
+        {
+          "id_or_template": "leak-history-table-body",
+          "line": 308
+        },
+        {
+          "id_or_template": "leak-history-pagination",
+          "line": 370
+        },
+        {
+          "id_or_template": "leak-modal",
+          "line": 405
+        },
+        {
+          "id_or_template": "hub-leak-card",
+          "line": 443
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/facebook/find-uid",
+          "line": 108
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/leak-lookup/pre-check",
+          "line": 150
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/leak-lookup/confirm",
+          "line": 216
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/leak-lookup/history?page=${page}&limit=30",
+          "line": 315
+        }
+      ],
+      "script_dependencies": [
+        "dashboard.js"
+      ],
+      "external_js": [
+        "SweetAlert2 global Swal"
+      ],
+      "initialization": "DOMContentLoaded; module globals must share the main dashboard browsing context"
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_link.js",
+      "line_count": 824,
+      "bytes": 38231,
+      "sha256": "04a4577fa9008b7ea27e76f9bb9974eba6f09d1596ecfdb9f5a27996d7466081",
+      "api_prefix": "/api",
+      "functions": [
+        {
+          "name": "escapeHtml",
+          "line": 21
+        },
+        {
+          "name": "showLinkTab",
+          "line": 34
+        },
+        {
+          "name": "loadLinkTemplates",
+          "line": 61
+        },
+        {
+          "name": "openLinkTemplateModal",
+          "line": 108
+        },
+        {
+          "name": "closeLinkTemplateModal",
+          "line": 119
+        },
+        {
+          "name": "fetchWebMetaForModal",
+          "line": 123
+        },
+        {
+          "name": "saveLinkTemplate",
+          "line": 163
+        },
+        {
+          "name": "editLinkTemplate",
+          "line": 197
+        },
+        {
+          "name": "deleteLinkTemplate",
+          "line": 218
+        },
+        {
+          "name": "getLocationTypeBadge",
+          "line": 245
+        },
+        {
+          "name": "loadLinkList",
+          "line": 253
+        },
+        {
+          "name": "openEditLinkModal",
+          "line": 305
+        },
+        {
+          "name": "closeEditLinkModal",
+          "line": 314
+        },
+        {
+          "name": "saveEditLink",
+          "line": 318
+        },
+        {
+          "name": "copyLinkToClipboard",
+          "line": 357
+        },
+        {
+          "name": "openCreateLinkModal",
+          "line": 374
+        },
+        {
+          "name": "autoSuggestDomainForTemplate",
+          "line": 425
+        },
+        {
+          "name": "closeCreateLinkModal",
+          "line": 460
+        },
+        {
+          "name": "submitCreateLink",
+          "line": 464
+        },
+        {
+          "name": "loadLinkDomains",
+          "line": 510
+        },
+        {
+          "name": "renderLinkDomains",
+          "line": 529
+        },
+        {
+          "name": "openDomainModal",
+          "line": 556
+        },
+        {
+          "name": "closeDomainModal",
+          "line": 580
+        },
+        {
+          "name": "saveDomain",
+          "line": 585
+        },
+        {
+          "name": "editDomain",
+          "line": 617
+        },
+        {
+          "name": "deleteDomain",
+          "line": 626
+        },
+        {
+          "name": "loadLinkResults",
+          "line": 649
+        },
+        {
+          "name": "filterLinkResults",
+          "line": 668
+        },
+        {
+          "name": "loadLinkResultsThumbnail",
+          "line": 715
+        },
+        {
+          "name": "filterLinkResultsThumbnail",
+          "line": 734
+        },
+        {
+          "name": "uploadThumbnailFile",
+          "line": 777
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "hub-link-card",
+          "line": 11
+        },
+        {
+          "id_or_template": "link-tab-${tabId}",
+          "line": 44
+        },
+        {
+          "id_or_template": "link-templates-body",
+          "line": 62
+        },
+        {
+          "id_or_template": "link-template-modal-title",
+          "line": 109
+        },
+        {
+          "id_or_template": "link-template-id",
+          "line": 110
+        },
+        {
+          "id_or_template": "link-template-name",
+          "line": 111
+        },
+        {
+          "id_or_template": "link-template-url",
+          "line": 112
+        },
+        {
+          "id_or_template": "link-template-title",
+          "line": 113
+        },
+        {
+          "id_or_template": "link-template-thumbnail",
+          "line": 114
+        },
+        {
+          "id_or_template": "link-template-thumb-preview",
+          "line": 115
+        },
+        {
+          "id_or_template": "linkTemplateModal",
+          "line": 116
+        },
+        {
+          "id_or_template": "link-template-thumb-img",
+          "line": 148
+        },
+        {
+          "id_or_template": "link-list-body",
+          "line": 254
+        },
+        {
+          "id_or_template": "edit-link-id",
+          "line": 308
+        },
+        {
+          "id_or_template": "edit-link-name",
+          "line": 309
+        },
+        {
+          "id_or_template": "edit-link-location-type",
+          "line": 310
+        },
+        {
+          "id_or_template": "editLinkModal",
+          "line": 311
+        },
+        {
+          "id_or_template": "create-link-template-select",
+          "line": 377
+        },
+        {
+          "id_or_template": "create-link-domain-select",
+          "line": 378
+        },
+        {
+          "id_or_template": "create-link-name",
+          "line": 419
+        },
+        {
+          "id_or_template": "create-link-location-type",
+          "line": 420
+        },
+        {
+          "id_or_template": "createLinkModal",
+          "line": 422
+        },
+        {
+          "id_or_template": "link-domains-body",
+          "line": 511
+        },
+        {
+          "id_or_template": "linkDomainModal",
+          "line": 557
+        },
+        {
+          "id_or_template": "link-domain-modal-title",
+          "line": 560
+        },
+        {
+          "id_or_template": "link-domain-id",
+          "line": 561
+        },
+        {
+          "id_or_template": "link-domain-name",
+          "line": 562
+        },
+        {
+          "id_or_template": "link-domain-detail",
+          "line": 563
+        },
+        {
+          "id_or_template": "link-results-body",
+          "line": 650
+        },
+        {
+          "id_or_template": "link-results-search",
+          "line": 672
+        },
+        {
+          "id_or_template": "link-results-thumbnail-body",
+          "line": 716
+        },
+        {
+          "id_or_template": "link-results-thumbnail-search",
+          "line": 738
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/templates",
+          "line": 67
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/fetch-meta",
+          "line": 136
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/templates/${id}",
+          "line": 222
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/links",
+          "line": 259
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/links/${id}",
+          "line": 333
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/templates",
+          "line": 384
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/domains",
+          "line": 385
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/links",
+          "line": 480
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/domains",
+          "line": 516
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/domains/${id}",
+          "line": 630
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/results",
+          "line": 655
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/results-thumbnail",
+          "line": 721
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/link/upload-thumbnail",
+          "line": 795
+        }
+      ],
+      "script_dependencies": [
+        "dashboard.js"
+      ],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; module globals must share the main dashboard browsing context"
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+      "line_count": 964,
+      "bytes": 42116,
+      "sha256": "6bb22d6772c669657ae642451c5e22094c5e038ec7aafc328fd3349b8b4d01e0",
+      "api_prefix": "/api",
+      "functions": [
+        {
+          "name": "showZaloOaTab",
+          "line": 17
+        },
+        {
+          "name": "checkAndAutoRefreshTokenOa",
+          "line": 46
+        },
+        {
+          "name": "loadOaToken",
+          "line": 81
+        },
+        {
+          "name": "promptRefreshToken",
+          "line": 123
+        },
+        {
+          "name": "closeOaRefreshTokenModal",
+          "line": 129
+        },
+        {
+          "name": "submitOaRefreshToken",
+          "line": 133
+        },
+        {
+          "name": "loadOaTemplates",
+          "line": 166
+        },
+        {
+          "name": "saveOaTemplate",
+          "line": 196
+        },
+        {
+          "name": "openOaTemplateModal",
+          "line": 225
+        },
+        {
+          "name": "closeOaTemplateModal",
+          "line": 234
+        },
+        {
+          "name": "editOaTemplate",
+          "line": 238
+        },
+        {
+          "name": "deleteOaTemplate",
+          "line": 250
+        },
+        {
+          "name": "loadOaResults",
+          "line": 269
+        },
+        {
+          "name": "updateOaMessageStatus",
+          "line": 332
+        },
+        {
+          "name": "onOaIpTypeChange",
+          "line": 361
+        },
+        {
+          "name": "loadOaTemplatesForSend",
+          "line": 396
+        },
+        {
+          "name": "checkAndLoadOaDynamicFields",
+          "line": 410
+        },
+        {
+          "name": "backToOaStep1",
+          "line": 502
+        },
+        {
+          "name": "sendOaMessage",
+          "line": 511
+        },
+        {
+          "name": "toggleAllOaFetch",
+          "line": 608
+        },
+        {
+          "name": "autoFetchOaTemplates",
+          "line": 613
+        },
+        {
+          "name": "closeOaAutoFetchModal",
+          "line": 663
+        },
+        {
+          "name": "saveAutoFetchedTemplates",
+          "line": 667
+        },
+        {
+          "name": "onOaIpTypeChangeUid",
+          "line": 718
+        },
+        {
+          "name": "loadOaTemplatesForSendUid",
+          "line": 753
+        },
+        {
+          "name": "checkAndLoadOaDynamicFieldsUid",
+          "line": 761
+        },
+        {
+          "name": "backToOaUidStep1",
+          "line": 859
+        },
+        {
+          "name": "sendOaMessageUid",
+          "line": 868
+        }
+      ],
+      "dom_contract": [
+        {
+          "id_or_template": "hub-zalo-oa-card",
+          "line": 9
+        },
+        {
+          "id_or_template": "zalo-oa-tab-${tabId}",
+          "line": 27
+        },
+        {
+          "id_or_template": "zalo-oa-tab-token",
+          "line": 63
+        },
+        {
+          "id_or_template": "zalo-oa-token-info",
+          "line": 85
+        },
+        {
+          "id_or_template": "oa-refresh-token-input",
+          "line": 125
+        },
+        {
+          "id_or_template": "oaRefreshTokenModal",
+          "line": 126
+        },
+        {
+          "id_or_template": "zalo-oa-templates-body",
+          "line": 170
+        },
+        {
+          "id_or_template": "oa-template-id",
+          "line": 197
+        },
+        {
+          "id_or_template": "oa-template-code",
+          "line": 198
+        },
+        {
+          "id_or_template": "oa-template-detail",
+          "line": 199
+        },
+        {
+          "id_or_template": "oa-template-params",
+          "line": 200
+        },
+        {
+          "id_or_template": "oa-template-modal-title",
+          "line": 226
+        },
+        {
+          "id_or_template": "oaTemplateModal",
+          "line": 231
+        },
+        {
+          "id_or_template": "zalo-oa-results-body",
+          "line": 273
+        },
+        {
+          "id_or_template": "oa-send-ip-type",
+          "line": 362
+        },
+        {
+          "id_or_template": "oa-single-template-container",
+          "line": 363
+        },
+        {
+          "id_or_template": "oa-both-templates-container",
+          "line": 364
+        },
+        {
+          "id_or_template": "oa-send-template-v4-select",
+          "line": 371
+        },
+        {
+          "id_or_template": "oa-send-template-v6-select",
+          "line": 377
+        },
+        {
+          "id_or_template": "oa-template-label",
+          "line": 385
+        },
+        {
+          "id_or_template": "oa-send-template-select",
+          "line": 388
+        },
+        {
+          "id_or_template": "oa-send-phone",
+          "line": 411
+        },
+        {
+          "id_or_template": "oa-send-dynamic-fields",
+          "line": 437
+        },
+        {
+          "id_or_template": "oa-send-step-1",
+          "line": 440
+        },
+        {
+          "id_or_template": "oa-send-step-2",
+          "line": 441
+        },
+        {
+          "id_or_template": "oa-send-step-3",
+          "line": 505
+        },
+        {
+          "id_or_template": "btn-send-oa",
+          "line": 544
+        },
+        {
+          "id_or_template": "oa-send-result-container",
+          "line": 565
+        },
+        {
+          "id_or_template": "oa-auto-fetch-body",
+          "line": 632
+        },
+        {
+          "id_or_template": "oa-auto-fetch-all",
+          "line": 643
+        },
+        {
+          "id_or_template": "oa-auto-fetch-modal",
+          "line": 647
+        },
+        {
+          "id_or_template": "oa-send-uid-ip-type",
+          "line": 719
+        },
+        {
+          "id_or_template": "oa-uid-single-template-container",
+          "line": 720
+        },
+        {
+          "id_or_template": "oa-uid-both-templates-container",
+          "line": 721
+        },
+        {
+          "id_or_template": "oa-send-uid-template-v4-select",
+          "line": 728
+        },
+        {
+          "id_or_template": "oa-send-uid-template-v6-select",
+          "line": 734
+        },
+        {
+          "id_or_template": "oa-uid-template-label",
+          "line": 742
+        },
+        {
+          "id_or_template": "oa-send-uid-template-select",
+          "line": 745
+        },
+        {
+          "id_or_template": "oa-send-uid",
+          "line": 762
+        },
+        {
+          "id_or_template": "oa-send-uid-dynamic-fields",
+          "line": 788
+        },
+        {
+          "id_or_template": "oa-send-uid-step-1",
+          "line": 791
+        },
+        {
+          "id_or_template": "oa-send-uid-step-2",
+          "line": 792
+        },
+        {
+          "id_or_template": "oa-send-uid-step-3",
+          "line": 862
+        },
+        {
+          "id_or_template": "btn-send-oa-uid",
+          "line": 901
+        },
+        {
+          "id_or_template": "oa-send-uid-result-container",
+          "line": 922
+        }
+      ],
+      "literal_api_calls": [
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/token",
+          "line": 48
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/token/refresh",
+          "line": 57
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/token",
+          "line": 83
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/token/refresh",
+          "line": 145
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/templates",
+          "line": 168
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/templates/${id}",
+          "line": 253
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/results",
+          "line": 271
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/message-status?message_id=${msgId}&phone=${phone}&id=${id}",
+          "line": 340
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/templates",
+          "line": 398
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/preview-data",
+          "line": 449
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/send-template",
+          "line": 556
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/fetch-new-templates",
+          "line": 620
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/templates",
+          "line": 696
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/preview-data",
+          "line": 800
+        },
+        {
+          "callee": "apiCall",
+          "endpoint_expression": "/zalo-oa/send-template-uid",
+          "line": 913
+        }
+      ],
+      "script_dependencies": [
+        "dashboard.js"
+      ],
+      "external_js": [],
+      "initialization": "DOMContentLoaded; module globals must share the main dashboard browsing context"
+    }
+  ],
+  "boundaries": [
+    "Chưa test trình duyệt vì HTML/CSS và các thư viện host thiếu.",
+    "Endpoints được suy từ frontend; không khẳng định backend triển khai đầy đủ.",
+    "P1 injection findings là sink chưa encode trong frontend; cần đối chiếu server sanitize để đánh giá khai thác thực tế.",
+    "Không suy diễn tên trang HTML chưa có trong source."
+  ]
+}

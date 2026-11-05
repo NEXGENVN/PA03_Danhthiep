@@ -1,0 +1,3785 @@
+{
+  "generatedAt": "2026-11-03T11:06:02.694Z",
+  "files": [
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "lines": 604,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "mysql2/promise",
+        "axios",
+        "fs",
+        "path",
+        "dotenv",
+        "multer"
+      ],
+      "environment": [
+        "FILES_SERVER_PORT",
+        "FILES_SERVER_IMAGE_FILE",
+        "DOCKER_HOST",
+        "BOT_TOKEN",
+        "TELEGRAM_ID",
+        "DB_PORT",
+        "DB_USER_FILE",
+        "DB_PASSWORD_FILE",
+        "DB_NAME",
+        "FILES_SERVER_DOMAIN"
+      ],
+      "routes": [
+        {
+          "file": "recovered/FILES_SERVER/files_server.js",
+          "line": 384,
+          "method": "POST",
+          "path": "/api/upload"
+        },
+        {
+          "file": "recovered/FILES_SERVER/files_server.js",
+          "line": 408,
+          "method": "POST",
+          "path": "/api/upload-thumbnail"
+        },
+        {
+          "file": "recovered/FILES_SERVER/files_server.js",
+          "line": 431,
+          "method": "USE",
+          "path": "/api/upload"
+        },
+        {
+          "file": "recovered/FILES_SERVER/files_server.js",
+          "line": 451,
+          "method": "POST",
+          "path": "/remote-server"
+        },
+        {
+          "file": "recovered/FILES_SERVER/files_server.js",
+          "line": 481,
+          "method": "GET",
+          "path": "/*"
+        }
+      ]
+    },
+    {
+      "file": "recovered/FRONTEND/admin-dashboard.js",
+      "lines": 589,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/admin-dataleak.js",
+      "lines": 265,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/admin-products.js",
+      "lines": 709,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/admin-zalo.js",
+      "lines": 454,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard.js",
+      "lines": 3448,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_datafind.js",
+      "lines": 450,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_link.js",
+      "lines": 825,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+      "lines": 965,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/config/database.js",
+      "lines": 151,
+      "obfuscated": false,
+      "imports": [
+        "mysql2/promise",
+        "dotenv",
+        "path"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER_MAIN",
+        "DB_PASSWORD_MAIN",
+        "DB_NAME",
+        "DB_CONNECTION_LIMIT"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+      "lines": 1167,
+      "obfuscated": false,
+      "imports": [
+        "bcrypt",
+        "jsonwebtoken",
+        "axios",
+        "../config/database",
+        "../utils/sanitize",
+        "./captchaController"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "DATA_FIND_SERVER_PORT",
+        "INTERNAL_AUTH_KEY",
+        "DATA_FIND_SERVER_HOST",
+        "JWT_SECRET"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+      "lines": 780,
+      "obfuscated": false,
+      "imports": [
+        "../config/database"
+      ],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/controllers/authController.js",
+      "lines": 449,
+      "obfuscated": false,
+      "imports": [
+        "bcryptjs",
+        "jsonwebtoken",
+        "../config/database",
+        "../middleware/auth",
+        "../utils/sanitize",
+        "./captchaController"
+      ],
+      "environment": [
+        "BCRYPT_SALT_ROUNDS",
+        "JWT_SECRET",
+        "JWT_EXPIRE"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+      "lines": 831,
+      "obfuscated": false,
+      "imports": [
+        "crypto",
+        "../config/database"
+      ],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+      "lines": 430,
+      "obfuscated": false,
+      "imports": [
+        "../config/database",
+        "../middleware/apiLogger"
+      ],
+      "environment": [
+        "NODE_ENV"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "lines": 249,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "cors",
+        "helmet",
+        "express-rate-limit",
+        "morgan",
+        "path",
+        "dotenv",
+        "./config/database",
+        "./middleware/auth",
+        "./middleware/csrf",
+        "./middleware/apiLogger",
+        "./middleware/rateLimiter",
+        "./controllers/adminController",
+        "./routes/authRoutes",
+        "./routes/adminRoutes",
+        "./routes/adminProductRoutes",
+        "./routes/captchaRoutes",
+        "./routes/logsRoutes",
+        "./routes/zaloAccountProxyRoutes",
+        "./routes/zaloOaProxyRoutes",
+        "./routes/sendImageProxyRoutes",
+        "./routes/sendImageV2ProxyRoutes",
+        "./routes/sendImageByCardProxyRoutes",
+        "./routes/zaloTimerProxyRoutes",
+        "./routes/uploadProxyRoutes",
+        "./routes/checkStatusProxyRoutes",
+        "./routes/licenseProxyRoutes",
+        "./routes/checkIpProxyRoutes",
+        "./routes/dataFindProxyRoutes",
+        "./routes/linkProxyRoutes",
+        "./routes/payosProxyRoutes"
+      ],
+      "environment": [
+        "MAIN_SERVER_PORT",
+        "DOCKER_HOST",
+        "MAIN_SERVER_HOST",
+        "CORS_ORIGIN",
+        "NODE_ENV",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_NAME",
+        "DB_USER_MAIN",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 108,
+          "method": "GET",
+          "path": "/health"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 118,
+          "method": "USE",
+          "path": "/api/auth"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 119,
+          "method": "USE",
+          "path": "/api/captcha"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 122,
+          "method": "GET",
+          "path": "/api/csrf-token"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 131,
+          "method": "USE",
+          "path": "/api/zalo-accounts"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 132,
+          "method": "USE",
+          "path": "/api/zalo-oa"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 133,
+          "method": "USE",
+          "path": "/api/send-image"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 134,
+          "method": "USE",
+          "path": "/api/send-image-v2"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 135,
+          "method": "USE",
+          "path": "/api/send-image-by-card"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 136,
+          "method": "USE",
+          "path": "/api/send-image-v2-timer"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 137,
+          "method": "USE",
+          "path": "/api/send-image-by-card-timer"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 138,
+          "method": "USE",
+          "path": "/api/zalo-timer"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 139,
+          "method": "USE",
+          "path": "/api/zalo/upload-custom-image"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 140,
+          "method": "USE",
+          "path": "/api/check-status"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 141,
+          "method": "USE",
+          "path": "/api/licenses"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 142,
+          "method": "USE",
+          "path": "/api/check-ip"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 143,
+          "method": "USE",
+          "path": "/api/leak-lookup"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 144,
+          "method": "USE",
+          "path": "/api/link"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 150,
+          "method": "POST",
+          "path": "/api/admin/login"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 153,
+          "method": "USE",
+          "path": "/api/admin"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 154,
+          "method": "USE",
+          "path": "/api/admin"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 157,
+          "method": "USE",
+          "path": "/api/logs"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/main_server.js",
+          "line": 160,
+          "method": "USE",
+          "path": "/api/payos"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+      "lines": 494,
+      "obfuscated": false,
+      "imports": [
+        "../config/database"
+      ],
+      "environment": [
+        "NODE_ENV"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/middleware/auth.js",
+      "lines": 147,
+      "obfuscated": false,
+      "imports": [
+        "jsonwebtoken",
+        "../config/database"
+      ],
+      "environment": [
+        "JWT_SECRET"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+      "lines": 236,
+      "obfuscated": false,
+      "imports": [
+        "crypto"
+      ],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/middleware/rateLimiter.js",
+      "lines": 57,
+      "obfuscated": false,
+      "imports": [
+        "express-rate-limit"
+      ],
+      "environment": [
+        "GLOBAL_RATE_LIMIT_WINDOW_MS",
+        "GLOBAL_RATE_LIMIT_MAX_REQUESTS",
+        "LOGIN_RATE_LIMIT_WINDOW_MS",
+        "LOGIN_RATE_LIMIT_MAX_REQUESTS"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "lines": 59,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/adminProductController",
+        "../middleware/auth"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 15,
+          "method": "GET",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/products/stats"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 21,
+          "method": "GET",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 24,
+          "method": "POST",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 27,
+          "method": "PUT",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 30,
+          "method": "DELETE",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 37,
+          "method": "GET",
+          "path": "/licenses"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 40,
+          "method": "GET",
+          "path": "/licenses/stats"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 43,
+          "method": "GET",
+          "path": "/licenses/:licenseKey"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 46,
+          "method": "POST",
+          "path": "/licenses/:licenseKey/revoke"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 49,
+          "method": "POST",
+          "path": "/licenses/:licenseKey/extend"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+          "line": 52,
+          "method": "DELETE",
+          "path": "/licenses/:licenseKey"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "lines": 124,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/adminController",
+        "../middleware/auth"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 26,
+          "method": "GET",
+          "path": "/users"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 32,
+          "method": "GET",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 38,
+          "method": "POST",
+          "path": "/users"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 44,
+          "method": "PUT",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 50,
+          "method": "DELETE",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 56,
+          "method": "GET",
+          "path": "/stats"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 62,
+          "method": "GET",
+          "path": "/tool-setup"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 68,
+          "method": "PUT",
+          "path": "/tool-setup"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 78,
+          "method": "GET",
+          "path": "/zalo-accounts"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 88,
+          "method": "GET",
+          "path": "/ip-blocks"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 95,
+          "method": "POST",
+          "path": "/ip-blocks"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 101,
+          "method": "DELETE",
+          "path": "/ip-blocks/:ipAddress"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 111,
+          "method": "GET",
+          "path": "/requests"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+          "line": 121,
+          "method": "GET",
+          "path": "/leak-history"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "lines": 26,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/authController",
+        "../middleware/auth",
+        "../middleware/rateLimiter",
+        "../middleware/csrf"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 14,
+          "method": "POST",
+          "path": "/register"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 15,
+          "method": "POST",
+          "path": "/login"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/profile"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 19,
+          "method": "POST",
+          "path": "/change-password"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+          "line": 22,
+          "method": "GET",
+          "path": "/csrf-token"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+      "lines": 47,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/captchaController",
+        "express-rate-limit"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+          "line": 36,
+          "method": "GET",
+          "path": "/generate"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+          "line": 44,
+          "method": "GET",
+          "path": "/check-required"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/checkIpProxyRoutes.js",
+      "lines": 33,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "MINI_SERVICE_SERVER_PORT",
+        "MINI_SERVICE_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/checkIpProxyRoutes.js",
+          "line": 29,
+          "method": "POST",
+          "path": "/location"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+      "lines": 34,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+          "line": 29,
+          "method": "POST",
+          "path": "/pre-check"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+          "line": 30,
+          "method": "POST",
+          "path": "/confirm"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "lines": 128,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "INTERNAL_AUTH_KEY",
+        "DOCKER_HOST",
+        "DATA_FIND_SERVER_PORT",
+        "DATA_FIND_SERVER_HOST"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+          "line": 45,
+          "method": "POST",
+          "path": "/phone"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+          "line": 48,
+          "method": "POST",
+          "path": "/email"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+          "line": 51,
+          "method": "POST",
+          "path": "/pre-check"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+          "line": 71,
+          "method": "POST",
+          "path": "/confirm"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+          "line": 101,
+          "method": "GET",
+          "path": "/history"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "lines": 36,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+          "line": 29,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+          "line": 30,
+          "method": "GET",
+          "path": "/my-licenses"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+          "line": 31,
+          "method": "GET",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+          "line": 32,
+          "method": "POST",
+          "path": "/purchase"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "lines": 111,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios",
+        "path",
+        "dotenv",
+        "multer",
+        "form-data"
+      ],
+      "environment": [
+        "INTERNAL_AUTH_KEY",
+        "DOCKER_HOST",
+        "LINK_SERVER_PORT",
+        "LINK_SERVER_HOST"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 48,
+          "method": "POST",
+          "path": "/fetch-meta"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 51,
+          "method": "GET",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 52,
+          "method": "POST",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 53,
+          "method": "PUT",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 54,
+          "method": "DELETE",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 57,
+          "method": "GET",
+          "path": "/domains"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 58,
+          "method": "POST",
+          "path": "/domains"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 59,
+          "method": "PUT",
+          "path": "/domains/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 60,
+          "method": "DELETE",
+          "path": "/domains/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 63,
+          "method": "GET",
+          "path": "/links"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 64,
+          "method": "POST",
+          "path": "/links"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 65,
+          "method": "PUT",
+          "path": "/links/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 72,
+          "method": "POST",
+          "path": "/upload-thumbnail"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 106,
+          "method": "GET",
+          "path": "/results"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+          "line": 107,
+          "method": "GET",
+          "path": "/results-thumbnail"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "lines": 43,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/logsController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 15,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/stats"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 25,
+          "method": "GET",
+          "path": "/admin/all"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 28,
+          "method": "GET",
+          "path": "/admin/user/:userID"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 31,
+          "method": "GET",
+          "path": "/admin/security"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 34,
+          "method": "GET",
+          "path": "/admin/system-stats"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 37,
+          "method": "GET",
+          "path": "/admin/search"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+          "line": 40,
+          "method": "POST",
+          "path": "/admin/cleanup"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "lines": 95,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "PAYOS_PORT",
+        "PAYOS_HOST",
+        "CORS_ORIGIN",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 14,
+          "method": "POST",
+          "path": "/create"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 47,
+          "method": "GET",
+          "path": "/history"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+          "line": 68,
+          "method": "POST",
+          "path": "/cancel"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "lines": 35,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+          "line": 29,
+          "method": "POST",
+          "path": "/send"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+          "line": 30,
+          "method": "GET",
+          "path": "/personal-accounts"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+          "line": 31,
+          "method": "POST",
+          "path": "/decode-fid"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "lines": 35,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+          "line": 29,
+          "method": "POST",
+          "path": "/"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+          "line": 30,
+          "method": "GET",
+          "path": "/history"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+          "line": 31,
+          "method": "GET",
+          "path": "/stats"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "lines": 35,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+          "line": 29,
+          "method": "POST",
+          "path": "/send"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+          "line": 30,
+          "method": "POST",
+          "path": "/search"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+          "line": 31,
+          "method": "GET",
+          "path": "/zalo-accounts"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+      "lines": 90,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "multer",
+        "form-data",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "FILES_SERVER_PORT",
+        "FILES_SERVER_HOST"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+          "line": 31,
+          "method": "POST",
+          "path": "/"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "lines": 71,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 60,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 61,
+          "method": "GET",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 62,
+          "method": "POST",
+          "path": "/"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 63,
+          "method": "POST",
+          "path": "/auto-fetch"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 64,
+          "method": "PUT",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 65,
+          "method": "DELETE",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 66,
+          "method": "POST",
+          "path": "/:uid/check-status"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+          "line": 67,
+          "method": "POST",
+          "path": "/check-all-status"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "lines": 48,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_SERVER_PORT",
+        "ZL_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 29,
+          "method": "GET",
+          "path": "/token"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 30,
+          "method": "POST",
+          "path": "/token/refresh"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 33,
+          "method": "GET",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 34,
+          "method": "POST",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 35,
+          "method": "PUT",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 36,
+          "method": "DELETE",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 39,
+          "method": "POST",
+          "path": "/send-template"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 40,
+          "method": "POST",
+          "path": "/send-template-uid"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 41,
+          "method": "GET",
+          "path": "/results"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 42,
+          "method": "GET",
+          "path": "/preview-data"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 43,
+          "method": "GET",
+          "path": "/message-status"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+          "line": 44,
+          "method": "GET",
+          "path": "/fetch-new-templates"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "lines": 67,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios"
+      ],
+      "environment": [
+        "DOCKER_HOST",
+        "ZL_TIMER_SERVER_PORT",
+        "ZL_TIMER_SERVER_HOST",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+          "line": 37,
+          "method": "GET",
+          "path": "/history"
+        },
+        {
+          "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+          "line": 60,
+          "method": "POST",
+          "path": "/send"
+        }
+      ]
+    },
+    {
+      "file": "recovered/MAIN_SERVER/utils/sanitize.js",
+      "lines": 201,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/config/database.js",
+      "lines": 121,
+      "obfuscated": false,
+      "imports": [
+        "mysql2/promise",
+        "dotenv",
+        "path"
+      ],
+      "environment": [
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER_ZL_SERVER",
+        "DB_PASSWORD_ZL_SERVER",
+        "DB_NAME",
+        "DB_CONNECTION_LIMIT"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/adminController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [
+        "bcrypt"
+      ],
+      "environment": [
+        "JWT_SECRET"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/adminProductController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/authController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [
+        "BCRYPT_SALT_ROUNDS",
+        "JWT_SECRET",
+        "JWT_EXPIRE"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/captchaController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/checkIpController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [
+        "cheerio"
+      ],
+      "environment": [
+        "NODE_ENV"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/checkStatusController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/licenseController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/logsController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [
+        "NODE_ENV"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/sendImageByCardController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [
+        "IMG_URL_V4",
+        "IMG_URL",
+        "IMG_URL_V6"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/sendImageController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/sendImageV2Controller.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [
+        "crypto-js"
+      ],
+      "environment": [
+        "IMG_URL_V4",
+        "IMG_URL",
+        "IMG_URL_V6"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/zaloAccountAutoController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [
+        "crypto-js"
+      ],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/zaloAccountController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/controllers/zaloOaController.js",
+      "lines": 2,
+      "obfuscated": true,
+      "imports": [],
+      "environment": [
+        "SECRET_KEY",
+        "APP_ID",
+        "REFRESH_TOKEN"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/middleware/ipWhitelist.js",
+      "lines": 45,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/middleware/trustMiddleware.js",
+      "lines": 27,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "lines": 59,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/adminProductController",
+        "../middleware/auth"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 15,
+          "method": "GET",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/products/stats"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 21,
+          "method": "GET",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 24,
+          "method": "POST",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 27,
+          "method": "PUT",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 30,
+          "method": "DELETE",
+          "path": "/products/:productID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 37,
+          "method": "GET",
+          "path": "/licenses"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 40,
+          "method": "GET",
+          "path": "/licenses/stats"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 43,
+          "method": "GET",
+          "path": "/licenses/:licenseKey"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 46,
+          "method": "POST",
+          "path": "/licenses/:licenseKey/revoke"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 49,
+          "method": "POST",
+          "path": "/licenses/:licenseKey/extend"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+          "line": 52,
+          "method": "DELETE",
+          "path": "/licenses/:licenseKey"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "lines": 112,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/adminController",
+        "../middleware/auth",
+        "../middleware/rateLimiter"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 28,
+          "method": "GET",
+          "path": "/users"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 34,
+          "method": "GET",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 40,
+          "method": "POST",
+          "path": "/users"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 46,
+          "method": "PUT",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 52,
+          "method": "DELETE",
+          "path": "/users/:userID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 58,
+          "method": "GET",
+          "path": "/stats"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 64,
+          "method": "GET",
+          "path": "/tool-setup"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 70,
+          "method": "PUT",
+          "path": "/tool-setup"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 76,
+          "method": "GET",
+          "path": "/zalo-accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 86,
+          "method": "GET",
+          "path": "/ip-blocks"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 93,
+          "method": "POST",
+          "path": "/ip-blocks"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 99,
+          "method": "DELETE",
+          "path": "/ip-blocks/:ipAddress"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+          "line": 109,
+          "method": "GET",
+          "path": "/requests"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "lines": 26,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/authController",
+        "../middleware/auth",
+        "../middleware/rateLimiter",
+        "../middleware/csrf"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+          "line": 14,
+          "method": "POST",
+          "path": "/register"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+          "line": 15,
+          "method": "POST",
+          "path": "/login"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/profile"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+          "line": 19,
+          "method": "POST",
+          "path": "/change-password"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+          "line": 22,
+          "method": "GET",
+          "path": "/csrf-token"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+      "lines": 47,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/captchaController",
+        "express-rate-limit"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+          "line": 36,
+          "method": "GET",
+          "path": "/generate"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+          "line": 44,
+          "method": "GET",
+          "path": "/check-required"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/checkIpRoutes.js",
+      "lines": 40,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "express-rate-limit",
+        "../controllers/checkIpController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/checkIpRoutes.js",
+          "line": 34,
+          "method": "POST",
+          "path": "/location"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+      "lines": 20,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/checkStatusController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+          "line": 13,
+          "method": "POST",
+          "path": "/pre-check"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+          "line": 16,
+          "method": "POST",
+          "path": "/confirm"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "lines": 370,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "axios",
+        "../config/database"
+      ],
+      "environment": [
+        "FB_SERVER_URL",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 26,
+          "method": "POST",
+          "path": "/accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 91,
+          "method": "GET",
+          "path": "/accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 143,
+          "method": "DELETE",
+          "path": "/accounts/:fb_userID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 185,
+          "method": "POST",
+          "path": "/scrape"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 269,
+          "method": "GET",
+          "path": "/scrape/results"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+          "line": 321,
+          "method": "GET",
+          "path": "/scrape/:requestID"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+      "lines": 30,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/licenseController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+          "line": 14,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+          "line": 17,
+          "method": "GET",
+          "path": "/products"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+          "line": 20,
+          "method": "POST",
+          "path": "/purchase"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+          "line": 23,
+          "method": "GET",
+          "path": "/my-licenses"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "lines": 43,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/logsController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 15,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/stats"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 25,
+          "method": "GET",
+          "path": "/admin/all"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 28,
+          "method": "GET",
+          "path": "/admin/user/:userID"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 31,
+          "method": "GET",
+          "path": "/admin/security"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 34,
+          "method": "GET",
+          "path": "/admin/system-stats"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 37,
+          "method": "GET",
+          "path": "/admin/search"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+          "line": 40,
+          "method": "POST",
+          "path": "/admin/cleanup"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+      "lines": 30,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/sendImageByCardController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+          "line": 19,
+          "method": "GET",
+          "path": "/personal-accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+          "line": 23,
+          "method": "POST",
+          "path": "/decode-fid"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+          "line": 27,
+          "method": "POST",
+          "path": "/send"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+      "lines": 21,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/sendImageController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+          "line": 12,
+          "method": "POST",
+          "path": "/"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+          "line": 15,
+          "method": "GET",
+          "path": "/history"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/stats"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+      "lines": 28,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/sendImageV2Controller"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+          "line": 17,
+          "method": "GET",
+          "path": "/zalo-accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+          "line": 21,
+          "method": "POST",
+          "path": "/search"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+          "line": 25,
+          "method": "POST",
+          "path": "/send"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "lines": 38,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/zaloAccountController",
+        "../controllers/zaloAccountAutoController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 13,
+          "method": "GET",
+          "path": "/"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 16,
+          "method": "POST",
+          "path": "/auto-fetch"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 20,
+          "method": "POST",
+          "path": "/check-all-status"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 23,
+          "method": "POST",
+          "path": "/"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 26,
+          "method": "GET",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 29,
+          "method": "PUT",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 32,
+          "method": "DELETE",
+          "path": "/:uid"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+          "line": 35,
+          "method": "POST",
+          "path": "/:uid/check-status"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "lines": 25,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "../controllers/zaloOaController"
+      ],
+      "environment": [],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 6,
+          "method": "GET",
+          "path": "/token"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 7,
+          "method": "POST",
+          "path": "/token/refresh"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 10,
+          "method": "GET",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 11,
+          "method": "POST",
+          "path": "/templates"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 12,
+          "method": "PUT",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 13,
+          "method": "DELETE",
+          "path": "/templates/:id"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 16,
+          "method": "POST",
+          "path": "/send-template"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 17,
+          "method": "POST",
+          "path": "/send-template-uid"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 18,
+          "method": "GET",
+          "path": "/results"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 19,
+          "method": "GET",
+          "path": "/preview-data"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 20,
+          "method": "GET",
+          "path": "/message-status"
+        },
+        {
+          "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+          "line": 21,
+          "method": "GET",
+          "path": "/fetch-new-templates"
+        }
+      ]
+    },
+    {
+      "file": "recovered/ZL_SERVER/utils/axiosInstance.js",
+      "lines": 62,
+      "obfuscated": false,
+      "imports": [
+        "axios",
+        "socks-proxy-agent"
+      ],
+      "environment": [
+        "PROXY_IP",
+        "PROXY_PORT",
+        "PROXY_USER",
+        "PROXY_PASS"
+      ],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/utils/sanitize.js",
+      "lines": 201,
+      "obfuscated": false,
+      "imports": [],
+      "environment": [],
+      "routes": []
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "lines": 126,
+      "obfuscated": false,
+      "imports": [
+        "express",
+        "cors",
+        "morgan",
+        "path",
+        "dotenv",
+        "./config/database",
+        "./middleware/ipWhitelist",
+        "./middleware/trustMiddleware",
+        "./routes/zaloAccountRoutes",
+        "./routes/sendImageRoutes",
+        "./routes/sendImageV2Routes",
+        "./routes/sendImageByCardRoutes",
+        "./routes/checkStatusRoutes",
+        "./routes/licenseRoutes",
+        "./routes/checkIpRoutes",
+        "./routes/zaloOaRoutes"
+      ],
+      "environment": [
+        "ZL_SERVER_HOST",
+        "ZL_SERVER_PORT",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_NAME",
+        "DB_USER_ZL",
+        "DB_USER_MAIN",
+        "INTERNAL_AUTH_KEY"
+      ],
+      "routes": [
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 42,
+          "method": "GET",
+          "path": "/health"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 52,
+          "method": "USE",
+          "path": "/zalo/zalo-accounts"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 53,
+          "method": "USE",
+          "path": "/zalo/send-image"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 54,
+          "method": "USE",
+          "path": "/zalo/send-image-v2"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 55,
+          "method": "USE",
+          "path": "/zalo/send-image-by-card"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 56,
+          "method": "USE",
+          "path": "/zalo/check-status"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 57,
+          "method": "USE",
+          "path": "/zalo/licenses"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 58,
+          "method": "USE",
+          "path": "/zalo/check-ip"
+        },
+        {
+          "file": "recovered/ZL_SERVER/zl_server.js",
+          "line": 59,
+          "method": "USE",
+          "path": "/zalo/zalo-oa"
+        }
+      ]
+    }
+  ],
+  "syntaxErrors": [],
+  "missingLocalModules": [
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 8,
+      "module": "../middleware/auth"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 11,
+      "module": "../middleware/auth"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 12,
+      "module": "../middleware/rateLimiter"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 9,
+      "module": "../middleware/auth"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 10,
+      "module": "../middleware/rateLimiter"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 11,
+      "module": "../middleware/csrf"
+    }
+  ],
+  "packages": [
+    "axios",
+    "bcrypt",
+    "bcryptjs",
+    "cheerio",
+    "cors",
+    "crypto-js",
+    "dotenv",
+    "express",
+    "express-rate-limit",
+    "form-data",
+    "helmet",
+    "jsonwebtoken",
+    "morgan",
+    "multer",
+    "mysql2",
+    "socks-proxy-agent"
+  ],
+  "environment": [
+    "APP_ID",
+    "BCRYPT_SALT_ROUNDS",
+    "BOT_TOKEN",
+    "CORS_ORIGIN",
+    "DATA_FIND_SERVER_HOST",
+    "DATA_FIND_SERVER_PORT",
+    "DB_CONNECTION_LIMIT",
+    "DB_HOST",
+    "DB_NAME",
+    "DB_PASSWORD_FILE",
+    "DB_PASSWORD_MAIN",
+    "DB_PASSWORD_ZL_SERVER",
+    "DB_PORT",
+    "DB_USER_FILE",
+    "DB_USER_MAIN",
+    "DB_USER_ZL",
+    "DB_USER_ZL_SERVER",
+    "DOCKER_HOST",
+    "FB_SERVER_URL",
+    "FILES_SERVER_DOMAIN",
+    "FILES_SERVER_HOST",
+    "FILES_SERVER_IMAGE_FILE",
+    "FILES_SERVER_PORT",
+    "GLOBAL_RATE_LIMIT_MAX_REQUESTS",
+    "GLOBAL_RATE_LIMIT_WINDOW_MS",
+    "IMG_URL",
+    "IMG_URL_V4",
+    "IMG_URL_V6",
+    "INTERNAL_AUTH_KEY",
+    "JWT_EXPIRE",
+    "JWT_SECRET",
+    "LINK_SERVER_HOST",
+    "LINK_SERVER_PORT",
+    "LOGIN_RATE_LIMIT_MAX_REQUESTS",
+    "LOGIN_RATE_LIMIT_WINDOW_MS",
+    "MAIN_SERVER_HOST",
+    "MAIN_SERVER_PORT",
+    "MINI_SERVICE_SERVER_HOST",
+    "MINI_SERVICE_SERVER_PORT",
+    "NODE_ENV",
+    "PAYOS_HOST",
+    "PAYOS_PORT",
+    "PROXY_IP",
+    "PROXY_PASS",
+    "PROXY_PORT",
+    "PROXY_USER",
+    "REFRESH_TOKEN",
+    "SECRET_KEY",
+    "TELEGRAM_ID",
+    "ZL_SERVER_HOST",
+    "ZL_SERVER_PORT",
+    "ZL_TIMER_SERVER_HOST",
+    "ZL_TIMER_SERVER_PORT"
+  ],
+  "routes": [
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "line": 384,
+      "method": "POST",
+      "path": "/api/upload"
+    },
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "line": 408,
+      "method": "POST",
+      "path": "/api/upload-thumbnail"
+    },
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "line": 431,
+      "method": "USE",
+      "path": "/api/upload"
+    },
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "line": 451,
+      "method": "POST",
+      "path": "/remote-server"
+    },
+    {
+      "file": "recovered/FILES_SERVER/files_server.js",
+      "line": 481,
+      "method": "GET",
+      "path": "/*"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 108,
+      "method": "GET",
+      "path": "/health"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 118,
+      "method": "USE",
+      "path": "/api/auth"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 119,
+      "method": "USE",
+      "path": "/api/captcha"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 122,
+      "method": "GET",
+      "path": "/api/csrf-token"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 131,
+      "method": "USE",
+      "path": "/api/zalo-accounts"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 132,
+      "method": "USE",
+      "path": "/api/zalo-oa"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 133,
+      "method": "USE",
+      "path": "/api/send-image"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 134,
+      "method": "USE",
+      "path": "/api/send-image-v2"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 135,
+      "method": "USE",
+      "path": "/api/send-image-by-card"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 136,
+      "method": "USE",
+      "path": "/api/send-image-v2-timer"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 137,
+      "method": "USE",
+      "path": "/api/send-image-by-card-timer"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 138,
+      "method": "USE",
+      "path": "/api/zalo-timer"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 139,
+      "method": "USE",
+      "path": "/api/zalo/upload-custom-image"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 140,
+      "method": "USE",
+      "path": "/api/check-status"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 141,
+      "method": "USE",
+      "path": "/api/licenses"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 142,
+      "method": "USE",
+      "path": "/api/check-ip"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 143,
+      "method": "USE",
+      "path": "/api/leak-lookup"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 144,
+      "method": "USE",
+      "path": "/api/link"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 150,
+      "method": "POST",
+      "path": "/api/admin/login"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 153,
+      "method": "USE",
+      "path": "/api/admin"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 154,
+      "method": "USE",
+      "path": "/api/admin"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 157,
+      "method": "USE",
+      "path": "/api/logs"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/main_server.js",
+      "line": 160,
+      "method": "USE",
+      "path": "/api/payos"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 15,
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/products/stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 21,
+      "method": "GET",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 24,
+      "method": "POST",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 27,
+      "method": "PUT",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 30,
+      "method": "DELETE",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 37,
+      "method": "GET",
+      "path": "/licenses"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 40,
+      "method": "GET",
+      "path": "/licenses/stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 43,
+      "method": "GET",
+      "path": "/licenses/:licenseKey"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 46,
+      "method": "POST",
+      "path": "/licenses/:licenseKey/revoke"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 49,
+      "method": "POST",
+      "path": "/licenses/:licenseKey/extend"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+      "line": 52,
+      "method": "DELETE",
+      "path": "/licenses/:licenseKey"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 26,
+      "method": "GET",
+      "path": "/users"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 32,
+      "method": "GET",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 38,
+      "method": "POST",
+      "path": "/users"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 44,
+      "method": "PUT",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 50,
+      "method": "DELETE",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 56,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 62,
+      "method": "GET",
+      "path": "/tool-setup"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 68,
+      "method": "PUT",
+      "path": "/tool-setup"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 78,
+      "method": "GET",
+      "path": "/zalo-accounts"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 88,
+      "method": "GET",
+      "path": "/ip-blocks"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 95,
+      "method": "POST",
+      "path": "/ip-blocks"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 101,
+      "method": "DELETE",
+      "path": "/ip-blocks/:ipAddress"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 111,
+      "method": "GET",
+      "path": "/requests"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+      "line": 121,
+      "method": "GET",
+      "path": "/leak-history"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 14,
+      "method": "POST",
+      "path": "/register"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 15,
+      "method": "POST",
+      "path": "/login"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/profile"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 19,
+      "method": "POST",
+      "path": "/change-password"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+      "line": 22,
+      "method": "GET",
+      "path": "/csrf-token"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+      "line": 36,
+      "method": "GET",
+      "path": "/generate"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+      "line": 44,
+      "method": "GET",
+      "path": "/check-required"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/checkIpProxyRoutes.js",
+      "line": 29,
+      "method": "POST",
+      "path": "/location"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+      "line": 29,
+      "method": "POST",
+      "path": "/pre-check"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+      "line": 30,
+      "method": "POST",
+      "path": "/confirm"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 45,
+      "method": "POST",
+      "path": "/phone"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 48,
+      "method": "POST",
+      "path": "/email"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 51,
+      "method": "POST",
+      "path": "/pre-check"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 71,
+      "method": "POST",
+      "path": "/confirm"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+      "line": 101,
+      "method": "GET",
+      "path": "/history"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 29,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 30,
+      "method": "GET",
+      "path": "/my-licenses"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 31,
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+      "line": 32,
+      "method": "POST",
+      "path": "/purchase"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 48,
+      "method": "POST",
+      "path": "/fetch-meta"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 51,
+      "method": "GET",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 52,
+      "method": "POST",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 53,
+      "method": "PUT",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 54,
+      "method": "DELETE",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 57,
+      "method": "GET",
+      "path": "/domains"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 58,
+      "method": "POST",
+      "path": "/domains"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 59,
+      "method": "PUT",
+      "path": "/domains/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 60,
+      "method": "DELETE",
+      "path": "/domains/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 63,
+      "method": "GET",
+      "path": "/links"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 64,
+      "method": "POST",
+      "path": "/links"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 65,
+      "method": "PUT",
+      "path": "/links/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 72,
+      "method": "POST",
+      "path": "/upload-thumbnail"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 106,
+      "method": "GET",
+      "path": "/results"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+      "line": 107,
+      "method": "GET",
+      "path": "/results-thumbnail"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 15,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 25,
+      "method": "GET",
+      "path": "/admin/all"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 28,
+      "method": "GET",
+      "path": "/admin/user/:userID"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 31,
+      "method": "GET",
+      "path": "/admin/security"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 34,
+      "method": "GET",
+      "path": "/admin/system-stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 37,
+      "method": "GET",
+      "path": "/admin/search"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+      "line": 40,
+      "method": "POST",
+      "path": "/admin/cleanup"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 14,
+      "method": "POST",
+      "path": "/create"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 47,
+      "method": "GET",
+      "path": "/history"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+      "line": 68,
+      "method": "POST",
+      "path": "/cancel"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 29,
+      "method": "POST",
+      "path": "/send"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 30,
+      "method": "GET",
+      "path": "/personal-accounts"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+      "line": 31,
+      "method": "POST",
+      "path": "/decode-fid"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 29,
+      "method": "POST",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 30,
+      "method": "GET",
+      "path": "/history"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+      "line": 31,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 29,
+      "method": "POST",
+      "path": "/send"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 30,
+      "method": "POST",
+      "path": "/search"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+      "line": 31,
+      "method": "GET",
+      "path": "/zalo-accounts"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+      "line": 31,
+      "method": "POST",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 60,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 61,
+      "method": "GET",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 62,
+      "method": "POST",
+      "path": "/"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 63,
+      "method": "POST",
+      "path": "/auto-fetch"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 64,
+      "method": "PUT",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 65,
+      "method": "DELETE",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 66,
+      "method": "POST",
+      "path": "/:uid/check-status"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+      "line": 67,
+      "method": "POST",
+      "path": "/check-all-status"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 29,
+      "method": "GET",
+      "path": "/token"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 30,
+      "method": "POST",
+      "path": "/token/refresh"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 33,
+      "method": "GET",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 34,
+      "method": "POST",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 35,
+      "method": "PUT",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 36,
+      "method": "DELETE",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 39,
+      "method": "POST",
+      "path": "/send-template"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 40,
+      "method": "POST",
+      "path": "/send-template-uid"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 41,
+      "method": "GET",
+      "path": "/results"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 42,
+      "method": "GET",
+      "path": "/preview-data"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 43,
+      "method": "GET",
+      "path": "/message-status"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+      "line": 44,
+      "method": "GET",
+      "path": "/fetch-new-templates"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 37,
+      "method": "GET",
+      "path": "/history"
+    },
+    {
+      "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+      "line": 60,
+      "method": "POST",
+      "path": "/send"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 15,
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/products/stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 21,
+      "method": "GET",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 24,
+      "method": "POST",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 27,
+      "method": "PUT",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 30,
+      "method": "DELETE",
+      "path": "/products/:productID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 37,
+      "method": "GET",
+      "path": "/licenses"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 40,
+      "method": "GET",
+      "path": "/licenses/stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 43,
+      "method": "GET",
+      "path": "/licenses/:licenseKey"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 46,
+      "method": "POST",
+      "path": "/licenses/:licenseKey/revoke"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 49,
+      "method": "POST",
+      "path": "/licenses/:licenseKey/extend"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+      "line": 52,
+      "method": "DELETE",
+      "path": "/licenses/:licenseKey"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 28,
+      "method": "GET",
+      "path": "/users"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 34,
+      "method": "GET",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 40,
+      "method": "POST",
+      "path": "/users"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 46,
+      "method": "PUT",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 52,
+      "method": "DELETE",
+      "path": "/users/:userID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 58,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 64,
+      "method": "GET",
+      "path": "/tool-setup"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 70,
+      "method": "PUT",
+      "path": "/tool-setup"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 76,
+      "method": "GET",
+      "path": "/zalo-accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 86,
+      "method": "GET",
+      "path": "/ip-blocks"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 93,
+      "method": "POST",
+      "path": "/ip-blocks"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 99,
+      "method": "DELETE",
+      "path": "/ip-blocks/:ipAddress"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+      "line": 109,
+      "method": "GET",
+      "path": "/requests"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 14,
+      "method": "POST",
+      "path": "/register"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 15,
+      "method": "POST",
+      "path": "/login"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/profile"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 19,
+      "method": "POST",
+      "path": "/change-password"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+      "line": 22,
+      "method": "GET",
+      "path": "/csrf-token"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+      "line": 36,
+      "method": "GET",
+      "path": "/generate"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+      "line": 44,
+      "method": "GET",
+      "path": "/check-required"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/checkIpRoutes.js",
+      "line": 34,
+      "method": "POST",
+      "path": "/location"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+      "line": 13,
+      "method": "POST",
+      "path": "/pre-check"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+      "line": 16,
+      "method": "POST",
+      "path": "/confirm"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 26,
+      "method": "POST",
+      "path": "/accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 91,
+      "method": "GET",
+      "path": "/accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 143,
+      "method": "DELETE",
+      "path": "/accounts/:fb_userID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 185,
+      "method": "POST",
+      "path": "/scrape"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 269,
+      "method": "GET",
+      "path": "/scrape/results"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+      "line": 321,
+      "method": "GET",
+      "path": "/scrape/:requestID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+      "line": 14,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+      "line": 17,
+      "method": "GET",
+      "path": "/products"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+      "line": 20,
+      "method": "POST",
+      "path": "/purchase"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+      "line": 23,
+      "method": "GET",
+      "path": "/my-licenses"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 15,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 25,
+      "method": "GET",
+      "path": "/admin/all"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 28,
+      "method": "GET",
+      "path": "/admin/user/:userID"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 31,
+      "method": "GET",
+      "path": "/admin/security"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 34,
+      "method": "GET",
+      "path": "/admin/system-stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 37,
+      "method": "GET",
+      "path": "/admin/search"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+      "line": 40,
+      "method": "POST",
+      "path": "/admin/cleanup"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+      "line": 19,
+      "method": "GET",
+      "path": "/personal-accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+      "line": 23,
+      "method": "POST",
+      "path": "/decode-fid"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+      "line": 27,
+      "method": "POST",
+      "path": "/send"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+      "line": 12,
+      "method": "POST",
+      "path": "/"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+      "line": 15,
+      "method": "GET",
+      "path": "/history"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/stats"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+      "line": 17,
+      "method": "GET",
+      "path": "/zalo-accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+      "line": 21,
+      "method": "POST",
+      "path": "/search"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+      "line": 25,
+      "method": "POST",
+      "path": "/send"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 13,
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 16,
+      "method": "POST",
+      "path": "/auto-fetch"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 20,
+      "method": "POST",
+      "path": "/check-all-status"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 23,
+      "method": "POST",
+      "path": "/"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 26,
+      "method": "GET",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 29,
+      "method": "PUT",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 32,
+      "method": "DELETE",
+      "path": "/:uid"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+      "line": 35,
+      "method": "POST",
+      "path": "/:uid/check-status"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 6,
+      "method": "GET",
+      "path": "/token"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 7,
+      "method": "POST",
+      "path": "/token/refresh"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 10,
+      "method": "GET",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 11,
+      "method": "POST",
+      "path": "/templates"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 12,
+      "method": "PUT",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 13,
+      "method": "DELETE",
+      "path": "/templates/:id"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 16,
+      "method": "POST",
+      "path": "/send-template"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 17,
+      "method": "POST",
+      "path": "/send-template-uid"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 18,
+      "method": "GET",
+      "path": "/results"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 19,
+      "method": "GET",
+      "path": "/preview-data"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 20,
+      "method": "GET",
+      "path": "/message-status"
+    },
+    {
+      "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+      "line": 21,
+      "method": "GET",
+      "path": "/fetch-new-templates"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 42,
+      "method": "GET",
+      "path": "/health"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 52,
+      "method": "USE",
+      "path": "/zalo/zalo-accounts"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 53,
+      "method": "USE",
+      "path": "/zalo/send-image"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 54,
+      "method": "USE",
+      "path": "/zalo/send-image-v2"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 55,
+      "method": "USE",
+      "path": "/zalo/send-image-by-card"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 56,
+      "method": "USE",
+      "path": "/zalo/check-status"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 57,
+      "method": "USE",
+      "path": "/zalo/licenses"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 58,
+      "method": "USE",
+      "path": "/zalo/check-ip"
+    },
+    {
+      "file": "recovered/ZL_SERVER/zl_server.js",
+      "line": 59,
+      "method": "USE",
+      "path": "/zalo/zalo-oa"
+    }
+  ]
+}

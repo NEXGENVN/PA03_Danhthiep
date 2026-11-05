@@ -1,0 +1,877 @@
+[
+  {
+    "file": "ZL_SERVER/config/database.js",
+    "out": "analysis/readable/ZL_SERVER/config/database.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "mysql2/promise",
+      "dotenv",
+      "path"
+    ],
+    "env": [
+      "DB_HOST",
+      "DB_PORT",
+      "DB_USER_ZL_SERVER",
+      "DB_PASSWORD_ZL_SERVER",
+      "DB_NAME",
+      "DB_CONNECTION_LIMIT"
+    ],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/adminController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/adminController.js",
+    "replaced": 738,
+    "rotated": 245,
+    "requires": [
+      "bcrypt",
+      "jsonwebtoken",
+      "../config/database",
+      "../utils/sanitize",
+      "./captchaController"
+    ],
+    "env": [
+      "JWT_SECRET"
+    ],
+    "sql": [
+      "SELECT * FROM user WHERE userName = ?",
+      "UPDATE user SET lastLogin = NOW(), lastIP = ? WHERE userID = ?",
+      "\n            SELECT \n                userID,\n                userName,\n                email,\n                lastIP,\n                lastLogin,\n                totalMoney,\n                userRole,\n                createdAt,\n                updatedAt,\n                isActive\n            FROM user\n            ORDER BY createdAt DESC\n        ",
+      "SELECT userID, userName, email, lastIP, lastLogin, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?",
+      "✏️ Admin Update User:",
+      "SELECT * FROM user WHERE userID = ?",
+      "SELECT userID FROM user WHERE userName = ? AND userID != ?",
+      "SELECT userID FROM user WHERE email = ? AND userID != ?",
+      "UPDATE user SET ",
+      "❌ Update User Error:",
+      "SELECT userID FROM user WHERE userID = ?",
+      "DELETE FROM user WHERE userID = ?",
+      "SELECT userID FROM user WHERE userName = ?",
+      "SELECT userID FROM user WHERE email = ?",
+      "INSERT INTO user (userName, password, email, totalMoney, userRole, isActive, createdAt, updatedAt) \n             VALUES (?, ?, ?, ?, ?, 1, NOW(), NOW())",
+      "SELECT userID, userName, email, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?",
+      "SELECT COUNT(*) as count FROM user",
+      "SELECT COUNT(*) as count FROM user WHERE isActive = 1",
+      "SELECT COUNT(*) as count FROM user WHERE userRole = 1",
+      "SELECT COUNT(*) as count FROM zalo_account",
+      "SELECT COUNT(*) as count FROM auto_request",
+      "SELECT COUNT(*) as count FROM auto_request WHERE sendResult = \"SUCCESS\"",
+      "SELECT SUM(fee_charged) as total FROM auto_request WHERE fee_charged > 0",
+      "SELECT * FROM tool_setup LIMIT 1",
+      "INSERT INTO tool_setup (uid_zalo_system, zalo_system_money, zalo_custom_money) VALUES (NULL, 30000.00, 20000.00)",
+      "SELECT UID, displayName, phoneNumber, Avatar, accStatus FROM zalo_account WHERE UID = ?",
+      "⚙️ Admin Update Tool Setup:",
+      "SELECT UID FROM zalo_account WHERE UID = ?",
+      "SELECT STT FROM tool_setup LIMIT 1",
+      "INSERT INTO tool_setup (uid_zalo_system, zalo_system_money, zalo_custom_money) VALUES (?, ?, ?)",
+      "UPDATE tool_setup SET ",
+      "❌ Update Tool Setup Error:",
+      "SELECT \n                UID, \n                displayName, \n                phoneNumber, \n                Avatar, \n                accStatus,\n                ImportTime\n             FROM zalo_account\n             ORDER BY ImportTime DESC",
+      "\n            SELECT \n                ar.reqID,\n                ar.phoneNumber,\n                ar.UID,\n                ar.displayName,\n                ar.imageUrl,\n                ar.sendResult,\n                ar.Detail,\n                ar.created_at,\n                ar.fee_charged,\n                ar.use_system_account,\n                ar.sender_zalo_uid,\n                COALESCE(u.userName, 'N/A') as userName,\n                COALESCE(u.userID, 0) as userID\n            FROM auto_request ar\n            LEFT JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n            LEFT JOIN user u ON ular.userID = u.userID\n            ORDER BY ar.created_at DESC\n            LIMIT 1000\n        "
+    ],
+    "urls": [],
+    "exports": [
+      "adminLogin",
+      "getAllUsers",
+      "getUserDetail",
+      "updateUser",
+      "deleteUser",
+      "createUser",
+      "getSystemStats",
+      "getToolSetup",
+      "updateToolSetup",
+      "getAllZaloAccounts",
+      "getBlockedIPsList",
+      "unblockIPAddress",
+      "blockIPManual",
+      "getAllAutoRequests"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/controllers/adminProductController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/adminProductController.js",
+    "replaced": 662,
+    "rotated": 298,
+    "requires": [
+      "../config/database"
+    ],
+    "env": [],
+    "sql": [
+      "\n            SELECT \n                productID,\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive,\n                createdAt,\n                updatedAt\n            FROM product\n            ORDER BY productID ASC\n        ",
+      "\n            SELECT \n                productID,\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive,\n                createdAt,\n                updatedAt\n            FROM product\n            WHERE productID = ?\n        ",
+      "\n            INSERT INTO product (\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive\n            ) VALUES (?, ?, ?, ?, ?, ?, ?)\n        ",
+      "SELECT productID FROM product WHERE productID = ?",
+      "\n            UPDATE product \n            SET ",
+      "\n            SELECT COUNT(*) as licenseCount \n            FROM license \n            WHERE productID = ?\n        ",
+      "UPDATE product SET isActive = FALSE WHERE productID = ?",
+      "DELETE FROM product WHERE productID = ?",
+      "\n            SELECT \n                p.productID,\n                p.productName,\n                p.isActive,\n                COUNT(l.licenseID) as totalLicenses,\n                SUM(CASE WHEN l.isActivated = TRUE THEN 1 ELSE 0 END) as activatedLicenses,\n                SUM(l.pricePaid) as totalRevenue\n            FROM product p\n            LEFT JOIN license l ON p.productID = l.productID\n            GROUP BY p.productID, p.productName, p.isActive\n            ORDER BY totalRevenue DESC\n        ",
+      "\n            SELECT COUNT(*) as total\n            FROM license l\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            ",
+      "\n            SELECT \n                l.licenseKey,\n                l.status,\n                p.productID,\n                p.productName,\n                p.productImage,\n                u.userID,\n                u.userName,\n                u.email,\n                ull.pricePaid,\n                ull.purchaseTime\n            FROM license l\n            INNER JOIN product p ON l.productID = p.productID\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            ",
+      "\n            SELECT \n                l.licenseKey,\n                l.activeTime,\n                l.createdAt,\n                l.updatedAt,\n                l.status,\n                l.countDown,\n                p.productID,\n                p.productName,\n                p.productImage,\n                u.userID,\n                u.userName,\n                u.email,\n                ull.pricePaid,\n                ull.purchaseTime\n            FROM license l\n            INNER JOIN product p ON l.productID = p.productID\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            WHERE l.licenseKey = ?\n        ",
+      "SELECT * FROM license WHERE licenseKey = ?",
+      "\n            UPDATE license \n            SET status = 2\n            WHERE licenseKey = ?\n        ",
+      "\n            UPDATE license \n            SET countDown = ?\n            WHERE licenseKey = ?\n        ",
+      "DELETE FROM user_link_license WHERE licenseKey = ?",
+      "DELETE FROM license WHERE licenseKey = ?",
+      "\n            SELECT \n                COUNT(*) as totalLicenses,\n                SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as activatedLicenses,\n                SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as notActivatedLicenses,\n                SUM(CASE WHEN status = 1 AND countDown > 0 THEN 1 ELSE 0 END) as activeLicenses,\n                SUM(CASE WHEN status = 2 OR countDown = 0 THEN 1 ELSE 0 END) as expiredLicenses,\n                COUNT(DISTINCT productID) as totalProducts,\n                (SELECT SUM(pricePaid) FROM user_link_license) as totalRevenue,\n                (SELECT COUNT(DISTINCT userID) FROM user_link_license) as totalUsers\n            FROM license\n        "
+    ],
+    "urls": [
+      "https://via.placeholder.com/300x200/667eea/ffffff?text=Product"
+    ],
+    "exports": [
+      "getAllProducts",
+      "getProductById",
+      "createProduct",
+      "updateProduct",
+      "deleteProduct",
+      "getProductStats",
+      "getAllLicenses",
+      "getLicenseById",
+      "revokeLicense",
+      "extendLicense",
+      "deleteLicense",
+      "getLicenseStats"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/controllers/authController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/authController.js",
+    "replaced": 287,
+    "rotated": 73,
+    "requires": [
+      "bcryptjs",
+      "jsonwebtoken",
+      "../config/database",
+      "../middleware/auth",
+      "../utils/sanitize",
+      "./captchaController"
+    ],
+    "env": [
+      "BCRYPT_SALT_ROUNDS",
+      "JWT_SECRET",
+      "JWT_EXPIRE"
+    ],
+    "sql": [
+      "SELECT userID FROM user WHERE userName = ? OR email = ?",
+      "INSERT INTO user (userName, password, email, userRole, totalMoney, lastIP) \n             VALUES (?, ?, ?, 2, 0.00, ?)",
+      "SELECT userID, userName, password, email, userRole, isActive FROM user WHERE userName = ?",
+      "SELECT userID, userName, email, totalMoney, userRole, \n                    createdAt, isActive, lastLogin\n             FROM user WHERE userID = ?",
+      "SELECT password FROM user WHERE userID = ?",
+      "UPDATE user SET password = ? WHERE userID = ?"
+    ],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/captchaController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/captchaController.js",
+    "replaced": 837,
+    "rotated": 255,
+    "requires": [
+      "crypto",
+      "../config/database"
+    ],
+    "env": [],
+    "sql": [
+      "INSERT INTO captcha_sessions (captchaID, captchaText, ipAddress, purpose, expiresAt)\n             VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? MINUTE))",
+      "SELECT captchaText, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?",
+      "SELECT COUNT(*) as failedCount \n             FROM login_attempts \n             WHERE ipAddress = ? \n             AND attemptType = ? \n             AND isSuccess = FALSE \n             AND attemptTime > DATE_SUB(NOW(), INTERVAL ? MINUTE)",
+      "SELECT * FROM captcha_sessions \n             WHERE captchaID = ? \n             AND purpose = ?\n             AND isUsed = FALSE\n             AND expiresAt > NOW()",
+      "SELECT captchaID, purpose, isUsed, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?",
+      "UPDATE captcha_sessions SET isUsed = TRUE WHERE captchaID = ?",
+      "INSERT INTO login_attempts (ipAddress, userName, attemptType, isSuccess)\n             VALUES (?, ?, ?, ?)",
+      "DELETE FROM login_attempts \n             WHERE ipAddress = ? \n             AND attemptType = ? \n             AND isSuccess = FALSE",
+      "SELECT \n                blockID,\n                ipAddress,\n                blockType,\n                reason,\n                failedAttempts,\n                blockedAt,\n                expiresAt,\n                TIMESTAMPDIFF(SECOND, NOW(), expiresAt) as remainingSeconds\n             FROM ip_blocks\n             WHERE ipAddress = ?\n             AND isActive = TRUE\n             AND expiresAt > NOW()\n             AND (blockType = ? OR blockType = 'both')\n             ORDER BY blockedAt DESC\n             LIMIT 1",
+      "UPDATE ip_blocks SET isActive = FALSE WHERE ipAddress = ? AND isActive = TRUE",
+      "INSERT INTO ip_blocks (ipAddress, blockType, reason, failedAttempts, expiresAt)\n             VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? MINUTE))",
+      "SELECT COUNT(*) as failedCount \n             FROM login_attempts \n             WHERE ipAddress = ? \n             AND isSuccess = FALSE \n             AND attemptTime > DATE_SUB(NOW(), INTERVAL ? MINUTE)",
+      "DELETE FROM login_attempts WHERE ipAddress = ? AND isSuccess = FALSE",
+      "SELECT \n                blockID,\n                ipAddress,\n                blockType,\n                reason,\n                failedAttempts,\n                blockedAt,\n                expiresAt,\n                TIMESTAMPDIFF(SECOND, NOW(), expiresAt) as remainingSeconds,\n                TIMESTAMPDIFF(MINUTE, NOW(), expiresAt) as remainingMinutes\n             FROM ip_blocks\n             WHERE isActive = TRUE AND expiresAt > NOW()\n             ORDER BY blockedAt DESC"
+    ],
+    "urls": [
+      "\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\""
+    ],
+    "exports": [
+      "generateCaptcha",
+      "checkCaptchaRequired",
+      "verifyCaptcha",
+      "recordLoginAttempt",
+      "isCaptchaRequired",
+      "resetLoginAttempts",
+      "isIPBlocked",
+      "blockIP",
+      "unblockIP",
+      "checkAndBlockIP",
+      "getBlockedIPs",
+      "CAPTCHA_CONFIG",
+      "getClientIP"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/controllers/checkIpController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/checkIpController.js",
+    "replaced": 141,
+    "rotated": 91,
+    "requires": [
+      "../utils/axiosInstance",
+      "cheerio"
+    ],
+    "env": [
+      "NODE_ENV"
+    ],
+    "sql": [],
+    "urls": [
+      "https://kiemtraip.vn/",
+      "https://kiemtraip.vn",
+      "https://www.google.com/maps?q="
+    ],
+    "exports": [
+      "checkIpLocation"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/controllers/checkStatusController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/checkStatusController.js",
+    "replaced": 413,
+    "rotated": 141,
+    "requires": [
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../config/database",
+      "../utils/sanitize"
+    ],
+    "env": [],
+    "sql": [
+      "SELECT * FROM tool_setup WHERE STT = 1",
+      "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK\n                 FROM zalo_account WHERE UID = ? AND accStatus = 'Đang hoạt động'",
+      "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n                 FROM zalo_account za\n                 INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n                 WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'",
+      "SELECT totalMoney FROM user WHERE userID = ?",
+      "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+      "UPDATE user SET totalMoney = ? WHERE userID = ?",
+      "INSERT INTO auto_request (phoneNumber, UID, displayName, Detail, sendResult, fee_charged, use_system_account, sender_zalo_uid, created_at)\n             VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())",
+      "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)"
+    ],
+    "urls": [
+      "https://tt-friend-wpa.chat.zalo.me/api/friend/profile/get?zpw_ver=670&zpw_type=30&params=",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/",
+      "https://tt-profile-wpa.chat.zalo.me/api/social/friend/getprofiles/v2?zpw_ver=671&zpw_type=30"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/licenseController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/licenseController.js",
+    "replaced": 306,
+    "rotated": 138,
+    "requires": [
+      "../config/database",
+      "crypto"
+    ],
+    "env": [],
+    "sql": [
+      "\n      SELECT \n        productID,\n        productName,\n        productDesc,\n        productOnePrice,\n        productFivePrice,\n        productTenPrice,\n        productImage\n      FROM product\n      WHERE isActive = TRUE\n      ORDER BY productID ASC\n    ",
+      "SELECT * FROM product WHERE productID = ? AND isActive = TRUE",
+      "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+      "SELECT licenseKey FROM license WHERE licenseKey = ?",
+      "INSERT INTO license \n                        (licenseKey, productID, countDown, status, createdAt, updatedAt)\n                    VALUES (?, ?, ?, 0, NOW(), NOW())",
+      "INSERT INTO user_link_license \n                (userID, licenseKey, purchaseTime, pricePaid)\n            VALUES (?, ?, NOW(), ?)",
+      "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?",
+      "SELECT \n\t\t\t   l.*,\n\t\t\t   p.productName,\n\t\t\t   p.productImage,\n\t\t\t   CASE\n\t\t\t\t WHEN l.countDown = 1 THEN '1 lần'\n\t\t\t\t WHEN l.countDown = 5 THEN '5 lần'\n\t\t\t\t WHEN l.countDown = 10 THEN '10 lần'\n\t\t\t\t ELSE CONCAT(l.countDown, ' lần')\n\t\t\t   END AS licenseTypeName\n\t\t\tFROM license l\n\t\t\tINNER JOIN product p ON l.productID = p.productID\n\t\t\tWHERE l.licenseKey = ?",
+      "\n            SELECT           \n                ull.licenseKey           AS licenseKey,\n                p.productName            AS productName,\n                p.productImage           AS productImage,\n                ull.purchaseTime         AS purchaseTime,\n                ull.pricePaid            AS pricePaid,\n                l.activeTime             AS activeTime,\n                l.countDown              AS countDown,\n                l.status                 AS licenseStatus\n            FROM user_link_license ull\n            JOIN user u       ON ull.userID = u.userID\n            JOIN license l    ON ull.licenseKey = l.licenseKey\n            LEFT JOIN product p ON l.productID = p.productID\n            WHERE ull.userID = ?"
+    ],
+    "urls": [],
+    "exports": [
+      "getProducts",
+      "purchaseLicense",
+      "getUserLicenses"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/controllers/logsController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/logsController.js",
+    "replaced": 283,
+    "rotated": 152,
+    "requires": [
+      "../config/database",
+      "../middleware/apiLogger"
+    ],
+    "env": [
+      "NODE_ENV"
+    ],
+    "sql": [
+      "\n            SELECT * FROM v_api_logs_with_user\n            ORDER BY created_at DESC\n            LIMIT ? OFFSET ?\n        ",
+      "SELECT COUNT(*) as total FROM api_logs",
+      "\n            SELECT \n                userID,\n                userName,\n                COUNT(*) as request_count,\n                MAX(created_at) as last_request\n            FROM api_logs\n            WHERE userID IS NOT NULL\n            AND created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY userID, userName\n            ORDER BY request_count DESC\n            LIMIT 10\n        ",
+      "\n            SELECT \n                ip_address,\n                COUNT(*) as request_count,\n                COUNT(DISTINCT userID) as unique_users,\n                MAX(created_at) as last_request\n            FROM api_logs\n            WHERE created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY ip_address\n            ORDER BY request_count DESC\n            LIMIT 10\n        ",
+      "\n            SELECT \n                event_type,\n                event_category,\n                COUNT(*) as count\n            FROM api_logs\n            WHERE created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY event_type, event_category\n            ORDER BY count DESC\n            LIMIT 20\n        ",
+      "\n            SELECT \n                response_status,\n                COUNT(*) as count\n            FROM api_logs\n            WHERE response_status >= 400\n            AND created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY response_status\n            ORDER BY count DESC\n        ",
+      "SELECT * FROM v_api_logs_with_user WHERE 1=1"
+    ],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/sendImageByCardController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/sendImageByCardController.js",
+    "replaced": 721,
+    "rotated": 308,
+    "requires": [
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../config/database",
+      "../utils/sanitize"
+    ],
+    "env": [
+      "IMG_URL_V4",
+      "IMG_URL",
+      "IMG_URL_V6"
+    ],
+    "sql": [
+      "SELECT * FROM tool_setup WHERE STT = 1",
+      "SELECT \n                za.UID, \n                za.displayName, \n\t\t\t\tza.phoneNumber,\n                za.accStatus\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.accStatus = 'Đang hoạt động'\n             ORDER BY za.ImportTime DESC",
+      "SELECT totalMoney FROM user WHERE userID = ?",
+      "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'",
+      "SELECT userID, userName, totalMoney FROM user WHERE userID = ? FOR UPDATE",
+      "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail, fee_charged, use_system_account, sender_zalo_uid)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+      "UPDATE auto_request \n                 SET imageUrl = ?, sendResult = ?, Detail = ?, fee_charged = ?\n                 WHERE reqID = ?",
+      "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?"
+    ],
+    "urls": [
+      "https://tt-profile-wpa.chat.zalo.me/api/social/friend/getprofiles/v2?zpw_ver=671&zpw_type=30",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/",
+      "https://tt-files-wpa.chat.zalo.me/api/message/photo_original/send?zpw_ver=670&zpw_type=30&nretry=0",
+      "https://tt-chat2-wpa.chat.zalo.me/api/message/delete?zpw_ver=683&zpw_type=30&nretry=0"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/sendImageController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/sendImageController.js",
+    "replaced": 489,
+    "rotated": 191,
+    "requires": [
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../config/database",
+      "../utils/sanitize"
+    ],
+    "env": [],
+    "sql": [
+      "SELECT \n                za.UID,\n                za.displayName,\n                za.IMEI, \n                za.ENCRYPTION_KEY, \n                za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?",
+      "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail)\n                 VALUES (?, NULL, NULL, NULL, ?, 'FAILED', ?)",
+      "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+      "INSERT INTO auto_request \n             (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail)\n             VALUES (?, ?, ?, ?, ?, ?, ?)",
+      "SELECT ar.reqID,  ar.phoneNumber,  ar.displayName,  ar.Avatar,  ar.sendResult,  ar.Detail,  ar.created_at,  ar.fee_charged,  ar.use_system_account FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             ",
+      "SELECT COUNT(*) as total FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             ",
+      "SELECT \n                COUNT(*) as totalSent,\n                SUM(CASE WHEN ar.sendResult = 'SUCCESS' THEN 1 ELSE 0 END) as successCount,\n                SUM(CASE WHEN ar.sendResult = 'FAILED' THEN 1 ELSE 0 END) as failedCount,\n                SUM(CASE WHEN ar.sendResult = 'ERROR' THEN 1 ELSE 0 END) as errorCount\n             FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             WHERE ular.userID = ?"
+    ],
+    "urls": [
+      "https://tt-friend-wpa.chat.zalo.me/api/friend/profile/get?zpw_ver=670&zpw_type=30&params=",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/",
+      "https://tt-files-wpa.chat.zalo.me/api/message/photo_original/send?zpw_ver=670&zpw_type=30&nretry=0"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/sendImageV2Controller.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/sendImageV2Controller.js",
+    "replaced": 714,
+    "rotated": 378,
+    "requires": [
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../config/database",
+      "../utils/sanitize"
+    ],
+    "env": [
+      "IMG_URL_V4",
+      "IMG_URL",
+      "IMG_URL_V6"
+    ],
+    "sql": [
+      "SELECT * FROM tool_setup WHERE STT = 1",
+      "SELECT \n                za.UID, \n                za.displayName, \n                za.phoneNumber,\n                za.Avatar, \n                za.accStatus,\n                za.ImportTime,\n                FALSE as isSystemAccount\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?\n             ORDER BY za.ImportTime DESC",
+      "SELECT UID, accStatus FROM zalo_account WHERE UID = ?",
+      "SELECT totalMoney FROM user WHERE userID = ?",
+      "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK FROM zalo_account WHERE UID = ?",
+      "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n                 FROM zalo_account za\n                 INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n                 WHERE ulza.userID = ? AND za.UID = ?",
+      "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+      "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail, fee_charged, use_system_account, sender_zalo_uid)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+      "UPDATE auto_request \n                 SET imageUrl = ?, sendResult = ?, Detail = ?, fee_charged = ?\n                 WHERE reqID = ?",
+      "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?"
+    ],
+    "urls": [
+      "https://tt-friend-wpa.chat.zalo.me/api/friend/profile/get?zpw_ver=670&zpw_type=30&params=",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/",
+      "https://tt-files-wpa.chat.zalo.me/api/message/photo_original/send?zpw_ver=670&zpw_type=30&nretry=0",
+      "https://tt-chat2-wpa.chat.zalo.me/api/message/delete?zpw_ver=683&zpw_type=30&nretry=0"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/zaloAccountAutoController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/zaloAccountAutoController.js",
+    "replaced": 447,
+    "rotated": 142,
+    "requires": [
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../config/database",
+      "../utils/sanitize"
+    ],
+    "env": [],
+    "sql": [
+      "SELECT UID FROM zalo_account WHERE UID = ?",
+      "INSERT INTO zalo_account \n                 (UID, displayName, phoneNumber, Avatar, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK, accStatus)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, 'Đang hoạt động')",
+      "INSERT INTO user_link_zalo_account (userID, UID) VALUES (?, ?)"
+    ],
+    "urls": [
+      "https://wpa.chat.zalo.me/api/login/getLoginInfo",
+      "https://tt-profile-wpa.chat.zalo.me/api/social/profile/me-v2?zpw_ver=670&zpw_type=30&params=",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/zaloAccountController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/zaloAccountController.js",
+    "replaced": 485,
+    "rotated": 113,
+    "requires": [
+      "../config/database",
+      "crypto-js",
+      "../utils/axiosInstance",
+      "../utils/sanitize"
+    ],
+    "env": [],
+    "sql": [
+      "SELECT \n                za.UID, \n                za.displayName, \n                za.phoneNumber, \n                za.Avatar, \n                za.accStatus,\n                za.ImportTime\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?\n             ORDER BY za.ImportTime DESC",
+      "SELECT linkID FROM user_link_zalo_account WHERE userID = ? AND UID = ?",
+      "SELECT \n                UID, \n                displayName, \n                phoneNumber, \n                Avatar, \n                accStatus,\n                ImportTime\n             FROM zalo_account \n             WHERE UID = ?",
+      "SELECT UID FROM zalo_account WHERE UID = ?",
+      "INSERT INTO zalo_account \n                 (UID, displayName, phoneNumber, Avatar, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK, accStatus)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, 'Đang hoạt động')",
+      "INSERT INTO user_link_zalo_account (userID, UID) VALUES (?, ?)",
+      "Update Zalo Account:",
+      "SELECT * FROM user_link_zalo_account WHERE userID = ? AND UID = ?",
+      "UPDATE zalo_account SET ",
+      "Update Zalo Account Error:",
+      "DELETE FROM zalo_account WHERE UID = ?",
+      "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK \n             FROM zalo_account \n             WHERE UID = ?",
+      "UPDATE zalo_account SET accStatus = ? WHERE UID = ?",
+      "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK \n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?"
+    ],
+    "urls": [
+      "https://tt-profile-wpa.chat.zalo.me/api/social/profile/me-v2?zpw_ver=670&zpw_type=30&params=",
+      "https://chat.zalo.me",
+      "https://chat.zalo.me/"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/controllers/zaloOaController.js",
+    "out": "analysis/readable/ZL_SERVER/controllers/zaloOaController.js",
+    "replaced": 592,
+    "rotated": 164,
+    "requires": [
+      "../utils/axiosInstance",
+      "../config/database"
+    ],
+    "env": [
+      "SECRET_KEY",
+      "APP_ID",
+      "REFRESH_TOKEN"
+    ],
+    "sql": [
+      "SELECT * FROM zalo_token ORDER BY id DESC LIMIT 1",
+      "SELECT refresh_token FROM zalo_token ORDER BY id DESC LIMIT 1",
+      "DELETE FROM zalo_token",
+      "INSERT INTO zalo_token (access_token, refresh_token, expires_at) VALUES (?, ?, ?)",
+      "SELECT * FROM zalo_template ORDER BY id DESC",
+      "INSERT INTO zalo_template (template_id, detail, params) VALUES (?, ?, ?)",
+      "UPDATE zalo_template SET template_id = ?, detail = ?, params = ? WHERE id = ?",
+      "DELETE FROM zalo_template WHERE id = ?",
+      "SELECT * FROM oa_result ORDER BY id DESC",
+      "SELECT COUNT(*) as count FROM oa_result",
+      "SELECT params FROM zalo_template WHERE template_id = ?",
+      "INSERT INTO oa_result (order_code, phone_number, template_id, msg_id, result, detail) VALUES (?, ?, ?, ?, ?, ?)",
+      "UPDATE oa_result SET msg_status = ? WHERE id = ?",
+      "SELECT template_id FROM zalo_template"
+    ],
+    "urls": [
+      "https://oauth.zaloapp.com/v4/oa/access_token",
+      "https://business.openapi.zalo.me/message/template",
+      "https://openapi.zalo.me/v3.0/oa/message/template",
+      "https://business.openapi.zalo.me/message/status?message_id=",
+      "https://business.openapi.zalo.me/template/all?offset=0&limit=100&status=1&filterPreset=1",
+      "https://business.openapi.zalo.me/template/info/v2?template_id="
+    ],
+    "exports": [
+      "getToken",
+      "refreshToken",
+      "getTemplates",
+      "addTemplate",
+      "updateTemplate",
+      "deleteTemplate",
+      "getResults",
+      "sendTemplate",
+      "sendTemplateUid",
+      "previewData",
+      "getMessageStatus",
+      "fetchNewTemplates"
+    ]
+  },
+  {
+    "file": "ZL_SERVER/middleware/ipWhitelist.js",
+    "out": "analysis/readable/ZL_SERVER/middleware/ipWhitelist.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [],
+    "env": [
+      "INTERNAL_AUTH_KEY"
+    ],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/middleware/trustMiddleware.js",
+    "out": "analysis/readable/ZL_SERVER/middleware/trustMiddleware.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/adminProductRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/adminProductRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/adminProductController",
+      "../middleware/auth"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/adminRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/adminRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/adminController",
+      "../middleware/auth",
+      "../middleware/rateLimiter"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/authRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/authRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/authController",
+      "../middleware/auth",
+      "../middleware/rateLimiter",
+      "../middleware/csrf"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/captchaRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/captchaRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/captchaController",
+      "express-rate-limit"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/checkIpRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/checkIpRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "express-rate-limit",
+      "../controllers/checkIpController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/checkStatusRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/checkStatusRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/checkStatusController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/facebookToolsRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/facebookToolsRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "axios",
+      "../config/database"
+    ],
+    "env": [
+      "FB_SERVER_URL",
+      "INTERNAL_AUTH_KEY"
+    ],
+    "sql": [],
+    "urls": [
+      "http://127.0.0.1:3110",
+      "http://127.0.0.1:3100"
+    ],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/licenseRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/licenseRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/licenseController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/logsRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/logsRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/logsController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/sendImageByCardRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/sendImageByCardRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/sendImageByCardController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/sendImageRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/sendImageRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/sendImageController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/sendImageV2Routes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/sendImageV2Routes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/sendImageV2Controller"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/zaloAccountRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/zaloAccountRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/zaloAccountController",
+      "../controllers/zaloAccountAutoController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/routes/zaloOaRoutes.js",
+    "out": "analysis/readable/ZL_SERVER/routes/zaloOaRoutes.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "../controllers/zaloOaController"
+    ],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/utils/axiosInstance.js",
+    "out": "analysis/readable/ZL_SERVER/utils/axiosInstance.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "axios",
+      "socks-proxy-agent"
+    ],
+    "env": [
+      "PROXY_IP",
+      "PROXY_PORT",
+      "PROXY_USER",
+      "PROXY_PASS"
+    ],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/utils/sanitize.js",
+    "out": "analysis/readable/ZL_SERVER/utils/sanitize.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [],
+    "env": [],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "ZL_SERVER/zl_server.js",
+    "out": "analysis/readable/ZL_SERVER/zl_server.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "cors",
+      "morgan",
+      "path",
+      "dotenv",
+      "./config/database",
+      "./middleware/ipWhitelist",
+      "./middleware/trustMiddleware",
+      "./routes/zaloAccountRoutes",
+      "./routes/sendImageRoutes",
+      "./routes/sendImageV2Routes",
+      "./routes/sendImageByCardRoutes",
+      "./routes/checkStatusRoutes",
+      "./routes/licenseRoutes",
+      "./routes/checkIpRoutes",
+      "./routes/zaloOaRoutes"
+    ],
+    "env": [
+      "ZL_SERVER_HOST",
+      "ZL_SERVER_PORT",
+      "DB_HOST",
+      "DB_PORT",
+      "DB_NAME",
+      "DB_USER_ZL",
+      "DB_USER_MAIN",
+      "INTERNAL_AUTH_KEY"
+    ],
+    "sql": [],
+    "urls": [],
+    "exports": []
+  },
+  {
+    "file": "FILES_SERVER/files_server.js",
+    "out": "analysis/readable/FILES_SERVER/files_server.js",
+    "replaced": 0,
+    "rotated": 0,
+    "requires": [
+      "express",
+      "mysql2/promise",
+      "axios",
+      "fs",
+      "path",
+      "dotenv",
+      "multer"
+    ],
+    "env": [
+      "FILES_SERVER_PORT",
+      "FILES_SERVER_IMAGE_FILE",
+      "DOCKER_HOST",
+      "BOT_TOKEN",
+      "TELEGRAM_ID",
+      "DB_PORT",
+      "DB_USER_FILE",
+      "DB_PASSWORD_FILE",
+      "DB_NAME",
+      "FILES_SERVER_DOMAIN"
+    ],
+    "sql": [
+      "SELECT id, results FROM link_results_thumbnail WHERE link_id = ? LIMIT 1",
+      "UPDATE link_results_thumbnail SET results = ? WHERE id = ?",
+      "INSERT INTO link_results_thumbnail (link_id, results) VALUES (?, ?)",
+      "SELECT detail, phone_number FROM oa_result WHERE order_code = ?",
+      "UPDATE oa_result SET detail = ? WHERE order_code = ?",
+      "SELECT Detail, phoneNumber, displayName FROM auto_request WHERE reqID = ?",
+      "UPDATE auto_request SET Detail = ? WHERE reqID = ?"
+    ],
+    "urls": [
+      "║          FILES_SERVER đang chạy tại http://"
+    ],
+    "exports": []
+  }
+]

@@ -1,0 +1,10 @@
+node_modules/
+.env
+recovered/.env
+.runtime/
+source-documents/
+MANGUON.rar
+*.log
+image-server-logs.txt
+recovered/FILES_SERVER/files/
+dist/

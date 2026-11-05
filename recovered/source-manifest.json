@@ -1,0 +1,440 @@
+[
+  {
+    "document": "FILES_SERVER_files_server.js.docx",
+    "file": "recovered/FILES_SERVER/files_server.js",
+    "lines": 1,
+    "sha256": "099a180cd71ae2850c2bb78f81ba1db403c7361b6e639f1129cb70769d399a3f"
+  },
+  {
+    "document": "FRONTEND_admin-dashboard.js.docx",
+    "file": "recovered/FRONTEND/admin-dashboard.js",
+    "lines": 1,
+    "sha256": "c0142e48d4e9d567695d4dba8855e833b0b51cbc7e6a74505e8d014848f563c6"
+  },
+  {
+    "document": "FRONTEND_admin-dataleak.js.docx",
+    "file": "recovered/FRONTEND/admin-dataleak.js",
+    "lines": 1,
+    "sha256": "52b8a11600bdeaf84d3dd75f03a63957bbbad701bebc65e5e51983e99cb47384"
+  },
+  {
+    "document": "FRONTEND_admin-products.js.docx",
+    "file": "recovered/FRONTEND/admin-products.js",
+    "lines": 1,
+    "sha256": "5bb812add291e6690c1831bf80a3f06b183dbdfb69615b583fa13e9527aea5ed"
+  },
+  {
+    "document": "FRONTEND_admin-zalo.js.docx",
+    "file": "recovered/FRONTEND/admin-zalo.js",
+    "lines": 1,
+    "sha256": "e1bfa52f8e731341ec532a317f794bcd8055bb9817b21e4b5b9a89ccde73ca4b"
+  },
+  {
+    "document": "FRONTEND_dashboard_datafind.js.docx",
+    "file": "recovered/FRONTEND/dashboard_datafind.js",
+    "lines": 1,
+    "sha256": "4154d898bd992421fdbb5a2f2c17dedec42c06f74144818fee0d462ab5203b57"
+  },
+  {
+    "document": "FRONTEND_dashboard_link.js.docx",
+    "file": "recovered/FRONTEND/dashboard_link.js",
+    "lines": 1,
+    "sha256": "04a4577fa9008b7ea27e76f9bb9974eba6f09d1596ecfdb9f5a27996d7466081"
+  },
+  {
+    "document": "FRONTEND_dashboard_zalo_oa.js.docx",
+    "file": "recovered/FRONTEND/dashboard_zalo_oa.js",
+    "lines": 1,
+    "sha256": "6bb22d6772c669657ae642451c5e22094c5e038ec7aafc328fd3349b8b4d01e0"
+  },
+  {
+    "document": "FRONTEND_dashboard.js.docx",
+    "file": "recovered/FRONTEND/dashboard.js",
+    "lines": 1,
+    "sha256": "cdfa84d6cda047c144f909eb64ca3d99a4b127ef9306b6d009ed851946804e1c"
+  },
+  {
+    "document": "MAIN_SERVER_config_database.js.docx",
+    "file": "recovered/MAIN_SERVER/config/database.js",
+    "lines": 1,
+    "sha256": "e54f8dd1f52c05bea657ac27a08229d73042b3c28521900cd7e47a66015f746c"
+  },
+  {
+    "document": "MAIN_SERVER_controllers_adminController.js.docx",
+    "file": "recovered/MAIN_SERVER/controllers/adminController.js",
+    "lines": 1,
+    "sha256": "ddd5715d6a3f9a735c4aa4db81d04c651fb2398066a251a0c01d013e6afdc940"
+  },
+  {
+    "document": "MAIN_SERVER_controllers_adminProductController.js.docx",
+    "file": "recovered/MAIN_SERVER/controllers/adminProductController.js",
+    "lines": 1,
+    "sha256": "2558dd49e5eda815b3f778538d96e3eff28cabe056cfad7aa3ae19d0871a68b1"
+  },
+  {
+    "document": "MAIN_SERVER_controllers_authController.js.docx",
+    "file": "recovered/MAIN_SERVER/controllers/authController.js",
+    "lines": 1,
+    "sha256": "920b72fbe698eac524f1ae444d23ab32b36662cff191170d4aa2e3d5b93c8ccd"
+  },
+  {
+    "document": "MAIN_SERVER_controllers_captchaController.js.docx",
+    "file": "recovered/MAIN_SERVER/controllers/captchaController.js",
+    "lines": 1,
+    "sha256": "181917955e3d473892a1649ae6d42e59f06977a67b5ffb4bd71444c757ccb68b"
+  },
+  {
+    "document": "MAIN_SERVER_controllers_logsController.js.docx",
+    "file": "recovered/MAIN_SERVER/controllers/logsController.js",
+    "lines": 1,
+    "sha256": "f4261ea9beb5e5dbb4aec2f07c401d65f61c0411f48c508fde3b1b9a233d94ec"
+  },
+  {
+    "document": "MAIN_SERVER_main_server.js.docx",
+    "file": "recovered/MAIN_SERVER/main_server.js",
+    "lines": 1,
+    "sha256": "9a8fd078d65985cade1bf5c78825992194c89d19ea104a78e0a061dd46d2f8e6"
+  },
+  {
+    "document": "MAIN_SERVER_middleware_apiLogger.js.docx",
+    "file": "recovered/MAIN_SERVER/middleware/apiLogger.js",
+    "lines": 1,
+    "sha256": "8dd12f82f37b83d957b93074d45bfa951350cab7c741f15e24e22aee70728ff2"
+  },
+  {
+    "document": "MAIN_SERVER_middleware_auth.js.docx",
+    "file": "recovered/MAIN_SERVER/middleware/auth.js",
+    "lines": 1,
+    "sha256": "8abb14a4bfbf7926dbd7561a8c05a02cb864cc96fe5f58cfde1508a4c4ef573a"
+  },
+  {
+    "document": "MAIN_SERVER_middleware_csrf.js.docx",
+    "file": "recovered/MAIN_SERVER/middleware/csrf.js",
+    "lines": 1,
+    "sha256": "3b4297bd0c694109ba0d68fa8a2165881ee6acb615a5860d99c265aaa6ddf701"
+  },
+  {
+    "document": "MAIN_SERVER_middleware_rateLimiter.js.docx",
+    "file": "recovered/MAIN_SERVER/middleware/rateLimiter.js",
+    "lines": 1,
+    "sha256": "c8b2dfac127a8b755ae206e28e218c09ac1047edd68e1cafc5917a4bd87dee12"
+  },
+  {
+    "document": "MAIN_SERVER_routes_adminProductRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/adminProductRoutes.js",
+    "lines": 1,
+    "sha256": "83ca8eb53582d2aa78859b2a5db0a03c4fb3e2f4f6e326faf8df329683ecdd3d"
+  },
+  {
+    "document": "MAIN_SERVER_routes_adminRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/adminRoutes.js",
+    "lines": 1,
+    "sha256": "79d8f54545f59a5e5c9382b1e683b81d94f2beb52315550e182e59f176821cd3"
+  },
+  {
+    "document": "MAIN_SERVER_routes_authRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/authRoutes.js",
+    "lines": 1,
+    "sha256": "49d753c47363591ada6fc9765f423ab13caf1377e9fadf1c8a5054bdaabece38"
+  },
+  {
+    "document": "MAIN_SERVER_routes_captchaRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/captchaRoutes.js",
+    "lines": 1,
+    "sha256": "fcbea5b2be41d3d96a148c85f7d2d70a747ee1dbac6c23070a4513c3c40d7a4b"
+  },
+  {
+    "document": "MAIN_SERVER_routes_checkIpProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/checkIpProxyRoutes.js",
+    "lines": 1,
+    "sha256": "f4b853046403e6e9d1b8c659d2f26b7b805f3942a7035eb1e61e9d887d246e80"
+  },
+  {
+    "document": "MAIN_SERVER_routes_checkStatusProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/checkStatusProxyRoutes.js",
+    "lines": 1,
+    "sha256": "7c7ff51dff2743e323aaded67e1487d54fb6b860b1671b23891b44dcea50171e"
+  },
+  {
+    "document": "MAIN_SERVER_routes_dataFindProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/dataFindProxyRoutes.js",
+    "lines": 1,
+    "sha256": "d27843c4805fd5d85677673d204f35f170f92476dddaa783d976e9ed2c31d621"
+  },
+  {
+    "document": "MAIN_SERVER_routes_licenseProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/licenseProxyRoutes.js",
+    "lines": 1,
+    "sha256": "8bdf1419cd1965f9090bcd60c9c092c0352b18ef871d86557ade914dfb252592"
+  },
+  {
+    "document": "MAIN_SERVER_routes_linkProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/linkProxyRoutes.js",
+    "lines": 1,
+    "sha256": "a0dac9a3c569635e5c919d153120db42cf971ff5c17545d973bb983f416fddef"
+  },
+  {
+    "document": "MAIN_SERVER_routes_logsRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/logsRoutes.js",
+    "lines": 1,
+    "sha256": "1747b0698f5fb2fc9c975b1b332084dabe4d8a38580487ab6a1723fa854aed98"
+  },
+  {
+    "document": "MAIN_SERVER_routes_payosProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/payosProxyRoutes.js",
+    "lines": 1,
+    "sha256": "5d0b6dcf2eeaa9e4a751605e8f522aee4f6a02285176e96a346893f89d774264"
+  },
+  {
+    "document": "MAIN_SERVER_routes_sendImageByCardProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/sendImageByCardProxyRoutes.js",
+    "lines": 1,
+    "sha256": "5fcd90976cdb0605fda72ad32f60bc007e54b209bfcaac24469c88a9317ceaae"
+  },
+  {
+    "document": "MAIN_SERVER_routes_sendImageProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/sendImageProxyRoutes.js",
+    "lines": 1,
+    "sha256": "971572fa46db516ec3b93d538ad5f7be2546631943d79f7859582b5662f0db10"
+  },
+  {
+    "document": "MAIN_SERVER_routes_sendImageV2ProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/sendImageV2ProxyRoutes.js",
+    "lines": 1,
+    "sha256": "2ada0d7fdce2d3bba8016bd17a4268a73fbf9f116bf6bb526bff35774bb0ed7d"
+  },
+  {
+    "document": "MAIN_SERVER_routes_uploadProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/uploadProxyRoutes.js",
+    "lines": 1,
+    "sha256": "a00c1d64b4ceebfc3517d37a11ed72aef633d1d0b5e0c58ff3a30ace61d2f9e5"
+  },
+  {
+    "document": "MAIN_SERVER_routes_zaloAccountProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/zaloAccountProxyRoutes.js",
+    "lines": 1,
+    "sha256": "13e87aba69a98caca22bd730dd29fe2badc3916bc55d677c213d2397948333c4"
+  },
+  {
+    "document": "MAIN_SERVER_routes_zaloOaProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/zaloOaProxyRoutes.js",
+    "lines": 1,
+    "sha256": "cd2e1e0d5b5c7f983718c8de373d6492b13a0cc18a24a7cc376efc6dc665d85b"
+  },
+  {
+    "document": "MAIN_SERVER_routes_zaloTimerProxyRoutes.js.docx",
+    "file": "recovered/MAIN_SERVER/routes/zaloTimerProxyRoutes.js",
+    "lines": 1,
+    "sha256": "adb53d4166888f13937e4464922bba5b50814b6e3faa9f0857872ea58df5841e"
+  },
+  {
+    "document": "MAIN_SERVER_utils_sanitize.js.docx",
+    "file": "recovered/MAIN_SERVER/utils/sanitize.js",
+    "lines": 1,
+    "sha256": "fe660085188c65040df944f561e32ac431847974adfa0733158b6b39c6c0e304"
+  },
+  {
+    "document": "ZL_SERVER_config_database.js.docx",
+    "file": "recovered/ZL_SERVER/config/database.js",
+    "lines": 1,
+    "sha256": "2e35715185820a7502d2de65b3d01f552686cc56b9318d8585840985789d4cfa"
+  },
+  {
+    "document": "ZL_SERVER_controllers_adminController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/adminController.js",
+    "lines": 1,
+    "sha256": "f490b5fa9d4b441ccafa6ccdd3247f339fb826d6fbd68962696ba83d108da831"
+  },
+  {
+    "document": "ZL_SERVER_controllers_adminProductController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/adminProductController.js",
+    "lines": 1,
+    "sha256": "d7bb98e976614596b316d182b84bdcd0da1b2bc200f6020e20ca39bd9248290d"
+  },
+  {
+    "document": "ZL_SERVER_controllers_authController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/authController.js",
+    "lines": 1,
+    "sha256": "36dd712a7d166da2d12e4e7f31ba9bae089a5ca7b66979eb42eb205abae9cc82"
+  },
+  {
+    "document": "ZL_SERVER_controllers_captchaController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/captchaController.js",
+    "lines": 1,
+    "sha256": "3bdd0030e1e5acbd3329f8914417c63e5df95567cd4c98bfe0e4789c0ae322c2"
+  },
+  {
+    "document": "ZL_SERVER_controllers_checkIpController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/checkIpController.js",
+    "lines": 1,
+    "sha256": "49847bdde230cc327797b02f6324c3526b6765f33f5459fc5c3ea4ee03a541cd"
+  },
+  {
+    "document": "ZL_SERVER_controllers_checkStatusController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/checkStatusController.js",
+    "lines": 1,
+    "sha256": "0d90a99e18887575483364dc9b5e394397f350556a68296939a43e82b94f6136"
+  },
+  {
+    "document": "ZL_SERVER_controllers_licenseController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/licenseController.js",
+    "lines": 1,
+    "sha256": "2604b40adcdf50f8400d5caa1ab291068f61e32a91ff8b33ff03d057b951ebd3"
+  },
+  {
+    "document": "ZL_SERVER_controllers_logsController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/logsController.js",
+    "lines": 1,
+    "sha256": "1153cad142454bb1e72d496114af163395bbab53679f603f0676d915c8b3a7dd"
+  },
+  {
+    "document": "ZL_SERVER_controllers_sendImageByCardController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/sendImageByCardController.js",
+    "lines": 1,
+    "sha256": "431600ba0c6ff2649a08af627ff33294ee148c0964a1b6b4c4962c8d5bd85ae4"
+  },
+  {
+    "document": "ZL_SERVER_controllers_sendImageController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/sendImageController.js",
+    "lines": 1,
+    "sha256": "dc96d793152d3b4e8ccdc4372c81db1b0aebc5df5f9e62ea1e85243a2d7f220c"
+  },
+  {
+    "document": "ZL_SERVER_controllers_sendImageV2Controller.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/sendImageV2Controller.js",
+    "lines": 1,
+    "sha256": "bbd9c4e21a24ecec0ee8c247395d40f015dd0014ba4beea3aa873070dd2b0a8f"
+  },
+  {
+    "document": "ZL_SERVER_controllers_zaloAccountAutoController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/zaloAccountAutoController.js",
+    "lines": 1,
+    "sha256": "74da772bdde92e70be45071f459451ecc1315ee6b7126268524e792f679d38b3"
+  },
+  {
+    "document": "ZL_SERVER_controllers_zaloAccountController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/zaloAccountController.js",
+    "lines": 1,
+    "sha256": "6fb29f6935c45e19e7ed1ab5433b7d3c76d984e7b0d739ae2f84e97ad66782c3"
+  },
+  {
+    "document": "ZL_SERVER_controllers_zaloOaController.js.docx",
+    "file": "recovered/ZL_SERVER/controllers/zaloOaController.js",
+    "lines": 1,
+    "sha256": "91aea9d3574d67ad879f3178e916c72d15977a9919f44c7e140726eb820dc101"
+  },
+  {
+    "document": "ZL_SERVER_middleware_ipWhitelist.js.docx",
+    "file": "recovered/ZL_SERVER/middleware/ipWhitelist.js",
+    "lines": 1,
+    "sha256": "4636cdd7a71c7f6beb720e0b176eee9c3aafe409034fa0b0dea94ec9b609c2cc"
+  },
+  {
+    "document": "ZL_SERVER_middleware_trustMiddleware.js.docx",
+    "file": "recovered/ZL_SERVER/middleware/trustMiddleware.js",
+    "lines": 1,
+    "sha256": "d471a825192b044fed0ad27c1e63a645e3e6f9634971552247f9e093e52995af"
+  },
+  {
+    "document": "ZL_SERVER_routes_adminProductRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/adminProductRoutes.js",
+    "lines": 1,
+    "sha256": "83ca8eb53582d2aa78859b2a5db0a03c4fb3e2f4f6e326faf8df329683ecdd3d"
+  },
+  {
+    "document": "ZL_SERVER_routes_adminRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/adminRoutes.js",
+    "lines": 1,
+    "sha256": "d6176a60a4187900cdb90df24166c8a2a0b47ccd7d38f88f09329ed516070d64"
+  },
+  {
+    "document": "ZL_SERVER_routes_authRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/authRoutes.js",
+    "lines": 1,
+    "sha256": "49d753c47363591ada6fc9765f423ab13caf1377e9fadf1c8a5054bdaabece38"
+  },
+  {
+    "document": "ZL_SERVER_routes_captchaRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/captchaRoutes.js",
+    "lines": 1,
+    "sha256": "fcbea5b2be41d3d96a148c85f7d2d70a747ee1dbac6c23070a4513c3c40d7a4b"
+  },
+  {
+    "document": "ZL_SERVER_routes_checkIpRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/checkIpRoutes.js",
+    "lines": 1,
+    "sha256": "a3f35c2895a956f7fb72764f979465f1abec0562b4c97a9e4eef08c8d6b2dcdb"
+  },
+  {
+    "document": "ZL_SERVER_routes_checkStatusRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/checkStatusRoutes.js",
+    "lines": 1,
+    "sha256": "e5b3d5381d4b22186e2c689ea2a512221a32958e2621800bbee43c581ab05698"
+  },
+  {
+    "document": "ZL_SERVER_routes_facebookToolsRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/facebookToolsRoutes.js",
+    "lines": 1,
+    "sha256": "3fdc2f5f817d932bf7bc4e24e7c14dcd475b2036b694881accf0c75d7de26daa"
+  },
+  {
+    "document": "ZL_SERVER_routes_licenseRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/licenseRoutes.js",
+    "lines": 1,
+    "sha256": "ae83ffe0ff14d245378a4205ab2724e530205326addc426dec543782fd0aca8e"
+  },
+  {
+    "document": "ZL_SERVER_routes_logsRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/logsRoutes.js",
+    "lines": 1,
+    "sha256": "1747b0698f5fb2fc9c975b1b332084dabe4d8a38580487ab6a1723fa854aed98"
+  },
+  {
+    "document": "ZL_SERVER_routes_sendImageByCardRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/sendImageByCardRoutes.js",
+    "lines": 1,
+    "sha256": "3923258fef171e4015257086d9a91c6a7156d32501d1e32cc575ab81ed9c4990"
+  },
+  {
+    "document": "ZL_SERVER_routes_sendImageRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/sendImageRoutes.js",
+    "lines": 1,
+    "sha256": "b38754253eba0f6e762cf2d0cc67738121df2502b93624576fcf6a7a6e234d19"
+  },
+  {
+    "document": "ZL_SERVER_routes_sendImageV2Routes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/sendImageV2Routes.js",
+    "lines": 1,
+    "sha256": "db86b570587ec4f0de3b154dd517fdfd44724b4fff848b529c8ebce56dcddbf5"
+  },
+  {
+    "document": "ZL_SERVER_routes_zaloAccountRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/zaloAccountRoutes.js",
+    "lines": 1,
+    "sha256": "03f460603fab82848e6e97a450b1a6bf1de91fdbd9ae1c45d143ef86e2927b9a"
+  },
+  {
+    "document": "ZL_SERVER_routes_zaloOaRoutes.js.docx",
+    "file": "recovered/ZL_SERVER/routes/zaloOaRoutes.js",
+    "lines": 1,
+    "sha256": "66b14d283180a389b9b5b9e1aaa8981e8f0941860f33b25400ea068a5b94ce46"
+  },
+  {
+    "document": "ZL_SERVER_utils_axiosInstance.js.docx",
+    "file": "recovered/ZL_SERVER/utils/axiosInstance.js",
+    "lines": 1,
+    "sha256": "29502842292bd4e6278809008c9dd3601c84aff619681c2ca9d796cd1ecb1d46"
+  },
+  {
+    "document": "ZL_SERVER_utils_sanitize.js.docx",
+    "file": "recovered/ZL_SERVER/utils/sanitize.js",
+    "lines": 1,
+    "sha256": "fe660085188c65040df944f561e32ac431847974adfa0733158b6b39c6c0e304"
+  },
+  {
+    "document": "ZL_SERVER_zl_server.js.docx",
+    "file": "recovered/ZL_SERVER/zl_server.js",
+    "lines": 1,
+    "sha256": "58fceda83100f445461f3a9f8c448a87a36e10ff5bdb67344e096b0bf32352bf"
+  }
+]

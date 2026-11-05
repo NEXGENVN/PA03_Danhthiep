@@ -1,0 +1,239 @@
+{
+  "note": "Static string literals only; not executed SQL. Dynamic strings may be partial. Template literal SQL from non-obfuscated facebookToolsRoutes is not in this catalog.",
+  "files": [
+    {
+      "source": "recovered/ZL_SERVER/controllers/adminController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/adminController.js",
+      "sql": [
+        "SELECT * FROM user WHERE userName = ?",
+        "UPDATE user SET lastLogin = NOW(), lastIP = ? WHERE userID = ?",
+        "\n            SELECT \n                userID,\n                userName,\n                email,\n                lastIP,\n                lastLogin,\n                totalMoney,\n                userRole,\n                createdAt,\n                updatedAt,\n                isActive\n            FROM user\n            ORDER BY createdAt DESC\n        ",
+        "SELECT userID, userName, email, lastIP, lastLogin, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?",
+        "SELECT * FROM user WHERE userID = ?",
+        "SELECT userID FROM user WHERE userName = ? AND userID != ?",
+        "SELECT userID FROM user WHERE email = ? AND userID != ?",
+        "UPDATE user SET ",
+        "SELECT userID FROM user WHERE userID = ?",
+        "DELETE FROM user WHERE userID = ?",
+        "SELECT userID FROM user WHERE userName = ?",
+        "SELECT userID FROM user WHERE email = ?",
+        "INSERT INTO user (userName, password, email, totalMoney, userRole, isActive, createdAt, updatedAt) \n             VALUES (?, ?, ?, ?, ?, 1, NOW(), NOW())",
+        "SELECT userID, userName, email, totalMoney, userRole, createdAt, updatedAt, isActive FROM user WHERE userID = ?",
+        "SELECT COUNT(*) as count FROM user",
+        "SELECT COUNT(*) as count FROM user WHERE isActive = 1",
+        "SELECT COUNT(*) as count FROM user WHERE userRole = 1",
+        "SELECT COUNT(*) as count FROM zalo_account",
+        "SELECT COUNT(*) as count FROM auto_request",
+        "SELECT COUNT(*) as count FROM auto_request WHERE sendResult = \"SUCCESS\"",
+        "SELECT SUM(fee_charged) as total FROM auto_request WHERE fee_charged > 0",
+        "SELECT * FROM tool_setup LIMIT 1",
+        "INSERT INTO tool_setup (uid_zalo_system, zalo_system_money, zalo_custom_money) VALUES (NULL, 30000.00, 20000.00)",
+        "SELECT UID, displayName, phoneNumber, Avatar, accStatus FROM zalo_account WHERE UID = ?",
+        "SELECT UID FROM zalo_account WHERE UID = ?",
+        "SELECT STT FROM tool_setup LIMIT 1",
+        "INSERT INTO tool_setup (uid_zalo_system, zalo_system_money, zalo_custom_money) VALUES (?, ?, ?)",
+        "UPDATE tool_setup SET ",
+        "SELECT \n                UID, \n                displayName, \n                phoneNumber, \n                Avatar, \n                accStatus,\n                ImportTime\n             FROM zalo_account\n             ORDER BY ImportTime DESC",
+        "\n            SELECT \n                ar.reqID,\n                ar.phoneNumber,\n                ar.UID,\n                ar.displayName,\n                ar.imageUrl,\n                ar.sendResult,\n                ar.Detail,\n                ar.created_at,\n                ar.fee_charged,\n                ar.use_system_account,\n                ar.sender_zalo_uid,\n                COALESCE(u.userName, 'N/A') as userName,\n                COALESCE(u.userID, 0) as userID\n            FROM auto_request ar\n            LEFT JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n            LEFT JOIN user u ON ular.userID = u.userID\n            ORDER BY ar.created_at DESC\n            LIMIT 1000\n        "
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/adminProductController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/adminProductController.js",
+      "sql": [
+        "\n            SELECT \n                productID,\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive,\n                createdAt,\n                updatedAt\n            FROM product\n            ORDER BY productID ASC\n        ",
+        "\n            SELECT \n                productID,\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive,\n                createdAt,\n                updatedAt\n            FROM product\n            WHERE productID = ?\n        ",
+        "\n            INSERT INTO product (\n                productName,\n                productDesc,\n                productOnePrice,\n                productFivePrice,\n                productTenPrice,\n                productImage,\n                isActive\n            ) VALUES (?, ?, ?, ?, ?, ?, ?)\n        ",
+        "SELECT productID FROM product WHERE productID = ?",
+        "\n            SELECT COUNT(*) as licenseCount \n            FROM license \n            WHERE productID = ?\n        ",
+        "UPDATE product SET isActive = FALSE WHERE productID = ?",
+        "DELETE FROM product WHERE productID = ?",
+        "\n            SELECT \n                p.productID,\n                p.productName,\n                p.isActive,\n                COUNT(l.licenseID) as totalLicenses,\n                SUM(CASE WHEN l.isActivated = TRUE THEN 1 ELSE 0 END) as activatedLicenses,\n                SUM(l.pricePaid) as totalRevenue\n            FROM product p\n            LEFT JOIN license l ON p.productID = l.productID\n            GROUP BY p.productID, p.productName, p.isActive\n            ORDER BY totalRevenue DESC\n        ",
+        "\n            SELECT COUNT(*) as total\n            FROM license l\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            ",
+        "\n            SELECT \n                l.licenseKey,\n                l.status,\n                p.productID,\n                p.productName,\n                p.productImage,\n                u.userID,\n                u.userName,\n                u.email,\n                ull.pricePaid,\n                ull.purchaseTime\n            FROM license l\n            INNER JOIN product p ON l.productID = p.productID\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            ",
+        "\n            SELECT \n                l.licenseKey,\n                l.activeTime,\n                l.createdAt,\n                l.updatedAt,\n                l.status,\n                l.countDown,\n                p.productID,\n                p.productName,\n                p.productImage,\n                u.userID,\n                u.userName,\n                u.email,\n                ull.pricePaid,\n                ull.purchaseTime\n            FROM license l\n            INNER JOIN product p ON l.productID = p.productID\n            LEFT JOIN user_link_license ull ON l.licenseKey = ull.licenseKey\n            LEFT JOIN user u ON ull.userID = u.userID\n            WHERE l.licenseKey = ?\n        ",
+        "SELECT * FROM license WHERE licenseKey = ?",
+        "DELETE FROM user_link_license WHERE licenseKey = ?",
+        "DELETE FROM license WHERE licenseKey = ?",
+        "\n            SELECT \n                COUNT(*) as totalLicenses,\n                SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) as activatedLicenses,\n                SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) as notActivatedLicenses,\n                SUM(CASE WHEN status = 1 AND countDown > 0 THEN 1 ELSE 0 END) as activeLicenses,\n                SUM(CASE WHEN status = 2 OR countDown = 0 THEN 1 ELSE 0 END) as expiredLicenses,\n                COUNT(DISTINCT productID) as totalProducts,\n                (SELECT SUM(pricePaid) FROM user_link_license) as totalRevenue,\n                (SELECT COUNT(DISTINCT userID) FROM user_link_license) as totalUsers\n            FROM license\n        "
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/authController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/authController.js",
+      "sql": [
+        "SELECT userID FROM user WHERE userName = ? OR email = ?",
+        "INSERT INTO user (userName, password, email, userRole, totalMoney, lastIP) \n             VALUES (?, ?, ?, 2, 0.00, ?)",
+        "SELECT userID, userName, password, email, userRole, isActive FROM user WHERE userName = ?",
+        "SELECT userID, userName, email, totalMoney, userRole, \n                    createdAt, isActive, lastLogin\n             FROM user WHERE userID = ?",
+        "SELECT password FROM user WHERE userID = ?",
+        "UPDATE user SET password = ? WHERE userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/captchaController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/captchaController.js",
+      "sql": [
+        "INSERT INTO captcha_sessions (captchaID, captchaText, ipAddress, purpose, expiresAt)\n             VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? MINUTE))",
+        "SELECT captchaText, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?",
+        "SELECT COUNT(*) as failedCount \n             FROM login_attempts \n             WHERE ipAddress = ? \n             AND attemptType = ? \n             AND isSuccess = FALSE \n             AND attemptTime > DATE_SUB(NOW(), INTERVAL ? MINUTE)",
+        "SELECT * FROM captcha_sessions \n             WHERE captchaID = ? \n             AND purpose = ?\n             AND isUsed = FALSE\n             AND expiresAt > NOW()",
+        "SELECT captchaID, purpose, isUsed, expiresAt, NOW() as currentTime FROM captcha_sessions WHERE captchaID = ?",
+        "UPDATE captcha_sessions SET isUsed = TRUE WHERE captchaID = ?",
+        "INSERT INTO login_attempts (ipAddress, userName, attemptType, isSuccess)\n             VALUES (?, ?, ?, ?)",
+        "DELETE FROM login_attempts \n             WHERE ipAddress = ? \n             AND attemptType = ? \n             AND isSuccess = FALSE",
+        "SELECT \n                blockID,\n                ipAddress,\n                blockType,\n                reason,\n                failedAttempts,\n                blockedAt,\n                expiresAt,\n                TIMESTAMPDIFF(SECOND, NOW(), expiresAt) as remainingSeconds\n             FROM ip_blocks\n             WHERE ipAddress = ?\n             AND isActive = TRUE\n             AND expiresAt > NOW()\n             AND (blockType = ? OR blockType = 'both')\n             ORDER BY blockedAt DESC\n             LIMIT 1",
+        "UPDATE ip_blocks SET isActive = FALSE WHERE ipAddress = ? AND isActive = TRUE",
+        "INSERT INTO ip_blocks (ipAddress, blockType, reason, failedAttempts, expiresAt)\n             VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL ? MINUTE))",
+        "SELECT COUNT(*) as failedCount \n             FROM login_attempts \n             WHERE ipAddress = ? \n             AND isSuccess = FALSE \n             AND attemptTime > DATE_SUB(NOW(), INTERVAL ? MINUTE)",
+        "DELETE FROM login_attempts WHERE ipAddress = ? AND isSuccess = FALSE",
+        "SELECT \n                blockID,\n                ipAddress,\n                blockType,\n                reason,\n                failedAttempts,\n                blockedAt,\n                expiresAt,\n                TIMESTAMPDIFF(SECOND, NOW(), expiresAt) as remainingSeconds,\n                TIMESTAMPDIFF(MINUTE, NOW(), expiresAt) as remainingMinutes\n             FROM ip_blocks\n             WHERE isActive = TRUE AND expiresAt > NOW()\n             ORDER BY blockedAt DESC"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/checkStatusController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/checkStatusController.js",
+      "sql": [
+        "SELECT * FROM tool_setup WHERE STT = 1",
+        "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK\n                 FROM zalo_account WHERE UID = ? AND accStatus = 'Đang hoạt động'",
+        "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n                 FROM zalo_account za\n                 INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n                 WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'",
+        "SELECT totalMoney FROM user WHERE userID = ?",
+        "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+        "UPDATE user SET totalMoney = ? WHERE userID = ?",
+        "INSERT INTO auto_request (phoneNumber, UID, displayName, Detail, sendResult, fee_charged, use_system_account, sender_zalo_uid, created_at)\n             VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())",
+        "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/licenseController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/licenseController.js",
+      "sql": [
+        "\n      SELECT \n        productID,\n        productName,\n        productDesc,\n        productOnePrice,\n        productFivePrice,\n        productTenPrice,\n        productImage\n      FROM product\n      WHERE isActive = TRUE\n      ORDER BY productID ASC\n    ",
+        "SELECT * FROM product WHERE productID = ? AND isActive = TRUE",
+        "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+        "SELECT licenseKey FROM license WHERE licenseKey = ?",
+        "INSERT INTO license \n                        (licenseKey, productID, countDown, status, createdAt, updatedAt)\n                    VALUES (?, ?, ?, 0, NOW(), NOW())",
+        "INSERT INTO user_link_license \n                (userID, licenseKey, purchaseTime, pricePaid)\n            VALUES (?, ?, NOW(), ?)",
+        "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?",
+        "SELECT \n\t\t\t   l.*,\n\t\t\t   p.productName,\n\t\t\t   p.productImage,\n\t\t\t   CASE\n\t\t\t\t WHEN l.countDown = 1 THEN '1 lần'\n\t\t\t\t WHEN l.countDown = 5 THEN '5 lần'\n\t\t\t\t WHEN l.countDown = 10 THEN '10 lần'\n\t\t\t\t ELSE CONCAT(l.countDown, ' lần')\n\t\t\t   END AS licenseTypeName\n\t\t\tFROM license l\n\t\t\tINNER JOIN product p ON l.productID = p.productID\n\t\t\tWHERE l.licenseKey = ?",
+        "\n            SELECT           \n                ull.licenseKey           AS licenseKey,\n                p.productName            AS productName,\n                p.productImage           AS productImage,\n                ull.purchaseTime         AS purchaseTime,\n                ull.pricePaid            AS pricePaid,\n                l.activeTime             AS activeTime,\n                l.countDown              AS countDown,\n                l.status                 AS licenseStatus\n            FROM user_link_license ull\n            JOIN user u       ON ull.userID = u.userID\n            JOIN license l    ON ull.licenseKey = l.licenseKey\n            LEFT JOIN product p ON l.productID = p.productID\n            WHERE ull.userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/logsController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/logsController.js",
+      "sql": [
+        "\n            SELECT * FROM v_api_logs_with_user\n            ORDER BY created_at DESC\n            LIMIT ? OFFSET ?\n        ",
+        "SELECT COUNT(*) as total FROM api_logs",
+        "\n            SELECT \n                userID,\n                userName,\n                COUNT(*) as request_count,\n                MAX(created_at) as last_request\n            FROM api_logs\n            WHERE userID IS NOT NULL\n            AND created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY userID, userName\n            ORDER BY request_count DESC\n            LIMIT 10\n        ",
+        "\n            SELECT \n                ip_address,\n                COUNT(*) as request_count,\n                COUNT(DISTINCT userID) as unique_users,\n                MAX(created_at) as last_request\n            FROM api_logs\n            WHERE created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY ip_address\n            ORDER BY request_count DESC\n            LIMIT 10\n        ",
+        "\n            SELECT \n                event_type,\n                event_category,\n                COUNT(*) as count\n            FROM api_logs\n            WHERE created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY event_type, event_category\n            ORDER BY count DESC\n            LIMIT 20\n        ",
+        "\n            SELECT \n                response_status,\n                COUNT(*) as count\n            FROM api_logs\n            WHERE response_status >= 400\n            AND created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)\n            GROUP BY response_status\n            ORDER BY count DESC\n        ",
+        "SELECT * FROM v_api_logs_with_user WHERE 1=1"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/sendImageByCardController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/sendImageByCardController.js",
+      "sql": [
+        "SELECT * FROM tool_setup WHERE STT = 1",
+        "SELECT \n                za.UID, \n                za.displayName, \n\t\t\t\tza.phoneNumber,\n                za.accStatus\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.accStatus = 'Đang hoạt động'\n             ORDER BY za.ImportTime DESC",
+        "SELECT totalMoney FROM user WHERE userID = ?",
+        "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ? AND za.UID = ? AND za.accStatus = 'Đang hoạt động'",
+        "SELECT userID, userName, totalMoney FROM user WHERE userID = ? FOR UPDATE",
+        "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail, fee_charged, use_system_account, sender_zalo_uid)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+        "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/sendImageController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/sendImageController.js",
+      "sql": [
+        "SELECT \n                za.UID,\n                za.displayName,\n                za.IMEI, \n                za.ENCRYPTION_KEY, \n                za.COOKIE_ZPW_SEK\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?",
+        "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail)\n                 VALUES (?, NULL, NULL, NULL, ?, 'FAILED', ?)",
+        "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+        "INSERT INTO auto_request \n             (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail)\n             VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "SELECT ar.reqID,  ar.phoneNumber,  ar.displayName,  ar.Avatar,  ar.sendResult,  ar.Detail,  ar.created_at,  ar.fee_charged,  ar.use_system_account FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             ",
+        "SELECT COUNT(*) as total FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             ",
+        "SELECT \n                COUNT(*) as totalSent,\n                SUM(CASE WHEN ar.sendResult = 'SUCCESS' THEN 1 ELSE 0 END) as successCount,\n                SUM(CASE WHEN ar.sendResult = 'FAILED' THEN 1 ELSE 0 END) as failedCount,\n                SUM(CASE WHEN ar.sendResult = 'ERROR' THEN 1 ELSE 0 END) as errorCount\n             FROM auto_request ar\n             INNER JOIN user_link_auto_request ular ON ar.reqID = ular.reqID\n             WHERE ular.userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/sendImageV2Controller.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/sendImageV2Controller.js",
+      "sql": [
+        "SELECT * FROM tool_setup WHERE STT = 1",
+        "SELECT \n                za.UID, \n                za.displayName, \n                za.phoneNumber,\n                za.Avatar, \n                za.accStatus,\n                za.ImportTime,\n                FALSE as isSystemAccount\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?\n             ORDER BY za.ImportTime DESC",
+        "SELECT UID, accStatus FROM zalo_account WHERE UID = ?",
+        "SELECT totalMoney FROM user WHERE userID = ?",
+        "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK FROM zalo_account WHERE UID = ?",
+        "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK\n                 FROM zalo_account za\n                 INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n                 WHERE ulza.userID = ? AND za.UID = ?",
+        "SELECT totalMoney FROM user WHERE userID = ? FOR UPDATE",
+        "INSERT INTO auto_request \n                 (phoneNumber, UID, displayName, Avatar, imageUrl, sendResult, Detail, fee_charged, use_system_account, sender_zalo_uid)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO user_link_auto_request (userID, reqID) VALUES (?, ?)",
+        "UPDATE user SET totalMoney = totalMoney - ? WHERE userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/zaloAccountAutoController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/zaloAccountAutoController.js",
+      "sql": [
+        "SELECT UID FROM zalo_account WHERE UID = ?",
+        "INSERT INTO zalo_account \n                 (UID, displayName, phoneNumber, Avatar, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK, accStatus)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, 'Đang hoạt động')",
+        "INSERT INTO user_link_zalo_account (userID, UID) VALUES (?, ?)"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/zaloAccountController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/zaloAccountController.js",
+      "sql": [
+        "SELECT \n                za.UID, \n                za.displayName, \n                za.phoneNumber, \n                za.Avatar, \n                za.accStatus,\n                za.ImportTime\n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?\n             ORDER BY za.ImportTime DESC",
+        "SELECT linkID FROM user_link_zalo_account WHERE userID = ? AND UID = ?",
+        "SELECT \n                UID, \n                displayName, \n                phoneNumber, \n                Avatar, \n                accStatus,\n                ImportTime\n             FROM zalo_account \n             WHERE UID = ?",
+        "SELECT UID FROM zalo_account WHERE UID = ?",
+        "INSERT INTO zalo_account \n                 (UID, displayName, phoneNumber, Avatar, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK, accStatus)\n                 VALUES (?, ?, ?, ?, ?, ?, ?, 'Đang hoạt động')",
+        "INSERT INTO user_link_zalo_account (userID, UID) VALUES (?, ?)",
+        "SELECT * FROM user_link_zalo_account WHERE userID = ? AND UID = ?",
+        "UPDATE zalo_account SET ",
+        "DELETE FROM zalo_account WHERE UID = ?",
+        "SELECT UID, displayName, IMEI, ENCRYPTION_KEY, COOKIE_ZPW_SEK \n             FROM zalo_account \n             WHERE UID = ?",
+        "UPDATE zalo_account SET accStatus = ? WHERE UID = ?",
+        "SELECT za.UID, za.displayName, za.IMEI, za.ENCRYPTION_KEY, za.COOKIE_ZPW_SEK \n             FROM zalo_account za\n             INNER JOIN user_link_zalo_account ulza ON za.UID = ulza.UID\n             WHERE ulza.userID = ?"
+      ]
+    },
+    {
+      "source": "recovered/ZL_SERVER/controllers/zaloOaController.js",
+      "readable": "analysis/readable/ZL_SERVER/controllers/zaloOaController.js",
+      "sql": [
+        "SELECT * FROM zalo_token ORDER BY id DESC LIMIT 1",
+        "SELECT refresh_token FROM zalo_token ORDER BY id DESC LIMIT 1",
+        "DELETE FROM zalo_token",
+        "INSERT INTO zalo_token (access_token, refresh_token, expires_at) VALUES (?, ?, ?)",
+        "SELECT * FROM zalo_template ORDER BY id DESC",
+        "INSERT INTO zalo_template (template_id, detail, params) VALUES (?, ?, ?)",
+        "UPDATE zalo_template SET template_id = ?, detail = ?, params = ? WHERE id = ?",
+        "DELETE FROM zalo_template WHERE id = ?",
+        "SELECT * FROM oa_result ORDER BY id DESC",
+        "SELECT COUNT(*) as count FROM oa_result",
+        "SELECT params FROM zalo_template WHERE template_id = ?",
+        "INSERT INTO oa_result (order_code, phone_number, template_id, msg_id, result, detail) VALUES (?, ?, ?, ?, ?, ?)",
+        "UPDATE oa_result SET msg_status = ? WHERE id = ?",
+        "SELECT template_id FROM zalo_template"
+      ]
+    },
+    {
+      "source": "recovered/FILES_SERVER/files_server.js",
+      "readable": "analysis/readable/FILES_SERVER/files_server.js",
+      "sql": [
+        "SELECT id, results FROM link_results_thumbnail WHERE link_id = ? LIMIT 1",
+        "UPDATE link_results_thumbnail SET results = ? WHERE id = ?",
+        "INSERT INTO link_results_thumbnail (link_id, results) VALUES (?, ?)",
+        "SELECT detail, phone_number FROM oa_result WHERE order_code = ?",
+        "UPDATE oa_result SET detail = ? WHERE order_code = ?",
+        "SELECT Detail, phoneNumber, displayName FROM auto_request WHERE reqID = ?",
+        "UPDATE auto_request SET Detail = ? WHERE reqID = ?"
+      ]
+    }
+  ]
+}

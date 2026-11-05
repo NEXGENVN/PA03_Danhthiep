@@ -1,0 +1,378 @@
+{
+  "checkedAt": "2026-11-02T07:27:41.187Z",
+  "routes": [
+    {
+      "route": "#overview",
+      "ok": true,
+      "heading": "Một ngày làm việc hiệu quả."
+    },
+    {
+      "route": "#accounts",
+      "ok": true,
+      "heading": "Tài khoản Zalo"
+    },
+    {
+      "route": "#send-phone",
+      "ok": true,
+      "heading": "Gửi ảnh theo số điện thoại"
+    },
+    {
+      "route": "#send-card",
+      "ok": true,
+      "heading": "Gửi ảnh qua danh thiếp"
+    },
+    {
+      "route": "#check-status",
+      "ok": true,
+      "heading": "Kiểm tra lần hoạt động"
+    },
+    {
+      "route": "#history",
+      "ok": true,
+      "heading": "Lịch sử yêu cầu"
+    },
+    {
+      "route": "#schedules",
+      "ok": true,
+      "heading": "Lịch hẹn Zalo"
+    },
+    {
+      "route": "#oa-send",
+      "ok": true,
+      "heading": "Gửi tin nhắn OA"
+    },
+    {
+      "route": "#oa-templates",
+      "ok": true,
+      "heading": "Mẫu tin nhắn OA"
+    },
+    {
+      "route": "#oa-results",
+      "ok": true,
+      "heading": "Kết quả tin nhắn OA"
+    },
+    {
+      "route": "#oa-token",
+      "ok": true,
+      "heading": "Kết nối Zalo OA"
+    },
+    {
+      "route": "#ip",
+      "ok": true,
+      "heading": "Tra cứu vị trí IP"
+    },
+    {
+      "route": "#leak",
+      "ok": true,
+      "heading": "Tra cứu dữ liệu rò rỉ"
+    },
+    {
+      "route": "#links",
+      "ok": true,
+      "heading": "Bộ công cụ Link"
+    },
+    {
+      "route": "#store",
+      "ok": true,
+      "heading": "Cửa hàng license"
+    },
+    {
+      "route": "#licenses",
+      "ok": true,
+      "heading": "License đã mua"
+    },
+    {
+      "route": "#deposits",
+      "ok": true,
+      "heading": "Nạp tiền vào ví"
+    },
+    {
+      "route": "#admin-users",
+      "ok": true,
+      "heading": "Quản trị người dùng"
+    },
+    {
+      "route": "#admin-zalo",
+      "ok": true,
+      "heading": "Quản trị Zalo"
+    },
+    {
+      "route": "#admin-products",
+      "ok": true,
+      "heading": "Quản trị sản phẩm"
+    },
+    {
+      "route": "#admin-licenses",
+      "ok": true,
+      "heading": "Quản trị license"
+    },
+    {
+      "route": "#admin-leak",
+      "ok": true,
+      "heading": "Quản trị tra cứu dữ liệu"
+    },
+    {
+      "route": "#logs",
+      "ok": true,
+      "heading": "Nhật ký & hệ thống"
+    },
+    {
+      "route": "#profile",
+      "ok": true,
+      "heading": "Hồ sơ cá nhân"
+    }
+  ],
+  "responsiveChecks": [
+    {
+      "route": "#overview",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#accounts",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#send-phone",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#send-card",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#check-status",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#history",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#schedules",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#oa-send",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#oa-templates",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#oa-results",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#oa-token",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#ip",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#leak",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#links",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#store",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#licenses",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#deposits",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#admin-users",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#admin-zalo",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#admin-products",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#admin-licenses",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#admin-leak",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#logs",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#profile",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "#overview",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#accounts",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#send-phone",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#send-card",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#check-status",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#history",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#schedules",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#oa-send",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#oa-templates",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#oa-results",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#oa-token",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#ip",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#leak",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#links",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#store",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#licenses",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#deposits",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#admin-users",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#admin-zalo",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#admin-products",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#admin-licenses",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#admin-leak",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#logs",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "#profile",
+      "width": 390,
+      "overflow": false
+    }
+  ],
+  "consoleErrors": [],
+  "workflows": [
+    "Demo phone lookup/quote/confirm send -> result/history/wallet",
+    "Demo five-use license purchase -> key and exact wallet debit",
+    "Demo OA candidate review -> selected detail -> saved template",
+    "Demo product create dialog -> new list row",
+    "Local backend admin login -> real empty catalog and zero balance",
+    "Saved live session -> demo -> login cancel -> remains demo after navigation (regression red then green)",
+    "Reset demo -> original wallet and records"
+  ],
+  "externalProviderOperations": false
+}

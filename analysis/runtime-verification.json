@@ -1,0 +1,203 @@
+{
+  "checkedAt": "2026-11-05T03:12:10.956Z",
+  "completed": true,
+  "error": null,
+  "scope": "Local synthetic database; no external Zalo, payment, data lookup or message send",
+  "passed": 29,
+  "failed": 0,
+  "results": [
+    {
+      "name": "MAIN health",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Unknown API returns 404",
+      "status": 404,
+      "expected": 404,
+      "passed": true
+    },
+    {
+      "name": "Profile requires login",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "ZL rejects missing internal key",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "ZL health with internal key",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "FILES serves synthetic PNG",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Admin account login through normal auth",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Admin profile",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "CSRF issuance",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Write rejects missing CSRF",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Admin user list",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Tool configuration read",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Admin product list",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Admin license list",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Zalo account list through gateway",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Zalo history through gateway",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Zalo stats through gateway",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Product catalog through gateway",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Owned licenses through gateway",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "OA templates read",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "OA results read",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "CAPTCHA generation",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Registration with synthetic local CAPTCHA fixture",
+      "status": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "Registered user login",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Registered user profile",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Regular user denied admin users",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Regular user denied OA",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Regular user denied VIP tool",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Valid CSRF accepted for empty config update",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "name": "Malformed short CSRF token",
+      "status": 500,
+      "expectedCorrectBehavior": 403,
+      "knownBugReproduced": true
+    },
+    {
+      "name": "Regular user reaches admin log search",
+      "status": 200,
+      "expectedCorrectBehavior": 403,
+      "knownBugReproduced": true
+    },
+    {
+      "name": "PayOS service implementation absent",
+      "status": 500,
+      "implementationPresent": false
+    }
+  ]
+}

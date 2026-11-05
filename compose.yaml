@@ -1,0 +1,20 @@
+name: pa03-local
+services:
+  database:
+    image: mariadb:11.4@sha256:d1891ede5a559f1086f55053bb8cc1569b0298338c4d72d71725a7f74f6ba620
+    ports:
+      - "127.0.0.1:${DB_PORT:-13307}:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Run tools/init-local.cjs first}
+      MARIADB_DATABASE: ${DB_NAME:-pa03_local}
+      MARIADB_USER: ${DB_USER_MAIN:-pa03_local}
+      MARIADB_PASSWORD: ${DB_PASSWORD_MAIN:?Run tools/init-local.cjs first}
+    volumes:
+      - pa03_database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  pa03_database:
