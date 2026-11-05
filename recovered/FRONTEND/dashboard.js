@@ -2142,6 +2142,7 @@ async function decodeFidAndSearch() {
         fee: response.data.fee,
         currentBalance: response.data.currentBalance,
         zaloName: response.data.zaloName || response.data.displayName,
+        phoneNumber: response.data.phoneNumber || null,
         imageType: imageType,
         ipType: ipType,
         autoDelete: autoDelete,
@@ -2163,6 +2164,14 @@ async function decodeFidAndSearch() {
         response.data.userId;
       document.getElementById("send-card-confirm-sender").textContent =
         sendCardData.zaloAccountName;
+      // Hiển thị số điện thoại
+      if (response.data.phoneNumber) {
+        const phoneElement = document.getElementById("send-card-confirm-phone");
+        if (phoneElement) {
+          phoneElement.textContent = response.data.phoneNumber;
+          phoneElement.style.display = "block";
+        }
+      }
 
       // Hiển thị tên Zalo
       document.getElementById("send-card-confirm-zalo-name").textContent =

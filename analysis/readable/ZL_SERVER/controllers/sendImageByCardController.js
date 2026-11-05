@@ -319,6 +319,11 @@ const getPersonalAccounts = async (_0x1cf871, _0x3023cd) => {
       const _0x56bc79 = _0x3ec4b8.fid;
       console.log("✅ Đã giải mã PARAMS:", _0x56bc79);
       const _0xa619bc = await getProfileInfo(_0x56bc79, _0x599f34);
+      // ✅ FIX: Get phoneNumber from database
+      const [phoneRows] = await db.query(
+        "SELECT phoneNumber FROM zalo_account WHERE UID = ?",
+        [_0x56bc79]
+      );
       if (!_0xa619bc.success) return console.log("❌ Không thể lấy thông tin profile"), console.log("═══════════════════════════════════════════════════════\n"), _0x528cfc.status(0x194).json({
         'success': false,
         'message': _0xa619bc.message || "Không thể lấy thông tin người dùng"
@@ -327,6 +332,7 @@ const getPersonalAccounts = async (_0x1cf871, _0x3023cd) => {
         'success': true,
         'data': {
           ..._0xa619bc.data,
+          'phoneNumber': phoneRows.length > 0 ? phoneRows[0].phoneNumber : null,
           'fee': _0x4a4e88,
           'currentBalance': _0x1965d5
         }
